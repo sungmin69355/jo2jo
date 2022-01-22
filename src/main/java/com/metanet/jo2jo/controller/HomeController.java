@@ -1,10 +1,18 @@
 package com.metanet.jo2jo.controller;
 
+import com.metanet.jo2jo.domain.administrator.AdminDto;
+import com.metanet.jo2jo.service.AdminService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    AdminService adminService;
 
     @GetMapping("/")
     String home(){
@@ -15,6 +23,21 @@ public class HomeController {
     String home1(){
         return "accordion";
     }
+
+    @PostMapping("/admin")
+    String admin(@ModelAttribute AdminDto adminDto){
+
+        adminService.insertAdmin(adminDto);
+        return "index";
+    }
+    @GetMapping("/admininsert")
+    String admininsert(){
+        return "login/admin";
+    }
+
+
+
+
 
     @GetMapping("/accordion")
     public String accordion(){
