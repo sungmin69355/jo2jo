@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping("/")
     String home(){
-        return "main";
+        return "login/main";
     }
 
     @PostMapping("/logincheck")

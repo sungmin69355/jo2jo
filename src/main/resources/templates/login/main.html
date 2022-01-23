@@ -11,7 +11,10 @@
             text-decoration: none;
             font-family:sans-serif;
         }
-
+        img{
+            width: 200px;
+            height: 100px;
+        }
         body {
             background-image: #34495e;
         }
@@ -103,8 +106,9 @@
         };
     </script>
     <body width="100%" height="100%">
+    <img src="assets/images/Logo/metanetDT_Logo.jpeg" alt="Logo">
     <form action="/admin" method="post" class="loginForm">
-        <h2>Login</h2>
+        <h1 style="font-size:2.7em; align-content: center">인사관리 시스템</h1>
         <div class="idForm">
             <input type="text" class="id" placeholder="ID" name="id">
         </div>
@@ -115,11 +119,12 @@
             <input type="checkbox" class="employee" name ="admin" onclick="doOpenCheck(this);" > 관리자
             <input type="checkbox" class="employee" name ="employee" onclick="doOpenCheck(this);" > 사원
         </div>
+        <br>
         <button type="submit" class="btn">
-            LOG IN SUCCESS!
+            로그인
         </button>
         <div class="bottomText">
-            Don't you have ID? <a href="#">sign up</a>
+            <a href="#">Forgot password?</a>
         </div>
     </form>
     </body>
