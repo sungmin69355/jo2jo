@@ -1,15 +1,10 @@
 package com.metanet.jo2jo.controller;
 
-import com.metanet.jo2jo.domain.administrator.AdminDto;
 import com.metanet.jo2jo.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
@@ -19,28 +14,13 @@ public class HomeController {
 
     @GetMapping("/")
     String home(){
-        return "main";
-    }
-
-    @PostMapping("/logincheck")
-    String admin(@ModelAttribute AdminDto adminDto, @RequestParam String employee, HttpSession session){
-
-        if(employee.equals("admin")){
-            //어드민 로그인
-        }else if(employee.equals("employee")) {
-            //사원 로그인
-        }
-        return "index";
+        return "login/main";
     }
 
     @GetMapping("/1")
     String home1(){
         return "accordion";
     }
-
-
-
-
 
 
     @GetMapping("/accordion")

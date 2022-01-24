@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.metanet.jo2jo.repository.admin.AdminRepository">
+<mapper namespace="com.metanet.jo2jo.repository.administrator.AdminRepository">
 
     <!-- 쿼리문 작성 -->
     <insert id="insertAdmin" parameterType="AdminDto">
@@ -12,6 +12,15 @@
 		VALUES	(seq_administrator_no.nextval, #{id}, #{password})
 	    ]]>
     </insert>
+
+    <!-- 관리자 로그인 -->
+    <select id="findByLoginId" parameterType="LoginDto" resultType="AdminDto">
+        <![CDATA[
+        SELECT *
+        FROM ADMINISTRATOR
+        WHERE ID = #{id} and PASSWORD = #{password}
+        ]]>
+    </select>
 
 
 </mapper>
