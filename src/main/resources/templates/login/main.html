@@ -107,7 +107,7 @@
     </script>
     <body width="100%" height="100%">
     <img src="assets/images/Logo/metanetDT_Logo.jpeg" alt="Logo">
-    <form action="/admin" method="post" class="loginForm">
+    <form action="/logincheck" method="post" class="loginForm">
         <h1 style="font-size:2.7em; align-content: center">인사관리 시스템</h1>
         <div class="idForm">
             <input type="text" class="id" placeholder="ID" name="id">
@@ -116,8 +116,8 @@
             <input type="password" class="pw" placeholder="PW" name ="password">
         </div>
         <div>
-            <input type="checkbox" class="employee" name ="admin" onclick="doOpenCheck(this);" > 관리자
-            <input type="checkbox" class="employee" name ="employee" onclick="doOpenCheck(this);" > 사원
+            <input type="checkbox" class="employee" name ="employee" onclick="doOpenCheck(this);" value="admin"> 관리자
+            <input type="checkbox" class="employee" name ="employee" onclick="doOpenCheck(this);" value="employee"> 사원
         </div>
         <br>
         <button type="submit" class="btn">
