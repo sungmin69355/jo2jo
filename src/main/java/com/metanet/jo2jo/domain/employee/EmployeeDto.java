@@ -4,39 +4,39 @@ import lombok.Getter;
 
 @Getter
 public class EmployeeDto {
-    private  Long EMPNO;
-    private  Long DEPTNO;
-    private  Long POSNO;
-    private  String EMAIL;
-    private  String EMPNAME;
-    private  String ADDRESS;
-    private  String PHOTOADDR;
-    private  String REGNO;
-    private  int ANNUAL;
-    private  String Id;
-    private  String PASSWORD;
-    private  Long SALARY;
-    private  String HIREDATE;
-    private  String ACADEMIC;
-    private  int MILITARY;
-    private  int GENDER;
+    private  Long empno;
+    private  Long deptno;
+    private  Long posno;
+    private  String email;
+    private  String empname;
+    private  String address;
+    private  String photoaddr;
+    private  String regno;
+    private  int annual;
+    private  String id;
+    private  String password;
+    private  Long salaary;
+    private  String hiredate;
+    private  String academic;
+    private  int military;
+    private  int gender;
 
-    public EmployeeDto(Long EMPNO, Long DEPTNO, Long POSNO, String EMAIL, String EMPNAME, String ADDRESS, String PHOTOADDR, String REGNO, int ANNUAL, String id, String PASSWORD, Long SALARY, String HIREDATE, String ACADEMIC, int MILITARY, int GENDER) {
-        this.EMPNO = EMPNO;
-        this.DEPTNO = DEPTNO;
-        this.POSNO = POSNO;
-        this.EMAIL = EMAIL;
-        this.EMPNAME = EMPNAME;
-        this.ADDRESS = ADDRESS;
-        this.PHOTOADDR = PHOTOADDR;
-        this.REGNO = REGNO;
-        this.ANNUAL = ANNUAL;
-        Id = id;
-        this.PASSWORD = PASSWORD;
-        this.SALARY = SALARY;
-        this.HIREDATE = HIREDATE;
-        this.ACADEMIC = ACADEMIC;
-        this.MILITARY = MILITARY;
-        this.GENDER = GENDER;
+    public EmployeeDto(Long empno, Long deptno, Long posno, String email, String empname, String address, String photoaddr, String regno, int annual, String id, String password, Long salaary, String hiredate, String academic, int military, int gender) {
+        this.empno = empno;
+        this.deptno = deptno;
+        this.posno = posno;
+        this.email = email;
+        this.empname = empname;
+        this.address = address;
+        this.photoaddr = photoaddr;
+        this.regno = regno;
+        this.annual = annual;
+        this.id = id;
+        this.password = password;
+        this.salaary = salaary;
+        this.hiredate = hiredate;
+        this.academic = academic;
+        this.military = military;
+        this.gender = gender;
     }
 }

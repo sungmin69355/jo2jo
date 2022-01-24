@@ -21,10 +21,10 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute LoginDto loginDto, HttpServletRequest request, HttpSession session) {
+    public String loginForm(@ModelAttribute LoginDto loginDto, HttpSession session) {
 
-        if(session != null){
-            return "/index";
+        if (session != null) {
+            return "index";
         }
         return "/login/main";
     }
@@ -54,5 +54,16 @@ public class LoginController {
             session.setAttribute("user" , employee);
         }
         return "index";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();   // 세션 날림
+        }
+
+        return "/login/main";
     }
 }
