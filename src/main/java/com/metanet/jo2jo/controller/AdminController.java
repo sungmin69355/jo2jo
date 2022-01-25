@@ -16,5 +16,7 @@ public class AdminController {
     String index() {
         return "index";
     }
+    
+  
 
-    }
+ }
