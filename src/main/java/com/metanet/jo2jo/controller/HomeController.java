@@ -19,8 +19,9 @@ public class HomeController {
 
     @GetMapping("/1")
     String home1(){
-        return "accordion";
+        return "employee/employee-detail";
     }
+
 
 
     @GetMapping("/accordion")
@@ -111,4 +112,6 @@ public class HomeController {
     public String samplePage(){
         return "sample-page";
     }
+
+
 }
