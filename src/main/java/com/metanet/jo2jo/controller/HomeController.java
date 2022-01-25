@@ -21,6 +21,16 @@ public class HomeController {
     String home1(){
         return "accordion";
     }
+    
+    @GetMapping("/employeemain")
+    String employeeMain() {
+        return "employee-main";
+    }
+    
+    @GetMapping("/departmentregister")
+    String departmentRegister() {
+        return "department-register";
+    }
 
 
     @GetMapping("/accordion")
