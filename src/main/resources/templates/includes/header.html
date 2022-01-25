@@ -5,15 +5,11 @@
 </head>
 
 <body>
-
 <header class="main-header-top hidden-print"  th:fragment="header">
-
+	<!-- Sidebar toggle button-->
+    <a href="#!" data-toggle="offcanvas" class="sidebar-toggle"></a>
+    
     <a href="index.html" class="logo"><img class="img-fluid able-logo" src="assets/images/Logo/metanetDT_Logo.jpeg" alt="Theme-logo"></a>
-
-		<!-- Sidebar toggle button-->
-        <a href="#!" data-toggle="offcanvas" class="sidebar-toggle"></a>
-    <a href="index.html" class="logo"><img class="img-fluid able-logo" src="assets/images/logo.png" alt="Theme-logo"></a>
-
     <nav class="navbar navbar-static-top">
         
         <ul class="top-nav lft-nav">
@@ -82,7 +78,7 @@
                 <li class="dropdown">
                     <a href="#!" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle drop icon-circle drop-image">
                         <span><img class="img-circle " src="assets/images/avatar-1.png" style="width:40px;" alt="User Image"></span>
-                        <span th:text="${session.user}"></span> <i class=" icofont icofont-simple-down"></i></span>
+                        <span th:text="${session.user}"></span><span><i class=" icofont icofont-simple-down"></i></span>
 
                     </a>
                     <ul class="dropdown-menu settings-menu">
