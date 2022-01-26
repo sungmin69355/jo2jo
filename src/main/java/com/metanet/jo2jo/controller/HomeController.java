@@ -16,6 +16,18 @@ public class HomeController {
     String home1(){
         return "accordion";
     }
+    
+    //ui제작 테스트용
+    @GetMapping("/employeemain")
+    String employeeMain() {
+        return "employee-main";
+    }
+    
+  //ui제작 테스트용
+    @GetMapping("/departmentregister")
+    String departmentRegister() {
+        return "department-register";
+    }
 
 
     @GetMapping("/accordion")
