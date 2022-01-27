@@ -1,16 +1,11 @@
 package com.metanet.jo2jo.controller;
 
-import com.metanet.jo2jo.service.AdminService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
 public class HomeController {
-
-    @Autowired
-    AdminService adminService;
 
     @GetMapping("/")
     String home(){
@@ -20,6 +15,18 @@ public class HomeController {
     @GetMapping("/1")
     String home1(){
         return "employee/employee-detail";
+    }
+    
+    //ui제작 테스트용
+    @GetMapping("/employeemain")
+    String employeeMain() {
+        return "employee-main";
+    }
+    
+  //ui제작 테스트용
+    @GetMapping("/departmentregister")
+    String departmentRegister() {
+        return "department-register";
     }
 
 

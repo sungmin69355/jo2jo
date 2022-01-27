@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <!--  [endif]-->
+	
+	<!-- Meta -->
+   	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+   <!-- Favicon icon -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon"> 
+
+   <!--  <Google font> -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+
+   <!--  themify -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+
+    <!-- iconfont -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+
+    <!-- simple line icon -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/simple-line-icons/css/simple-line-icons.css">
+
+   <!--  Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+
+   <!--  Chartlist chart css -->
+    <link rel="stylesheet" href="assets/plugins/chartist/dist/chartist.css" type="text/css" media="all">
+
+   <!--  Weather css -->
+    <link href="assets/css/svg-weather.css" rel="stylesheet">
+
+
+   <!--  Style.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+    <!-- Responsive.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css"> 
+
+</head>
+
+<body class="sidebar-mini fixed">
+  <!--  <div class="wrapper"> -->
+      <div class="loader-bg">
+         <div class="loader-bar">
+         </div>
+      </div>
+     
+      <!-- Side-Nav-->
+   		<!-- Navbar-->
+		<header th:replace="includes/header :: header"></header>
+		<!-- Side-Nav-->
+		<div th:replace="includes/navbar :: navbar"></div>
+    
+      <!-- Sidebar chat end-->
+        <div class="content-wrapper"> 
+         <!-- Container-fluid starts -->
+         <div class="container-fluid">  
+
+            <!-- Header Starts -->
+            <!-- Header end -->
+
+            <!-- Tables start -->
+            <!-- Row start -->
+            <div class="row"> 
+             <div class="col-sm-12"> 
+                  <!-- Basic Table starts -->
+                  <div class="card">
+                     <div class="card-header">
+                        <h6 class="card-header-text">사원조회 페이지</h6>
+                        <!--  <p>Basic example <code>without any additional modification</code> classes</p> -->
+                     </div>
+                   
+                     <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-12 table-responsive">
+                            	<div id = "searchform">
+				                      <form action="" method="get">
+										 search&nbsp;&nbsp;<input type="search" name="q">
+									     <input type="submit" value="검색">
+									  </form> 
+							  	</div>
+							       
+                              <table class="table">
+                              
+                                 <thead>
+                                 	 
+                                    <tr>
+                                       <th>사원이름</th>
+                                       <th>부서</th>
+                                       <th>전화번호</th>
+                                       <th>연차</th>
+                                       <th>이메일</th>
+                                       <th>생년월일</th>
+                                       <th>Action</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr>
+                                       <td>조민국</td>
+                                       <td>Mark</td>
+                                       <td>Otto</td>
+                                       <td>@mdo</td>
+                                       <td>Ducky</td>
+                                       <td>Ducky</td>
+                                       <td></td> 
+                                    </tr>
+                                 </tbody>
+                                     
+                              </table>
+                              <div id ="paging">                          
+	                          <nav aria-label="Page navigation example">
+								  <ul class="pagination">
+								    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+								    <li class="page-item"><a class="page-link" href="#">1</a></li>
+								    <li class="page-item"><a class="page-link" href="#">2</a></li>
+								    <li class="page-item"><a class="page-link" href="#">3</a></li>
+								    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+								  </ul>
+							</nav> 
+							<div>                   
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+                 
+   <!-- Warning Section Ends -->
+
+
+   <!-- Required Jqurey -->
+   <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
+   <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+   <script src="assets/plugins/tether/dist/js/tether.min.js"></script>
+
+   <!-- Required Fremwork -->
+   <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+   <!-- waves effects.js -->
+   <script src="assets/plugins/Waves/waves.min.js"></script>
+
+   <!-- Scrollbar JS-->
+   <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+   <script src="assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+
+   <!--classic JS-->
+   <script src="assets/plugins/classie/classie.js"></script>
+
+   <!-- notification -->
+   <script src="assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+
+   <!-- custom js -->
+   <script type="text/javascript" src="assets/js/main.min.js"></script>
+   <script type="text/javascript" src="assets/pages/elements.js"></script>
+   <script src="assets/js/menu.min.js"></script>
+</body>
+</html>
