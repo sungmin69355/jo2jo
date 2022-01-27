@@ -32,7 +32,7 @@ public class HomeController {
 
     @GetMapping("/accordion")
     public String accordion(){
-        return "accordion";
+        return "accordion"; 
     }
     @GetMapping("/button")
     public String button(){

@@ -21,7 +21,7 @@ public class LoginServiceTest {
     public void loginTest(){
         //given
         LoginDto loginDto = new LoginDto();
-        loginDto.setId("whtjdals");
+        loginDto.setId("조민국");
         loginDto.setPassword("1234");
 
         //when
