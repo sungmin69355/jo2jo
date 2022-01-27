@@ -14,8 +14,8 @@
 
     <!-- Logger -->
     <logger name="com.metanet" level="DEBUG" appender-ref="console" />
-    <logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
-    <logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infolog" />
+    <logger name="jdbc.sqlonly" level="INFO" appender-ref="console" />
+    <logger name="jdbc.resultsettable" level="INFO" appender-ref="console" />
 
     <!-- dev env -->
     <springProfile name="dev">
