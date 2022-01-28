@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class LoginServiceTest {
+public class LoginServiceAdminTest {
     @Autowired
     private LoginService loginService;
 

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -7,11 +8,13 @@
 
         <!-- 유저 로그인 -->
     <select id="findByLoginId" parameterType="LoginDto" resultType="EmployeeDto">
+
         <![CDATA[
         SELECT *
         FROM EMPLOYEE
         WHERE ID = #{id} and PASSWORD = #{password}
         ]]>
     </select>
+
 
 </mapper>
