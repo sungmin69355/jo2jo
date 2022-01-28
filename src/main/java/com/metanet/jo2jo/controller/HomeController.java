@@ -18,21 +18,21 @@ public class HomeController {
     }
     
     //ui제작 테스트용
-    @GetMapping("/employeemain")
+    @GetMapping("/employee")
     String employeeMain() {
-        return "employee-main";
+        return "employee/employee-main";
     }
     
   //ui제작 테스트용
-    @GetMapping("/departmentregister")
+    @GetMapping("/department")
     String departmentRegister() {
-        return "department-register";
+        return "department/department-register";
     }
 
 
     @GetMapping("/accordion")
     public String accordion(){
-        return "accordion";
+        return "accordion"; 
     }
     @GetMapping("/button")
     public String button(){
