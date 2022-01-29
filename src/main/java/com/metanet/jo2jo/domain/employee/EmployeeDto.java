@@ -7,33 +7,36 @@ public class EmployeeDto {
     private  Long empno;
     private  Long deptno;
     private  Long posno;
-    private  String email;
     private  String empname;
+    private  String email;
+    private  String phone;
     private  String address;
     private  String photoaddr;
-    private  String regno;
-    private  int annual;
+    private  String  regno;
+    private  Long annual;
     private  String id;
     private  String password;
-    private  Long salaary;
+    private  Long salary;
     private  String hiredate;
     private  String academic;
-    private  int military;
-    private  int gender;
+    private  Long military;
+    private  Long gender;
 
-    public EmployeeDto(Long empno, Long deptno, Long posno, String email, String empname, String address, String photoaddr, String regno, int annual, String id, String password, Long salaary, String hiredate, String academic, int military, int gender) {
+
+    public EmployeeDto(Long empno, Long deptno, Long posno, String empname, String email, String phone, String address, String photoaddr, String regno, Long annual, String id, String password, Long salary, String hiredate, String academic, Long military, Long gender) {
         this.empno = empno;
         this.deptno = deptno;
         this.posno = posno;
-        this.email = email;
         this.empname = empname;
+        this.email = email;
+        this.phone = phone;
         this.address = address;
         this.photoaddr = photoaddr;
         this.regno = regno;
         this.annual = annual;
         this.id = id;
         this.password = password;
-        this.salaary = salaary;
+        this.salary = salary;
         this.hiredate = hiredate;
         this.academic = academic;
         this.military = military;

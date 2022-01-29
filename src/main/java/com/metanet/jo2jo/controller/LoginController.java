@@ -32,21 +32,20 @@ public class LoginController {
         return "/login/main";
     }
 
-    @PostMapping("/logincheck")
+    @PostMapping("/login")
     public String loginCheck(@ModelAttribute LoginDto loginDto, @RequestParam String employee, HttpServletRequest request){
 
         HttpSession session;
 
         if(employee.equals("admin")){
             //어드민 로그인
-            System.out.print(loginDto.toString());
-            System.out.println(employee);
             AdminDto adminDto  = loginService.adminFindByLoginId(loginDto);
             if (adminDto == null) {
                 return "login/main";
             }
             session = request.getSession();
             session.setAttribute("user" , employee);
+            session.setAttribute("id", adminDto.getId());
         }else if(employee.equals("employee")) {
             //사원 로그인
             EmployeeDto employeeDto = loginService.employeeFindByLoginId(loginDto);
@@ -55,6 +54,7 @@ public class LoginController {
             }
             session = request.getSession();
             session.setAttribute("user" , employee);
+            session.setAttribute("id", employeeDto.getId());
         }
         return "index";
     }
