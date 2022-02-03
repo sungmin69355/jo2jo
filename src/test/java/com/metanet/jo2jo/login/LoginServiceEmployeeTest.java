@@ -23,7 +23,7 @@ public class LoginServiceEmployeeTest {
     public void adminLoginTest(){
         //given
         LoginDto loginDto = new LoginDto();
-        loginDto.setId("1003");
+        loginDto.setId("employeetest");
         loginDto.setPassword("1234");
 
         //when
