@@ -37,7 +37,11 @@ public class LoginServiceAdminTest {
     public void adminNotLoginTest(){
         //given
         LoginDto loginDto = new LoginDto();
+<<<<<<< HEAD
         loginDto.setId("admintest");
+=======
+        loginDto.setId("notnull");
+>>>>>>> origin/develop
         loginDto.setPassword("1234");
 
         //when
