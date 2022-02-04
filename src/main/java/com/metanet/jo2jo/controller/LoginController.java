@@ -26,7 +26,7 @@ public class LoginController {
     @GetMapping("/login")
     public String loginForm(Model model, HttpSession session) {
         model.addAttribute("loginDto", new LoginDto());
-        if (session != null) {
+        if (session.getAttribute("user") == null) {
             return "login/main";
         }
         return "index";
@@ -52,7 +52,7 @@ public class LoginController {
             }
             session = request.getSession();
             session.setAttribute("user" , employee);
-            session.setAttribute("id", adminDto.getId());
+            session.setAttribute("info", adminDto);
 
         }else if(employee.equals("employee")) {
             //사원 로그인
@@ -62,7 +62,7 @@ public class LoginController {
             }
             session = request.getSession();
             session.setAttribute("user" , employee);
-            session.setAttribute("id", employeeDto.getId());
+            session.setAttribute("info", employeeDto);
         }
         return "redirect:/index";
     }
