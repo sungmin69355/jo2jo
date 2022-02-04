@@ -33,9 +33,12 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public String loginCheck(@ModelAttribute("loginDto") @Valid LoginDto loginDto, BindingResult bindingResult, @RequestParam String employee, HttpServletRequest request){
+    public String loginCheck(@ModelAttribute("loginDto") @Valid LoginDto loginDto, BindingResult bindingResult, @RequestParam(value="employee", required=false) String employee, HttpServletRequest request){
 
         HttpSession session;
+        if(employee == null){
+            return "login/main";
+        }
 
         if (bindingResult.hasErrors()) {
             return "login/main";
@@ -60,8 +63,6 @@ public class LoginController {
             session = request.getSession();
             session.setAttribute("user" , employee);
             session.setAttribute("id", employeeDto.getId());
-        }else{
-            return "login/main";
         }
         return "redirect:/index";
     }
