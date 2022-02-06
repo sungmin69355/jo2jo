@@ -8,13 +8,13 @@ import com.metanet.jo2jo.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,18 +24,25 @@ public class LoginController {
     private final LoginService loginService;
 
     @GetMapping("/login")
-    public String loginForm(@ModelAttribute LoginDto loginDto, HttpSession session) {
-
+    public String loginForm(Model model, HttpSession session) {
+        model.addAttribute("loginDto", new LoginDto());
         if (session != null) {
-            return "index";
+            return "login/main";
         }
-        return "/login/main";
+        return "index";
     }
 
     @PostMapping("/login")
-    public String loginCheck(@ModelAttribute LoginDto loginDto, @RequestParam String employee, HttpServletRequest request){
+    public String loginCheck(@ModelAttribute("loginDto") @Valid LoginDto loginDto, BindingResult bindingResult, @RequestParam(value="employee", required=false) String employee, HttpServletRequest request){
 
         HttpSession session;
+        if(employee == null){
+            return "login/main";
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "login/main";
+        }
 
         if(employee.equals("admin")){
             //어드민 로그인
@@ -46,6 +53,7 @@ public class LoginController {
             session = request.getSession();
             session.setAttribute("user" , employee);
             session.setAttribute("id", adminDto.getId());
+
         }else if(employee.equals("employee")) {
             //사원 로그인
             EmployeeDto employeeDto = loginService.employeeFindByLoginId(loginDto);
@@ -56,17 +64,18 @@ public class LoginController {
             session.setAttribute("user" , employee);
             session.setAttribute("id", employeeDto.getId());
         }
-        return "index";
+        return "redirect:/index";
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    public String logout(Model model, HttpServletRequest request) {
 
+        model.addAttribute("loginDto", new LoginDto());
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();   // 세션 날림
         }
 
-        return "/login/main";
+        return "login/main";
     }
 }

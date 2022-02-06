@@ -22,7 +22,7 @@ public class LoginServiceAdminTest {
     public void adminLoginTest(){
         //given
         LoginDto loginDto = new LoginDto();
-        loginDto.setId("whtjdals");
+        loginDto.setId("admintest");
         loginDto.setPassword("1234");
 
         //when
@@ -37,7 +37,7 @@ public class LoginServiceAdminTest {
     public void adminNotLoginTest(){
         //given
         LoginDto loginDto = new LoginDto();
-        loginDto.setId("test");
+        loginDto.setId("notnull");
         loginDto.setPassword("1234");
 
         //when

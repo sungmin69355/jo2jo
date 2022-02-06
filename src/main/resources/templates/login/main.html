@@ -107,13 +107,20 @@
     </script>
     <body width="100%" height="100%">
     <img src="assets/images/Logo/metanetDT_Logo.jpeg" alt="Logo">
-    <form action="/login" method="post" class="loginForm">
+    <form action="/login" th:object="${loginDto}" method="post" class="loginForm">
         <h1 style="font-size:2.7em; align-content: center">인사관리 시스템</h1>
         <div class="idForm">
-            <input type="text" class="id" placeholder="ID" name="id">
+            <input type="text" th:field="*{id}" class="id" placeholder="ID"/>
+            <div th:each="msg : ${#fields.errors('id')}">
+                <p th:text="${msg}"></p>
+            </div>
+            </div>
         </div>
         <div class="passForm">
-            <input type="password" class="pw" placeholder="PW" name ="password">
+            <input type="password" th:field="*{password}" class="pw" placeholder="PW"/>
+            <div th:each="msg : ${#fields.errors('password')}">
+                <p th:text="${msg}"></p>
+        </div>
         </div>
         <div>
             <input type="checkbox" class="employee" name ="employee" onclick="doOpenCheck(this);" value="admin"> 관리자

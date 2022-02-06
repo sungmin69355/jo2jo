@@ -1,15 +1,23 @@
 package com.metanet.jo2jo.controller;
 
+import com.metanet.jo2jo.domain.Login.LoginDto;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
 public class HomeController {
 
     @GetMapping("/")
-    String home(){
-        return "login/main";
+    String home(Model model, HttpSession session){
+        model.addAttribute("loginDto", new LoginDto());
+        if (session != null) {
+            return "login/main";
+        }
+        return "index";
     }
 
     @GetMapping("/1")
@@ -18,22 +26,22 @@ public class HomeController {
     }
     
     //ui제작 테스트용
-    @GetMapping("/employeemain")
+    @GetMapping("/employee")
     String employeeMain() {
-        return "employee-main";
+        return "employee/employee-main";
     }
     
   //ui제작 테스트용
-    @GetMapping("/departmentregister")
+    @GetMapping("/department")
     String departmentRegister() {
-        return "department-register";
+        return "department/department-register";
     }
 
 
 
     @GetMapping("/accordion")
     public String accordion(){
-        return "accordion";
+        return "accordion"; 
     }
     @GetMapping("/button")
     public String button(){
