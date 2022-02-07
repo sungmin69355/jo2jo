@@ -101,14 +101,14 @@
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr>
-                                       <td>조민국</td>
-                                       <td>Mark</td>
-                                       <td>Otto</td>
-                                       <td>@mdo</td>
-                                       <td>Ducky</td>
-                                       <td>Ducky</td>
-                                       <td></td> 
+                                    <tr th:each="employeelist:${employeelist}">
+                                       <td>[[${employeelist.empname2}]]</td>
+                                       <td>[[${employeelist.deptname2}]]</td>
+                                       <td>[[${employeelist.phone2}]]</td>
+                                       <td>[[${employeelist.annual2}]]</td>
+                                       <td>[[${employeelist.email2}]]</td>
+                                       <td>[[${employeelist.regno2}]]</td>
+     								   <td></td>                                        
                                     </tr>
                                  </tbody>
                                      

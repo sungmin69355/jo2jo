@@ -25,11 +25,12 @@ public class HomeController {
         return "accordion";
     }
     
-    //ui제작 테스트용
-    @GetMapping("/employee")
-    String employeeMain() {
-        return "employee/employee-main";
-    }
+	/*
+	 * //ui제작 테스트용
+	 * 
+	 * @GetMapping("/employee") String employeeMain() { return
+	 * "employee/employee-main"; }
+	 */
     
   //ui제작 테스트용
     @GetMapping("/department")

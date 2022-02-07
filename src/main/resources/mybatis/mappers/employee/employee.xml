@@ -8,12 +8,31 @@
 
         <!-- 유저 로그인 -->
     <select id="findByLoginId" parameterType="LoginDto" resultType="EmployeeDto">
-
         <![CDATA[
         SELECT *
         FROM EMPLOYEE
         WHERE ID = #{id} and PASSWORD = #{password}
         ]]>
+    </select>
+    
+          <!-- 사원조회 -->
+    <select id="selectEmployee2"  resultType="EmployeeDto">      
+         SELECT *
+ 		 FROM EMPLOYEE        
+    </select>
+    
+          <!-- 사원조회 부서포함 -->
+    <select id="selectEmployee" resultType="EmployeeSelectDto"> 
+    	 	    	  	            
+         SELECT e.EMPNAME AS empname2,
+         		d.DEPTNAME AS deptname2,
+         		e.PHONE AS phone2,
+         		e.ANNUAL AS annual2,
+         		e.EMAIL AS email2,
+         		e.REGNO AS regno2        		 
+		 FROM EMPLOYEE e, DEPARTMENT d
+		 WHERE e.DEPTNO = d.DEPTNO
+							 			       
     </select>
 
 
