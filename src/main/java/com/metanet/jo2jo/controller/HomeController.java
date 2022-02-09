@@ -24,7 +24,7 @@ public class HomeController {
     String index(HttpSession session, Model model) {
         model.addAttribute("loginDto", new LoginDto());
         if(session.getAttribute("user") ==null){
-            return "/login/main";
+            return "login/main";
         }
         return "index";
     }
