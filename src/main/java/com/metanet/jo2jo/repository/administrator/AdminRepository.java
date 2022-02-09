@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface AdminRepository {
-    int insertAdmin(AdminDto adminDto);
     AdminDto findByLoginId(LoginDto loginDto); 
 }

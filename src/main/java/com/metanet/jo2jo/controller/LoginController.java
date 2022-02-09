@@ -22,7 +22,6 @@ import javax.validation.Valid;
 public class LoginController {
 
     private final LoginService loginService;
-
     @GetMapping("/login")
     public String loginForm(Model model, HttpSession session) {
         model.addAttribute("loginDto", new LoginDto());

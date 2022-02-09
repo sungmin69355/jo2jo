@@ -35,7 +35,7 @@ public class HomeController {
     }
     
     //ui제작 테스트용
-    @GetMapping("/employee")
+    @GetMapping("/employees")
     String employeeMain() {
         return "employee/employee-main";
     }
