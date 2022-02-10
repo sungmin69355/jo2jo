@@ -6,29 +6,28 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter
 public class EmployeeSelectDto extends CommonDto{	
-	private Long rownum2;
-	private String empname2;
-	private String deptname2;
-	private String phone2;
-	private Long annual2;
-    private String email2;
+	private Long rn;
+	private String empname;
+	private String deptname;
+	private String phone;
+	private Long annual;
+    private String email;
     
     	
-	public EmployeeSelectDto(Long rownum2, String empname2, String deptname2, String phone2, Long annual2,String email2) {	
-		this.rownum2 = rownum2;
-		this.empname2 = empname2;
-		this.deptname2 = deptname2;
-		this.phone2 = phone2;
-		this.annual2 = annual2;
-		this.email2 = email2;
+	public EmployeeSelectDto(Long rn, String empname, String deptname, String phone, Long annual,String email) {	
+		this.rn = rn;
+		this.empname = empname;
+		this.deptname = deptname;
+		this.phone = phone;
+		this.annual = annual;
+		this.email = email;
 	}
   
 	@Override
 	public String toString() {
-		return "EmployeeSelectDto [rownum2=" + rownum2 + ", empname2=" + empname2 + ", deptname2=" + deptname2
-				+ ", phone2=" + phone2 + ", annual2=" + annual2 + ", email2=" + email2 + "]";
+		return "EmployeeSelectDto [rn=" + rn + ", empname=" + empname + ", deptname=" + deptname
+				+ ", phone=" + phone + ", annual=" + annual + ", email=" + email + "]";
 	}
     
  

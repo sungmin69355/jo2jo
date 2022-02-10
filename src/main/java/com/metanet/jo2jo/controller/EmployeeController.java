@@ -15,7 +15,7 @@ public class EmployeeController {
 	private final EmployeeService employeeService;
     
 	//사원조회 부서추가
-    @GetMapping("/employee")
+    @GetMapping("/employees")
      String employeeMain(@ModelAttribute("params") EmployeeSelectDto params, Model model) {    	
     	model.addAttribute("employeelist", employeeService.employeelist(params));
         return "employee/employee-main";
