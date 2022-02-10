@@ -1,6 +1,7 @@
 package com.metanet.jo2jo.controller;
 
 import com.metanet.jo2jo.domain.department.DepartmentDto;
+import com.metanet.jo2jo.domain.employee.EmployeeDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.service.EmployeeRegisterService;
@@ -33,25 +34,33 @@ public class AdminController {
 
         model.addAttribute("findByAllDepartment",findByAllDepartment);
         model.addAttribute("findAllByPosition",findAllByPosition);
+        model.addAttribute("employeeRegisterForm", new EmployeeRegisterForm());
         return "employee/employee-register";
     }
 
     @PostMapping("/employee")
-    String employeeRegister(HttpSession session, HttpServletRequest request, @Valid EmployeeRegisterForm employeeRegisterForm, BindingResult bindingResult){
+    String employeeRegister(HttpSession session, HttpServletRequest request,Model model, @Valid EmployeeRegisterForm employeeRegisterForm, BindingResult bindingResult){
 
         if(session.getAttribute("user").equals("admin")){
+            System.out.println(employeeRegisterForm.toString());
             //Valid 검증
             if (bindingResult.hasErrors()) {
+                //부서 정보
+                List<DepartmentDto> findByAllDepartment = employeeRegisterService.findAllByDepartment();
+                //직급 정보
+                List<PositionDto> findAllByPosition = employeeRegisterService.findAllByPosition();
+                model.addAttribute("findByAllDepartment",findByAllDepartment);
+                model.addAttribute("findAllByPosition",findAllByPosition);
                 return "employee/employee-register";
             }
             //insert로직
 
             //결과
         }else{
-            return "/employee/employee-main";
+            return "employee/employee-main";
         }
 
-        return "/employee/employee-main";
+        return "employee/employee-main";
     }
   
 
