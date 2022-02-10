@@ -6,15 +6,112 @@
 
 <mapper namespace="com.metanet.jo2jo.repository.employee.EmployeeRepository">
 
+<!-- Oracle 검색 -->
+	<sql id="search">
+		<!-- 검색 키워드가 있을 때 -->
+		<if test="searchKeyword != null">
+			<choose>
+				<!-- 검색 유형이 있을 때 -->
+				<when test="searchType != null">
+					<choose>
+						<when test="'empname'.equals(searchType)">
+							AND empname LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'deptname'.equals(searchType)">
+							AND deptname LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'phone'.equals(searchType)">
+							AND phone LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'annual'.equals(searchType)">
+							AND annual LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'email'.equals(searchType)">
+							AND email  LIKE('%' || #{searchKeyword} || '%')
+						</when>
+					</choose>
+				</when>
+				<!-- 검색 유형이 없을 때 -->
+				<otherwise>
+					AND
+						(
+						  empname LIKE('%'|| #{searchKeyword} || '%')
+						  OR deptname LIKE('%'|| #{searchKeyword} ||'%')
+						  OR phone LIKE('%'|| #{searchKeyword} ||'%')
+						  OR annual LIKE('%'|| #{searchKeyword} ||'%')
+						  OR email  LIKE('%'|| #{searchKeyword} ||'%')
+						)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+	
+	
+
         <!-- 유저 로그인 -->
     <select id="findByLoginId" parameterType="LoginDto" resultType="EmployeeDto">
-
         <![CDATA[
         SELECT *
         FROM EMPLOYEE
         WHERE ID = #{id} and PASSWORD = #{password}
         ]]>
     </select>
+    
+          <!-- 사원조회 -->
+    <select id="selectEmployee2" resultType="EmployeeDto">      
+         SELECT *
+ 		 FROM EMPLOYEE		 	         
+    </select>
+      <!-- 사원조회 총개수 -->
+     <select id="selectEmployeeTotalCount" parameterType="EmployeeSelectDto" resultType ="int">
+		  <![CDATA[	
+			 SELECT COUNT(*)
+			 FROM EMPLOYEE e, DEPARTMENT d 
+			 WHERE e.DEPTNO = d.DEPTNO
+		]]>						 	
+		    <include refid="search"></include>		
+	</select>
+    
+          <!-- 사원조회 부서포함 -->
+    <select id="selectEmployee"  parameterType="EmployeeSelectDto" resultType="EmployeeSelectDto"> 
+    	<![CDATA[	    	  	            
+        SELECT  
+        		R AS rownum2,
+        		EMPNAME AS empname2,
+         		DEPTNAME AS deptname2,
+         		PHONE AS phone2,
+         		ANNUAL AS annual2,
+         		EMAIL AS email2       		 
+		FROM 
+		 		(
+		 		SELECT ROWNUM R,
+		 			   EMPNAME,
+		 			   DEPTNAME,
+		 			   PHONE,
+		 			   ANNUAL,
+		 			   EMAIL
+				FROM DEPARTMENT d, EMPLOYEE e
+				WHERE e.DEPTNO = d.DEPTNO
+				AND ROWNUM <= #{endPage}
+		]]>
+		
+				<if test="searchKeyword != null">
+					 <include refid="search"></include>
+				</if>
+		<![CDATA[					
+		)
+		WHERE R >= #{startPage}
+				
+		]]>
+					 			       
+    </select>
+    
+   
+	
+	
+
+
+	
 
 
 </mapper>

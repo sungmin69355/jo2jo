@@ -21,6 +21,7 @@ public class EmployeeDto {
     private  String academic;
     private  Long military;
     private  Long gender;
+    
 
 
     public EmployeeDto(Long empno, Long deptno, Long posno, String empname, String email, String phone, String address, String photoaddr, String regno, Long annual, String id, String password, Long salary, String hiredate, String academic, Long military, Long gender) {
@@ -41,5 +42,6 @@ public class EmployeeDto {
         this.academic = academic;
         this.military = military;
         this.gender = gender;
+        
     }
 }
