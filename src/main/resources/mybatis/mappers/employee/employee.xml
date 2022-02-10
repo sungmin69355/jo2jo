@@ -14,22 +14,7 @@
 				<!-- 검색 유형이 있을 때 -->
 				<when test="searchType != null">
 					<choose>
-						<when test="'empname'.equals(searchType)">
-<<<<<<< HEAD
-							AND empname LIKE('%' || #{searchKeyword} || '%')
-						</when>
-						<when test="'deptname'.equals(searchType)">
-							AND deptname LIKE('%' || #{searchKeyword} || '%')
-						</when>
-						<when test="'phone'.equals(searchType)">
-							AND phone LIKE('%' || #{searchKeyword} || '%')
-						</when>
-						<when test="'annual'.equals(searchType)">
-							AND annual LIKE('%' || #{searchKeyword} || '%')
-						</when>
-						<when test="'email'.equals(searchType)">
-							AND email  LIKE('%' || #{searchKeyword} || '%')
-=======
+						<when test="'empname'.equals(searchType)">						
 							AND EMPNAME LIKE('%' || #{searchKeyword} || '%')
 						</when>
 						<when test="'deptname'.equals(searchType)">
@@ -43,7 +28,6 @@
 						</when>
 						<when test="'email'.equals(searchType)">
 							AND EMAIL  LIKE('%' || #{searchKeyword} || '%')
->>>>>>> origin/develop
 						</when>
 					</choose>
 				</when>
@@ -51,19 +35,11 @@
 				<otherwise>
 					AND
 						(
-<<<<<<< HEAD
-						  empname LIKE('%'|| #{searchKeyword} || '%')
-						  OR deptname LIKE('%'|| #{searchKeyword} ||'%')
-						  OR phone LIKE('%'|| #{searchKeyword} ||'%')
-						  OR annual LIKE('%'|| #{searchKeyword} ||'%')
-						  OR email  LIKE('%'|| #{searchKeyword} ||'%')
-=======
 						  EMPNAME LIKE('%'|| #{searchKeyword} || '%')
 						  OR DEPTNAME LIKE('%'|| #{searchKeyword} ||'%')
 						  OR PHONE LIKE('%'|| #{searchKeyword} ||'%')
 						  OR ANNUAL LIKE('%'|| #{searchKeyword} ||'%')
 						  OR EMAIL  LIKE('%'|| #{searchKeyword} ||'%')
->>>>>>> origin/develop
 						)
 				</otherwise>
 			</choose>
@@ -100,21 +76,13 @@
     <select id="selectEmployee"  parameterType="EmployeeSelectDto" resultType="EmployeeSelectDto"> 
     	<![CDATA[	    	  	            
         SELECT  
-<<<<<<< HEAD
-        		R AS rownum2,
-        		EMPNAME AS empname2,
-         		DEPTNAME AS deptname2,
-         		PHONE AS phone2,
-         		ANNUAL AS annual2,
-         		EMAIL AS email2       		 
-=======
         		R AS rn,
         		EMPNAME AS empname,
          		DEPTNAME AS deptname,
          		PHONE AS phone,
          		ANNUAL AS annual,
          		EMAIL AS email       		 
->>>>>>> origin/develop
+
 		FROM 
 		 		(
 		 		SELECT ROWNUM R,
@@ -138,16 +106,4 @@
 		]]>
 					 			       
     </select>
-    
-<<<<<<< HEAD
-   
-	
-	
-
-
-	
-
-=======
->>>>>>> origin/develop
-
 </mapper>
