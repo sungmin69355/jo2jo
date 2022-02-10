@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -79,62 +79,135 @@
                      <div class="card-block">
                         <div class="row">
                             <div class="col-sm-12 table-responsive">
-                            	<div id = "searchform">
-				                      <form action="" method="get">
-										 search&nbsp;&nbsp;<input type="search" name="q">
-									     <input type="submit" value="검색">
-									  </form> 
-							  	</div>
+                            	<div id="adv-search"  class="input-group">                            		
+				                     <form id="searchForm" th:action="@{/employee}" method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+														<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
+														<input type="hidden" name="currentPageNo" value="1" />
+														<input type="hidden" name="recordsPerPage" th:value="${params.recordsPerPage}" />
+														<input type="hidden" name="pageSize" th:value="${params.pageSize}" />
+														<div class="form-group">
+															<label for="filter">검색 유형</label>
+															<select name="searchType" class="form-control">
+																<option value="" th:selected="${#strings.isEmpty( params.searchType )}">전체</option>
+																<option value="empname" th:selected="${#strings.equals(params.searchType, 'empname')}">사원이름</option>
+																<option value="deptname" th:selected="${#strings.equals(params.searchType, 'deptname')}">부서</option>
+																<option value="phone" th:selected="${#strings.equals(params.searchType, 'phone')}">전화번호</option>
+																<option value="annual" th:selected="${#strings.equals(params.searchType, 'annual')}">연차</option>
+																<option value="email" th:selected="${#strings.equals(params.searchType, 'email')}">이메일</option>
+															</select>
+														</div>
+														<div class="form-group">
+															<label for="contain">키워드</label>
+															<input type="text" name="searchKeyword" class="form-control" th:value="${params.searchKeyword}"/> 																																																							 												      		
+													  </div>
+													  <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
+											</form>													  			
+								  		</div>
+								  	
+							
 							       
                               <table class="table">
                               
-                                 <thead>
-                                 	 
+                                 <thead>                                 	 
                                     <tr>
+                                       <th></th>
                                        <th>사원이름</th>
                                        <th>부서</th>
                                        <th>전화번호</th>
                                        <th>연차</th>
                                        <th>이메일</th>
-                                       <th>생년월일</th>
                                        <th>Action</th>
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr th:each="employeelist:${employeelist}">
+                                    <tr th:each="employeelist:${employeelist}" th:if="${not #lists.isEmpty(employeelist)}">
+                                       <td>[[${employeelist.rownum2}]]</td> 
                                        <td>[[${employeelist.empname2}]]</td>
                                        <td>[[${employeelist.deptname2}]]</td>
                                        <td>[[${employeelist.phone2}]]</td>
                                        <td>[[${employeelist.annual2}]]</td>
                                        <td>[[${employeelist.email2}]]</td>
-                                       <td>[[${employeelist.regno2}]]</td>
      								   <td></td>                                        
                                     </tr>
-                                 </tbody>
-                                     
+                                    <tr th:unless="${not #lists.isEmpty(employeelist)}" >
+                                    	<td colspan="5">조회된 결과가 없습니다.</td>                               	
+                                    </tr>
+                                                                   
+                                 </tbody>                                    
                               </table>
-                              <div id ="paging">                          
-	                          <nav aria-label="Page navigation example">
-								  <ul class="pagination">
-								    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-								    <li class="page-item"><a class="page-link" href="#">1</a></li>
-								    <li class="page-item"><a class="page-link" href="#">2</a></li>
-								    <li class="page-item"><a class="page-link" href="#">3</a></li>
-								    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-								  </ul>
-							</nav> 
+                            <div class ="paging">                          
+		                           <nav aria-label="Page navigation example" th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}">
+									  <ul class="pagination">
+									    <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1)} ]])">									    
+									    	<a class="page-link" href="javascript:void(0)" aria-label="Previous" aria-hidden="true">
+									    	 <<
+									    	</a>
+									    </li>
+									    <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.firstPage - 1)} ]])">									    
+									    	<a class="page-link" href="javascript:void(0)" aria-label="Previous" aria-hidden="true">
+									    	 Previous
+									    	</a>
+									    </li>
+									    <li class="page-item"  th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:id="${pageNo == params.currentPageNo} ? 'active'">
+									    	<a class="page-link" href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo)} ]])"></a>
+									    </li>
+									     <li class="page-item"  th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.lastPage + 1)} ]])">
+									     	<a class="page-link" href="javascript:void(0)" aria-label="NEXT" aria-hidden="true">
+									    	 NEXT
+									    	</a>
+									     </li>
+									     <li class="page-item" th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount)} ]])">
+									     	<a class="page-link" href="javascript:void(0)" aria-label="NEXT" aria-hidden="true">
+									    	 >>
+									    	</a>
+									     </li>
+									  </ul>								  
+									</nav>  
+							</div>						
 							<div>                   
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-                 
-   <!-- Warning Section Ends -->
+                           </div>												
+	                        </div>
+	                     </div>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+		<th:block layout:fragment="script"> 
+			<script th:inline="javascript">						
+				function movePage(uri, queryString)  {
+					location.href = uri + queryString;
+				}
+				
+				function searchBoard(form) {
+					/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
+						if (isEmpty(form) == true) {
+						var searchKeyword = document.getElementById("mainSearchKeyword");
+						if (isEmpty(searchKeyword.value) == true) {
+							alert("키워드를 입력해 주세요.");
+							searchKeyword.focus();
+							return false;
+						}
 
+						form = document.getElementById("searchForm");
+						form.searchKeyword.value = searchKeyword.value;
+						form.submit();
+					}
+
+					if (isEmpty(form.searchKeyword.value) == true) {
+						alert("키워드를 입력해 주세요.");
+						form.searchKeyword.focus();
+						return false;
+					}
+				}
+				/*[- end of function -]*/
+	
+
+
+			</script>
+	   </th:block>                 
+   <!-- Warning Section Ends -->
+ 
 
    <!-- Required Jqurey -->
    <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
