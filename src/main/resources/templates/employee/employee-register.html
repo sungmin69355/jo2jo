@@ -382,7 +382,7 @@
 
                         </h5>
                         <h5>직급 : <select class="form-select form-select-lg mb-3" th:field="*{posno}">
-                            <option th:each="findAllByPosition:${findAllByPosition}" value=[[${findAllByPosition.posno}]]>[[${findAllByPosition.posname}]]</option>
+                            <option th:each="findAllByPosition:${findAllByPosition}" th:value="${findAllByPosition.posno}">[[${findAllByPosition.posname}]]</option>
                         </select>
                             <select class="form-select form-select-lg mb-3" th:field="*{annual}">
                                 <option value=1>1년차</option>
@@ -540,19 +540,19 @@
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" checked="checked" th:field="*{academic}" value=0>
+                                            <input type="radio" name="radio" checked="checked" th:field="*{academic}" value="0">
                                             <i class="helper"></i>고졸
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" th:field="*{academic}" value=1>
+                                            <input type="radio" name="radio" th:field="*{academic}" value="1">
                                             <i class="helper"></i>초대졸
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" th:field="*{academic}" value=2>
+                                            <input type="radio" name="radio" th:field="*{academic}" value="2">
                                             <i class="helper"></i>대졸
                                         </label>
                                     </div>

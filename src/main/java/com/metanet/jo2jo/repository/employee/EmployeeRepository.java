@@ -2,6 +2,7 @@ package com.metanet.jo2jo.repository.employee;
 
 import com.metanet.jo2jo.domain.Login.LoginDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDto;
+import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 
 
@@ -16,4 +17,6 @@ public interface EmployeeRepository {
     EmployeeDto findByLoginId(LoginDto loginDto);	
     List<EmployeeSelectDto> selectEmployee(EmployeeSelectDto params);
     int selectEmployeeTotalCount(EmployeeSelectDto params);
+    Integer insertEmployee(EmployeeRegisterForm employeeRegisterForm);
+
 }

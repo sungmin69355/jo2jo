@@ -47,7 +47,7 @@ public class EmployeeController {
             model.addAttribute("employeeRegisterForm", new EmployeeRegisterForm());
             return "employee/employee-register";
         } else {
-            return "index";
+            return "redirect:index";
         }
     }
 
@@ -67,9 +67,16 @@ public class EmployeeController {
                 model.addAttribute("findAllByPosition", findAllByPosition);
                 return "employee/employee-register";
             }
+
             //insert 로직
+            //이미지 첨부기능 임시방편
+            employeeRegisterForm.setPhotoaddr("/images/user/aaa.jpg");
+            Integer insertEmployeeResult = employeeRegisterService.insertEmployee(employeeRegisterForm);
+            System.out.println(insertEmployeeResult);
+            //결과
+            return "redirect:employees";
         }
-        return "index";
+        return "redirect:index";
     }
 
 
