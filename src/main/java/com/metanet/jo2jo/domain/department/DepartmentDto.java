@@ -17,4 +17,5 @@ public class DepartmentDto {
         this.maneger = maneger;
         this.deptid = deptid;
     }
+		
 }
