@@ -372,73 +372,76 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
+                    <form action="/employee" th:object="${employeeRegisterForm}" method="post">
                     <div class="user-block-2">
                         <img class="img-fluid" src="assets/images/widget/user-1.png" alt="user-header">
                         <input class="form-control form-control-sm" style="margin:0 auto; width: 20%" id="formFileSm" type="file"><br>
-                        <h5>부서 : <select class="form-select form-select-lg mb-3">
-                            <option th:each="findByAllDepartment:${findByAllDepartment}" value=[[${findByAllDepartment.deptno}]]>[[${findByAllDepartment.deptname}]]</option>
+                        <h5>부서 : <select class="form-select form-select-lg mb-3" th:field="*{deptno}">
+                            <option th:each="findByAllDepartment:${findByAllDepartment}"th:value="${findByAllDepartment.deptno}">[[${findByAllDepartment.deptname}]]</option>
                         </select>
 
                         </h5>
-                        <h5>직급 : <select class="form-select form-select-lg mb-3">
+                        <h5>직급 : <select class="form-select form-select-lg mb-3" th:field="*{posno}">
                             <option th:each="findAllByPosition:${findAllByPosition}" value=[[${findAllByPosition.posno}]]>[[${findAllByPosition.posname}]]</option>
-
                         </select>
-                            <select class="form-select form-select-lg mb-3">
-                                <option value="1">1년차</option>
-                                <option value="2">2년차</option>
-                                <option value="3">3년차</option>
-                                <option value="4">4년차</option>
-                                <option value="5">5년차</option>
-                                <option value="6">6년차</option>
-                                <option value="7">7년차</option>
-                                <option value="8">8년차</option>
-
-                            </select></h5>
-
+                            <select class="form-select form-select-lg mb-3" th:field="*{annual}">
+                                <option value=1>1년차</option>
+                                <option value=2>2년차</option>
+                                <option value=3>3년차</option>
+                                <option value=4>4년차</option>
+                                <option value=5>5년차</option>
+                                <option value=6>6년차</option>
+                                <option value=7>7년차</option>
+                                <option value=8>8년차</option>
+                            </select>
+                        </h5>
                     </div>
                     <div class="card-block">
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-user-suited"></i> 이름
-                                <input type="email" id="name" class="form-control" placeholder="name">
+                                <input type="text" th:field="*{empname}" id="empname" class="form-control" placeholder="name">
+                                <div th:each="msg : ${#fields.errors('empname')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-phone"></i> 전화 번호
-                                <input type="email" id="phoneNumber" class="form-control" placeholder="phoneNumber">
+                                <input type="text"  th:field="*{phone}" id="phone" class="form-control" placeholder="phoneNumber">
+                                <div th:each="msg : ${#fields.errors('phone')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-home"></i> 주소
-                                <input type="email" id="address" class="form-control" placeholder="address">
+                                <input type="text" th:field="*{address}" id="address" class="form-control" placeholder="address">
+                                <div th:each="msg : ${#fields.errors('address')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
 
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-email"></i> email
-                                <input type="email" id="email" class="form-control" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="user-block-2-activities">
-                            <div class="user-block-2-active">
-                                <i class="icofont icofont-user-suited"></i> 입사일
-                                <div class="input-group date input-group-date-custom">
-                                    <input type="text" class="form-control" placeholder="ex) 01/01/2022">
-                                    <span class="input-group-addon bg-primary">
-                                        <i class="icofont icofont-clock-time"></i>
-                                    </span>
+                                <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="Email">
+                                <div th:each="msg : ${#fields.errors('email')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
                                 </div>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
-                                <i class="icofont icofont-birthday-cake"></i> 생년월일
+                                <i class="icofont icofont-user-suited"></i> 입사일
+                                <div th:each="msg : ${#fields.errors('hiredate')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                                 <div class="input-group date input-group-date-custom">
-                                    <input type="text" class="form-control" placeholder="ex) 01/01/2022">
+                                    <input type="text" th:field="*{hiredate}" class="form-control" placeholder="ex) 01/01/2022">
                                     <span class="input-group-addon bg-primary">
                                         <i class="icofont icofont-clock-time"></i>
                                     </span>
@@ -448,43 +451,58 @@
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-id-card"></i> ID
-                                <input type="text" id="id" class="form-control" placeholder="ID">
+                                <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="ID">
+                                <div th:each="msg : ${#fields.errors('id')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-id-card"></i> 비밀번호
-                                <input type="text" id="password" class="form-control" placeholder="password">
+                                <input type="password" th:field="*{password}" id="password" class="form-control" placeholder="password">
+                                <div th:each="msg : ${#fields.errors('password')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-id-card"></i> 주민등록번호
-                                <input type="text" id="regno" class="form-control" placeholder="register">
+                                <input type="text" th:field="*{regno}" id="regno" class="form-control" placeholder="register">
+                                <div th:each="msg : ${#fields.errors('regno')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-letter"></i> 연봉
-                                <input type="text" id="salary" class="form-control" placeholder="salary">
+                                <input type="text" th:field="*{salary}" id="salary" class="form-control" placeholder="salary">
+                                <div th:each="msg : ${#fields.errors('salary')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-group-students"></i> 성별
-                                <div class="form-radio">
+                                <div class="form-radio" >
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" checked="checked">
+                                            <input type="radio" name="radio" checked="checked"  th:field="*{gender}" value=1>
                                             <i class="helper"></i>남자
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio">
+                                            <input type="radio" name="radio" th:field="*{gender}" value=2>
                                             <i class="helper"></i>여자
                                         </label>
                                     </div>
+                                </div>
+                                <div th:each="msg : ${#fields.errors('gender')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
                                 </div>
                             </div>
                         </div>
@@ -494,22 +512,25 @@
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" checked="checked">
+                                            <input type="radio" name="radio" checked="checked" th:field="*{military}" value=1>
                                             <i class="helper"></i>필
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio">
+                                            <input type="radio" name="radio"  th:field="*{military}" value=0>
                                             <i class="helper"></i>미필
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio">
+                                            <input type="radio" name="radio"  th:field="*{military}" value=2>
                                             <i class="helper"></i>상관없음
                                         </label>
                                     </div>
+                                </div>
+                                <div th:each="msg : ${#fields.errors('military')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
                                 </div>
                             </div>
                         </div>
@@ -519,35 +540,40 @@
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" checked="checked">
+                                            <input type="radio" name="radio" checked="checked" th:field="*{academic}" value=0>
                                             <i class="helper"></i>고졸
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio">
+                                            <input type="radio" name="radio" th:field="*{academic}" value=1>
                                             <i class="helper"></i>초대졸
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio">
+                                            <input type="radio" name="radio" th:field="*{academic}" value=2>
                                             <i class="helper"></i>대졸
                                         </label>
                                     </div>
                                 </div>
+                                <div th:each="msg : ${#fields.errors('academic')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase">
+                            <button type="submit" class="btn btn-primary waves-effect waves-light text-uppercase">
                                 등록하기
                             </button>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <!-- Warning Section Starts -->
