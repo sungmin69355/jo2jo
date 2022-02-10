@@ -14,7 +14,16 @@ public class HomeController {
     @GetMapping("/")
     String home(Model model, HttpSession session){
         model.addAttribute("loginDto", new LoginDto());
-        if (session != null) {
+        if (session.getAttribute("user") != null) {
+            return "login/main";
+        }
+        return "index";
+    }
+
+    @GetMapping("/index")
+    String index(HttpSession session, Model model) {
+        model.addAttribute("loginDto", new LoginDto());
+        if(session.getAttribute("user") ==null){
             return "login/main";
         }
         return "index";
@@ -26,7 +35,7 @@ public class HomeController {
     }
     
     //ui제작 테스트용
-    @GetMapping("/employee")
+    @GetMapping("/employees")
     String employeeMain() {
         return "employee/employee-main";
     }
