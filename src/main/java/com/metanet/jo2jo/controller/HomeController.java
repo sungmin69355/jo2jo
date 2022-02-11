@@ -20,6 +20,16 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping("/index")
+    String index(Model model, HttpSession session){
+        model.addAttribute("loginDto", new LoginDto());
+        System.out.println(session.getAttribute("info"));
+        if (session != null) {
+            return "login/main";
+        }
+        return "index";
+    }
+
     @GetMapping("/1")
     String home1(){
         return "accordion";

@@ -63,7 +63,7 @@ public class LoginController {
             session.setAttribute("user" , employee);
             session.setAttribute("info", employeeDto);
         }
-        return "redirect:/index";
+        return "redirect:/employees";
     }
 
     @GetMapping("/logout")
