@@ -12,4 +12,6 @@ public interface CurriculumRepository {
     Long registerCurriculum(CurriculumDto curriculumDto);
     Optional<CurriculumDto> findOneCurriculum(Long currno);
     int registerCurriculumCostotalcnt(CurriculumDto curriculumDto);
+    커밋되라 커밋되라
+
 }
