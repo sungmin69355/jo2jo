@@ -31,7 +31,7 @@ public class HomeController {
 
     @GetMapping("/1")
     String home1(){
-        return "accordion";
+        return "employee/employee-detail";
     }
         
   //ui제작 테스트용
@@ -39,6 +39,7 @@ public class HomeController {
     String departmentRegister() {
         return "department/department-register";
     }
+
 
 
     @GetMapping("/accordion")
@@ -129,4 +130,6 @@ public class HomeController {
     public String samplePage(){
         return "sample-page";
     }
+
+
 }
