@@ -9,15 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 import com.metanet.jo2jo.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+
+
 
 @Controller
 @RequiredArgsConstructor
@@ -51,6 +51,7 @@ public class EmployeeController {
         }
     }
 
+
     //사원 등록
     @PostMapping("/employee")
     String employeeRegister(HttpSession session, Model model, @Valid EmployeeRegisterForm employeeRegisterForm, BindingResult bindingResult) {
@@ -79,5 +80,15 @@ public class EmployeeController {
         return "redirect:index";
     }
 
+
+
+   
+  //사원조회 상세페이지
+    @GetMapping("/employeedetail")
+     String employeeDetail(@ModelAttribute("params") EmployeeSelectDto params, Model model) {    	
+    	model.addAttribute("employeedetaillist", employeeService.employeeDetaillist(params));
+        return "employee/employee-detail";
+       
+    }
 
 }
