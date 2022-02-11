@@ -134,8 +134,13 @@
 			   GENDER AS gender  
 		FROM DEPARTMENT d , EMPLOYEE e ,"POSITION" p 
 		WHERE e.EMPNO = #{empno}
-		AND e.DEPTNO = d.DEPTNO 
+		AND e.DEPTNO = d.DEPTNO
 		AND e.POSNO = p.POSNO
 	]]>		 	         
     </select>
+
+	<!-- 사원아이디 조회 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(ID) FROM EMPLOYEE where ID = #{id}
+	</select>
 </mapper>
