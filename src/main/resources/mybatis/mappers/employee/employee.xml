@@ -9,10 +9,10 @@
 <!-- Oracle 검색 -->
 	<sql id="search">
 		<!-- 검색 키워드가 있을 때 -->
-		<if test="searchKeyword != null">
+		<if test="searchKeyword != null and searchType != ''">
 			<choose>
 				<!-- 검색 유형이 있을 때 -->
-				<when test="searchType != null">
+				<when test="searchType != null and searchType != ''">
 					<choose>
 						<when test="'empname'.equals(searchType)">						
 							AND EMPNAME LIKE('%' || #{searchKeyword} || '%')
@@ -24,7 +24,8 @@
 							AND PHONE LIKE('%' || #{searchKeyword} || '%')
 						</when>
 						<when test="'annual'.equals(searchType)">
-							AND ANNUAL LIKE('%' || #{searchKeyword} || '%')
+							<!-- AND ANNUAL LIKE('%' || #{searchKeyword} || '%') -->
+							AND ANNUAL = #{searchKeyword}
 						</when>
 						<when test="'email'.equals(searchType)">
 							AND EMAIL  LIKE('%' || #{searchKeyword} || '%')
@@ -57,13 +58,13 @@
         ]]>
     </select>
     
-          <!-- 사원조회 -->
+    <!-- 사원조회 -->
     <select id="selectEmployee2" resultType="EmployeeDto">      
          SELECT *
  		 FROM EMPLOYEE		 	         
     </select>
       <!-- 사원조회 총개수 -->
-     <select id="selectEmployeeTotalCount" parameterType="EmployeeSelectDto" resultType ="int">
+     <select id="selectEmployeeTotalCount" parameterType="EmployeeSelectDto" resultType ="Integer">
 		  <![CDATA[	
 			 SELECT COUNT(*)
 			 FROM EMPLOYEE e, DEPARTMENT d 
@@ -81,8 +82,8 @@
          		DEPTNAME AS deptname,
          		PHONE AS phone,
          		ANNUAL AS annual,
-         		EMAIL AS email       		 
-
+         		EMAIL AS email,       		 
+				EMPNO AS empno
 		FROM 
 		 		(
 		 		SELECT ROWNUM R,
@@ -90,7 +91,8 @@
 		 			   DEPTNAME,
 		 			   PHONE,
 		 			   ANNUAL,
-		 			   EMAIL
+		 			   EMAIL,
+		 			   EMPNO
 				FROM DEPARTMENT d, EMPLOYEE e
 				WHERE e.DEPTNO = d.DEPTNO
 				AND ROWNUM <= #{endPage}
@@ -105,5 +107,28 @@
 				
 		]]>
 					 			       
+    </select>
+    
+      <!-- 사원조회상세페이징  민감정보-->
+    <select id="selectEmployeeDetail" parameterType="EmployeeSelectDto" resultType="EmployeeDetailDto">      
+       <![CDATA[	
+        SELECT EMPNAME AS empname, 
+        	   DEPTNAME AS deptname, 
+        	   POSNAME AS posname, 
+        	   ANNUAL AS annual,
+        	   PHONE AS phone,
+			   ADDRESS AS address,
+			   EMAIL AS email,
+			   HIREDATE AS hiredate,
+			   REGNO AS regno,
+			   ID AS id,
+			   ACADEMIC AS academic,
+			   MILITARY AS military,
+			   GENDER AS gender  
+		FROM DEPARTMENT d , EMPLOYEE e ,"POSITION" p 
+		WHERE e.EMPNO = #{empno}
+		AND e.DEPTNO = d.DEPTNO 
+		AND e.POSNO = p.POSNO
+	]]>		 	         
     </select>
 </mapper>

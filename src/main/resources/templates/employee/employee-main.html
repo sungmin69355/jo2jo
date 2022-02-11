@@ -4,6 +4,7 @@
 <head>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   
     <!--  [endif]-->
 	
 	<!-- Meta -->
@@ -88,7 +89,7 @@
 														<div class="form-group">
 															<label for="filter">검색 유형</label>
 															<select name="searchType" class="form-control">
-																<option value="" th:selected="${#strings.isEmpty( params.searchType )}">전체</option>
+																<option value="" th:selected="${#strings.isEmpty(params.searchType)}">선택안함</option>
 																<option value="empname" th:selected="${#strings.equals(params.searchType, 'empname')}">사원이름</option>
 																<option value="deptname" th:selected="${#strings.equals(params.searchType, 'deptname')}">부서</option>
 																<option value="phone" th:selected="${#strings.equals(params.searchType, 'phone')}">전화번호</option>
@@ -120,16 +121,21 @@
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr th:each="employeelist:${employeelist}" th:if="${not #lists.isEmpty(employeelist)}">
-                                       <td>[[${employeelist.rownum2}]]</td> 
-                                       <td>[[${employeelist.empname2}]]</td>
-                                       <td>[[${employeelist.deptname2}]]</td>
-                                       <td>[[${employeelist.phone2}]]</td>
-                                       <td>[[${employeelist.annual2}]]</td>
-                                       <td>[[${employeelist.email2}]]</td>
-     								   <td></td>                                        
+                                    <tr th:if="${not #lists.isEmpty( employeelist )}" th:each="employeelist:${employeelist}">
+                                       <td>[[${employeelist.rn}]]</td> 
+                                       <td>[[${employeelist.empname}]]</td>
+                                       <td>[[${employeelist.deptname}]]</td>
+                                       <td>[[${employeelist.phone}]]</td>
+                                       <td>[[${employeelist.annual}]]</td>
+                                       <td>[[${employeelist.email}]]</td>
+     								   <td>
+     								   <a href="/employeedetail?empno="
+     								   	 	th:attrappend="href=${employeelist.empno}">
+     								   	<i class="icofont icofont-ui-text-chat"></i>
+     								   </a>
+     								   </td>                                        
                                     </tr>
-                                    <tr th:unless="${not #lists.isEmpty(employeelist)}" >
+                                    <tr th:unless="${not #lists.isEmpty( employeelist )}"  >
                                     	<td colspan="5">조회된 결과가 없습니다.</td>                               	
                                     </tr>
                                                                    
@@ -188,6 +194,8 @@
 							searchKeyword.focus();
 							return false;
 						}
+						
+						
 
 						form = document.getElementById("searchForm");
 						form.searchKeyword.value = searchKeyword.value;

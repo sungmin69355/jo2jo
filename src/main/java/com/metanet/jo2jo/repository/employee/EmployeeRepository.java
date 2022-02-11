@@ -1,6 +1,7 @@
 package com.metanet.jo2jo.repository.employee;
 
 import com.metanet.jo2jo.domain.Login.LoginDto;
+import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDto;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 
@@ -15,5 +16,6 @@ import org.springframework.stereotype.Repository;
 public interface EmployeeRepository {
     EmployeeDto findByLoginId(LoginDto loginDto);	
     List<EmployeeSelectDto> selectEmployee(EmployeeSelectDto params);
-    int selectEmployeeTotalCount(EmployeeSelectDto params);
+    Integer selectEmployeeTotalCount(EmployeeSelectDto params);
+    List<EmployeeDetailDto> selectEmployeeDetail(EmployeeSelectDto params);
 }

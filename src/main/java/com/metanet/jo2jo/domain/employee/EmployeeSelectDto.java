@@ -4,9 +4,11 @@ import com.metanet.jo2jo.domain.commons.CommonDto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class EmployeeSelectDto extends CommonDto{	
 	private Long rn;
 	private String empname;
@@ -14,22 +16,25 @@ public class EmployeeSelectDto extends CommonDto{
 	private String phone;
 	private Long annual;
     private String email;
+    private Long empno;
+   
     
     	
-	public EmployeeSelectDto(Long rn, String empname, String deptname, String phone, Long annual,String email) {	
+	public EmployeeSelectDto(Long rn, String empname, String deptname, String phone, Long annual,String email, Long empno) {	
 		this.rn = rn;
 		this.empname = empname;
 		this.deptname = deptname;
 		this.phone = phone;
 		this.annual = annual;
 		this.email = email;
+		this.empno = empno;
 	}
+
+
+
+	
   
-	@Override
-	public String toString() {
-		return "EmployeeSelectDto [rn=" + rn + ", empname=" + empname + ", deptname=" + deptname
-				+ ", phone=" + phone + ", annual=" + annual + ", email=" + email + "]";
-	}
+	
     
  
       	
