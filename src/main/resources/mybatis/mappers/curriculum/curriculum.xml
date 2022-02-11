@@ -10,19 +10,19 @@
     <insert id="registerCurriculum" parameterType="CurriculumDto">
         <![CDATA[
 		INSERT INTO CURRICULUM (CURRNO
-					  , CURRNAME
-					  , CURRCOST
-					  , STARTDATE
-					  , ENDDATE
-					  , DEPTRANGE
-					  , CONTENT
-					  , INSTRUCTOR
-					  , EDUCOS1
-					  , EDUCOS2
-					  , EDUCOS3
-					  , EDUCOS4
-					  , EDUCOS5
-						)
+                              , CURRNAME
+                              , CURRCOST
+                              , STARTDATE
+                              , ENDDATE
+                              , DEPTRANGE
+                              , CONTENT
+                              , INSTRUCTOR
+                              , EDUCOS1
+                              , EDUCOS2
+                              , EDUCOS3
+                              , EDUCOS4
+                              , EDUCOS5
+                                )
         VALUES (SEQ_CURRICULUM_NO.NEXTVAL
               , #{currname}
               , #{currcost}
@@ -40,8 +40,17 @@
 	    ]]>
     </insert>
 
+    <!-- 커리큘럼 이름 하나 select -->
+    <select id="findOneCurriculum" parameterType="long" resultType="CurriculumDto">
+        <![CDATA[
+        SELECT 	*
+        FROM 	CURRICULUM
+        WHERE   CURRNO = #{currno}
+	    ]]>
+    </select>
+
     <!-- 커리큘럼 등록(코스총개수) -->
-    <update id="registerCurriculumCostotalCnt" parameterType="CurriculumDto">
+    <update id="registerCurriculumCostotalcnt" parameterType="CurriculumDto">
         <![CDATA[
         UPDATE 	CURRICULUM
         SET 	COSTOTALCNT = #{costotalcnt}
