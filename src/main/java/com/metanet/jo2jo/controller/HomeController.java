@@ -14,16 +14,7 @@ public class HomeController {
     @GetMapping("/")
     String home(Model model, HttpSession session){
         model.addAttribute("loginDto", new LoginDto());
-        if (session.getAttribute("user") != null) {
-            return "login/main";
-        }
-        return "index";
-    }
-
-    @GetMapping("/index")
-    String index(HttpSession session, Model model) {
-        model.addAttribute("loginDto", new LoginDto());
-        if(session.getAttribute("user") ==null){
+        if (session != null) {
             return "login/main";
         }
         return "index";
@@ -33,7 +24,7 @@ public class HomeController {
     String home1(){
         return "accordion";
     }
-        
+    
   //ui제작 테스트용
     @GetMapping("/department")
     String departmentRegister() {

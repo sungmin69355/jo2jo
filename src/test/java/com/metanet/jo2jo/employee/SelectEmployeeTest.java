@@ -26,8 +26,8 @@ public class SelectEmployeeTest {
   
 
 		  //when		
-		  EmployeeSelectDto params = new EmployeeSelectDto(null, "조성민", "최고부서", "010-3333-4444", null, "test3@example.com");
-		  int empolyeeTotalCount = employeeService.EmployeeTotalCount(params);
+		  EmployeeSelectDto params = new EmployeeSelectDto(null, null, null, null, null, null, null);
+		  Integer empolyeeTotalCount = employeeService.EmployeeTotalCount(params);
 		  List<EmployeeSelectDto> list = employeeService.employeelist(params);
 		  //then
 		  System.out.println("사원조회 모든테이블수:"+empolyeeTotalCount);
