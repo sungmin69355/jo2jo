@@ -1,6 +1,7 @@
 package com.metanet.jo2jo.curriculumRegister;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
+import com.metanet.jo2jo.repository.curriculum.CurriculumRepository;
 import com.metanet.jo2jo.service.CurriculumRegisterService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,13 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class CurriculumRegisterServiceTest {
     @Autowired
     private CurriculumRegisterService curriculumRegisterService;
+    private CurriculumRepository curriculumRepository;
 
     @Test
-    @DisplayName("커리큘럼 등록이 가능해야 한다")
+    @Transactional
+    @DisplayName("커리큘럼 등록이 가능해야 한다 색갸")
     public void registerCurriculumTest(){
         //given
         CurriculumDto curriculumDto = new CurriculumDto(
-                1000L
+                  null
                 , "테스트커리큘럼"
                 , 70000L
                 , "2022-02-10"
@@ -36,10 +39,10 @@ public class CurriculumRegisterServiceTest {
         );
 
         //when
-        Long saveCurrno = curriculumRegisterService.registerCurriculum(curriculumDto);
+        Long saveCurriculum = curriculumRegisterService.newCurriculum(curriculumDto);
 
         //then
-        CurriculumDto findCurriculum = curriculumRegisterService.findOneCurriculum(saveCurrno).get();
+        CurriculumDto findCurriculum = curriculumRegisterService.findOneCurriculum(saveCurriculum).get();
         Assertions.assertThat(curriculumDto.getCurrname()).isEqualTo(findCurriculum.getCurrname());
     }
 }

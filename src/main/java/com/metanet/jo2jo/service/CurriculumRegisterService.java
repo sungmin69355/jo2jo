@@ -12,9 +12,8 @@ import java.util.Optional;
 public class CurriculumRegisterService {
     private final CurriculumRepository curriculumRepository;
 
-    public Long registerCurriculum(CurriculumDto curriculumDto){
-        curriculumRepository.registerCurriculum(curriculumDto);
-        return curriculumDto.getCurrno();
+    public Long newCurriculum(CurriculumDto curriculumDto){
+        return curriculumRepository.registerCurriculum(curriculumDto);
     }
 
     public Optional<CurriculumDto> findOneCurriculum(Long currno){

@@ -41,7 +41,7 @@
     </insert>
 
     <!-- 커리큘럼 이름 하나 select -->
-    <select id="findOneCurriculum" parameterType="long" resultType="CurriculumDto">
+    <select id="findOneCurriculum" parameterType="Long" resultType="CurriculumDto">
         <![CDATA[
         SELECT 	*
         FROM 	CURRICULUM
