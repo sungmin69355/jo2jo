@@ -395,10 +395,10 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <form action="/employee" th:object="${employeeRegisterForm}" method="post">
+                    <form action="/employee" th:object="${employeeRegisterForm}" method="post" enctype="multipart/form-data">
                     <div class="user-block-2">
                         <img class="img-fluid" src="assets/images/widget/user-1.png" alt="user-header">
-                        <input class="form-control form-control-sm" style="margin:0 auto; width: 20%" id="formFileSm" type="file"><br>
+                        <input type="file" class="form-control form-control-sm" style="margin:0 auto; width: 20%" name="file" id="file"><br>
                         <h5>부서 : <select class="form-select form-select-lg mb-3" th:field="*{deptno}">
                             <option th:each="findByAllDepartment:${findByAllDepartment}"th:value="${findByAllDepartment.deptno}">[[${findByAllDepartment.deptname}]]</option>
                         </select>
