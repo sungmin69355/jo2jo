@@ -63,7 +63,13 @@ public class LoginController {
             session.setAttribute("user" , employee);
             session.setAttribute("info", employeeDto);
         }
-        return "redirect:/index";
+        return "redirect:/employees";
+    }
+    @PostMapping("/idCheck")
+    @ResponseBody
+    public int idCheck(@RequestParam("id") String id){
+        int cnt = loginService.idCheck(id);
+        return cnt;
     }
 
     @GetMapping("/logout")

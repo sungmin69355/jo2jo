@@ -1,5 +1,6 @@
 package com.metanet.jo2jo.domain.employee;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -29,6 +30,7 @@ public class EmployeeRegisterForm {
     private  String photoaddr;
     @Pattern(regexp = "^\\d{6}\\-[1-4]\\d{6}",message = "주민번호를 정확히 입력해주세요")
     private  String regno;
+    @NotNull(message = "연차를 선택해주세요")
     private  Long annual;
     @NotBlank(message = "아이디를 입력해주세요")
     private  String id;
@@ -44,4 +46,26 @@ public class EmployeeRegisterForm {
     private  Long military;
     @NotNull(message = "성별을 선택해주세요")
     private  Long gender;
+
+    public EmployeeRegisterForm(Long posno, Long deptno, String empname, String email, String phone, String address, String photoaddr, String regno, Long annual, String id, String password, Long salary, String hiredate, String academic, Long military, Long gender) {
+        this.posno = posno;
+        this.deptno = deptno;
+        this.empname = empname;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.photoaddr = photoaddr;
+        this.regno = regno;
+        this.annual = annual;
+        this.id = id;
+        this.password = password;
+        this.salary = salary;
+        this.hiredate = hiredate;
+        this.academic = academic;
+        this.military = military;
+        this.gender = gender;
+    }
+
+    public EmployeeRegisterForm() {
+    }
 }

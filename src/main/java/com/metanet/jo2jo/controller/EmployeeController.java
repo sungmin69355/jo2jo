@@ -9,15 +9,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 import com.metanet.jo2jo.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
+
+
 
 @Controller
 @RequiredArgsConstructor
@@ -47,9 +47,10 @@ public class EmployeeController {
             model.addAttribute("employeeRegisterForm", new EmployeeRegisterForm());
             return "employee/employee-register";
         } else {
-            return "index";
+            return "redirect:index";
         }
     }
+
 
     //사원 등록
     @PostMapping("/employee")
@@ -67,10 +68,27 @@ public class EmployeeController {
                 model.addAttribute("findAllByPosition", findAllByPosition);
                 return "employee/employee-register";
             }
+
             //insert 로직
+            //이미지 첨부기능 임시방편
+            employeeRegisterForm.setPhotoaddr("/images/user/aaa.jpg");
+            Integer insertEmployeeResult = employeeRegisterService.insertEmployee(employeeRegisterForm);
+            System.out.println(insertEmployeeResult);
+            //결과
+            return "redirect:employees";
         }
-        return "index";
+        return "redirect:index";
     }
 
+
+
+   
+  //사원조회 상세페이지
+    @GetMapping("/employeedetail")
+     String employeeDetail(@ModelAttribute("params") EmployeeSelectDto params, Model model) {    	
+    	model.addAttribute("employeedetaillist", employeeService.employeeDetaillist(params));
+        return "employee/employee-detail";
+       
+    }
 
 }

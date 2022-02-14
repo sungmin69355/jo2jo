@@ -8,7 +8,7 @@
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <!--[endif]-->
+    <!-[endif]-->
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,6 +85,29 @@
     <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css"/>
     <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css"/>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        function checkId(){
+            var id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
+            $.ajax({
+                url:'/idCheck', //Controller에서 인식할 주소
+                type:'post', //POST 방식으로 전달
+                data:{id:id},
+                success:function(cnt){
+                    if(cnt != 1){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디
+                        $('.id_ok').css("display","inline-block");
+                        $('.id_already').css("display", "none");
+                    } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                        $('.id_already').css("display","inline-block");
+                        $('.id_ok').css("display", "none");
+                    }
+                },
+                error:function(){
+                    alert("에러입니다");
+                }
+            });
+        };
+    </script>
 </head>
 
 <body class="sidebar-mini fixed">
@@ -382,7 +405,7 @@
 
                         </h5>
                         <h5>직급 : <select class="form-select form-select-lg mb-3" th:field="*{posno}">
-                            <option th:each="findAllByPosition:${findAllByPosition}" value=[[${findAllByPosition.posno}]]>[[${findAllByPosition.posname}]]</option>
+                            <option th:each="findAllByPosition:${findAllByPosition}" th:value="${findAllByPosition.posno}">[[${findAllByPosition.posname}]]</option>
                         </select>
                             <select class="form-select form-select-lg mb-3" th:field="*{annual}">
                                 <option value=1>1년차</option>
@@ -451,10 +474,12 @@
                         <div class="user-block-2-activities">
                             <div class="user-block-2-active">
                                 <i class="icofont icofont-id-card"></i> ID
-                                <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="ID">
+                                <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="ID" oninput="checkId()">
                                 <div th:each="msg : ${#fields.errors('id')}">
                                     <p th:text="${msg}" style="color:red;"></p>
                                 </div>
+                                <span class="id_ok" style="display: none;">사용 가능한 아이디입니다.</span>
+                                <span class="id_already" style="display: none;">누군가 이 아이디를 사용하고 있어요.</span>
                             </div>
                         </div>
                         <div class="user-block-2-activities">
@@ -540,19 +565,19 @@
                                 <div class="form-radio">
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" checked="checked" th:field="*{academic}" value=0>
+                                            <input type="radio" name="radio" checked="checked" th:field="*{academic}" value="0">
                                             <i class="helper"></i>고졸
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" th:field="*{academic}" value=1>
+                                            <input type="radio" name="radio" th:field="*{academic}" value="1">
                                             <i class="helper"></i>초대졸
                                         </label>
                                     </div>
                                     <div class="radio radio-inline">
                                         <label>
-                                            <input type="radio" name="radio" th:field="*{academic}" value=2>
+                                            <input type="radio" name="radio" th:field="*{academic}" value="2">
                                             <i class="helper"></i>대졸
                                         </label>
                                     </div>
