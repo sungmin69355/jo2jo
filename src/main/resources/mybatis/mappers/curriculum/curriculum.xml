@@ -40,12 +40,12 @@
 	    ]]>
     </insert>
 
-    <!-- 커리큘럼 이름 하나 select -->
-    <select id="findOneCurriculum" parameterType="Long" resultType="CurriculumDto">
+    <!-- 커리큘럼 하나 select -->
+    <select id="findOneCurriculum" parameterType="CurriculumDto" resultType="CurriculumDto">
         <![CDATA[
         SELECT 	*
         FROM 	CURRICULUM
-        WHERE   CURRNO = #{currno}
+        WHERE   CURRNAME = #{currname}
 	    ]]>
     </select>
 
@@ -54,7 +54,7 @@
         <![CDATA[
         UPDATE 	CURRICULUM
         SET 	COSTOTALCNT = #{costotalcnt}
-        WHERE 	CURRNO = #{currno}
+        WHERE 	CURRNAME = #{currname}
 	    ]]>
     </update>
 

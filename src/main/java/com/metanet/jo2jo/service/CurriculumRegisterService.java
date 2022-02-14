@@ -12,15 +12,34 @@ import java.util.Optional;
 public class CurriculumRegisterService {
     private final CurriculumRepository curriculumRepository;
 
-    public Long newCurriculum(CurriculumDto curriculumDto){
-        return curriculumRepository.registerCurriculum(curriculumDto);
+    public CurriculumDto newCurriculum(CurriculumDto curriculumDto){   //커리큘럼 이름 반환
+        curriculumRepository.registerCurriculum(curriculumDto);
+        return curriculumDto;
     }
 
-    public Optional<CurriculumDto> findOneCurriculum(Long currno){
-        return curriculumRepository.findOneCurriculum(currno);
+    public Optional<CurriculumDto> findOneCurriculum(CurriculumDto curriculumDto){
+        return curriculumRepository.findOneCurriculum(curriculumDto);
     }
 
-    public int registerCurriculumCostotalcnt(CurriculumDto curriculumDto){
-        return curriculumRepository.registerCurriculumCostotalcnt(curriculumDto);
+    public Long registerCurriculumCostotalcnt(CurriculumDto curriculumDto){
+        Long count = 0L;
+        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos1()!=null){
+            count++;
+        }
+        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos2()!=null){
+            count++;
+        }
+        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos3()!=null){
+            count++;
+        }
+        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos4()!=null){
+            count++;
+        }
+        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos5()!=null){
+            count++;
+        }
+        curriculumDto.setCostotalcnt(count);
+        curriculumRepository.registerCurriculumCostotalcnt(curriculumDto);
+        return count;
     }
 }

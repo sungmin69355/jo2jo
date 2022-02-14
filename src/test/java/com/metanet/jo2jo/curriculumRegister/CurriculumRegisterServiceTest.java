@@ -22,7 +22,7 @@ public class CurriculumRegisterServiceTest {
     public void registerCurriculumTest(){
         //given
         CurriculumDto curriculumDto = new CurriculumDto(
-                  null
+                  null   //SEQ_CURRICULUM_NO.NEXTVAL
                 , "테스트커리큘럼"
                 , 70000L
                 , "2022-02-10"
@@ -35,14 +35,45 @@ public class CurriculumRegisterServiceTest {
                 , "테스트코스3"
                 , "테스트코스4"
                 , "테스트코스5"
-                , null
+                , null  //costotalcnt
         );
 
         //when
-        Long saveCurriculum = curriculumRegisterService.newCurriculum(curriculumDto);
+        CurriculumDto saveCurriculum = curriculumRegisterService.newCurriculum(curriculumDto);
 
         //then
         CurriculumDto findCurriculum = curriculumRegisterService.findOneCurriculum(saveCurriculum).get();
         Assertions.assertThat(curriculumDto.getCurrname()).isEqualTo(findCurriculum.getCurrname());
+    }
+
+    @Test
+    @Transactional
+    @DisplayName("커리큘럼 등록이 되면 코스 총 개수가 업데이트되어야 한다")
+    public void registerCostotalCntTest(){
+        //given
+        CurriculumDto curriculumDto = new CurriculumDto(
+                null    //SEQ_CURRICULUM_NO.NEXTVAL
+                , "테스트커리큘럼"
+                , 70000L
+                , "2022-02-10"
+                , "2022-03-12"
+                , "ST부문 공공부문 금융사업본 교육사업본부 서비스부문 뱅킹부문 ES사업본부 ITO사업본부"
+                , "테스트내용"
+                , "테스트강사"
+                , "테스트코스1"
+                , "테스트코스2"
+                , "테스트코스3"
+                , "테스트코스4"
+                , "테스트코스5"
+                , null  //costotalcnt
+        );
+
+        //when
+        CurriculumDto saveCurriculum = curriculumRegisterService.newCurriculum(curriculumDto);
+        Long saveCostotalcnt = curriculumRegisterService.registerCurriculumCostotalcnt(curriculumDto);
+
+        //then
+        CurriculumDto findCurriculum = curriculumRegisterService.findOneCurriculum(saveCurriculum).get();
+        Assertions.assertThat(saveCostotalcnt).isEqualTo(findCurriculum.getCostotalcnt());
     }
 }
