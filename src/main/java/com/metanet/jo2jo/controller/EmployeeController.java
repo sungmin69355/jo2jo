@@ -4,6 +4,7 @@ import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.service.EmployeeRegisterService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class EmployeeController {
     private final EmployeeService employeeService;
     private final EmployeeRegisterService employeeRegisterService;
