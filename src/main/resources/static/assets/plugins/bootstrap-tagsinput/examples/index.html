@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../dist/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
-    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="/assets/app.css">
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -156,7 +156,7 @@ var citynames = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   prefetch: {
-    url: 'assets/citynames.json',
+    url: '/assets/citynames.json',
     filter: function(list) {
       return $.map(list, function(cityname) {
         return { name: cityname }; });
@@ -203,7 +203,7 @@ $('input').tagsinput({
 var cities = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
-  prefetch: 'assets/cities.json'
+  prefetch: '/assets/cities.json'
 });
 cities.initialize();
 
@@ -252,7 +252,7 @@ elt.tagsinput('add', { "value": 13, "text": "Cairo"       , "continent": "Africa
 var cities = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
-  prefetch: 'assets/cities.json'
+  prefetch: '/assets/cities.json'
 });
 cities.initialize();
 
@@ -735,8 +735,8 @@ $('#tags-input').on('beforeItemRemove', function(event) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
-    <script src="assets/app.js"></script>
-    <script src="assets/app_bs3.js"></script>
+    <script src="/assets/app.js"></script>
+    <script src="/assets/app_bs3.js"></script>
   </body>
 </html>
 

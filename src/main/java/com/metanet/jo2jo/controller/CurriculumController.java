@@ -17,9 +17,12 @@ public class CurriculumController {
     //커리큘럼 등록
     @GetMapping("/curriculum/new")
     String curriculumRegisterForm(){
-
-
         return "curriculum/curriculum-register";
+    }
+
+    @GetMapping("/curriculum/2")
+    String curriculumRegisterForm2(){
+        return "curriculum/form-elements-advance";
     }
 
     @PostMapping("/curriculum/new")
