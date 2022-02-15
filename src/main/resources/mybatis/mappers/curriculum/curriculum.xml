@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metanet.jo2jo.repository.curriculum.CurriculumRepository">
+
+    <!-- 커리큘럼 등록 -->
+    <insert id="registerCurriculum" parameterType="CurriculumDto">
+        <![CDATA[
+		INSERT INTO CURRICULUM (CURRNO
+                              , CURRNAME
+                              , CURRCOST
+                              , STARTDATE
+                              , ENDDATE
+                              , DEPTRANGE
+                              , CONTENT
+                              , INSTRUCTOR
+                              , EDUCOS1
+                              , EDUCOS2
+                              , EDUCOS3
+                              , EDUCOS4
+                              , EDUCOS5
+                                )
+        VALUES (SEQ_CURRICULUM_NO.NEXTVAL
+              , #{currname}
+              , #{currcost}
+              , TO_DATE(#{startdate},'YYYY-MM-DD')
+              , TO_DATE(#{enddate},'YYYY-MM-DD')
+              , #{deptrange}
+              , #{content}
+              , #{instructor}
+              , #{educos1}
+              , #{educos2}
+              , #{educos3}
+              , #{educos4}
+              , #{educos5}
+              )
+	    ]]>
+    </insert>
+
+    <!-- 커리큘럼 이름 하나 select -->
+    <select id="findOneCurriculum" parameterType="long" resultType="CurriculumDto">
+        <![CDATA[
+        SELECT 	*
+        FROM 	CURRICULUM
+        WHERE   CURRNO = #{currno}
+	    ]]>
+    </select>
+
+    <!-- 커리큘럼 등록(코스총개수) -->
+    <update id="registerCurriculumCostotalcnt" parameterType="CurriculumDto">
+        <![CDATA[
+        UPDATE 	CURRICULUM
+        SET 	COSTOTALCNT = #{costotalcnt}
+        WHERE 	CURRNO = #{currno}
+	    ]]>
+    </update>
+
+</mapper>
