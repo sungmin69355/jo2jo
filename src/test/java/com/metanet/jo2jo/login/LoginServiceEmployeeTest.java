@@ -78,4 +78,25 @@ public class LoginServiceEmployeeTest {
             EmployeeDto employeeDto = loginService.employeeFindByLoginId(loginDto);
         });
     }
+    @Test
+    @DisplayName("사원 idCheck 함수 테스트 사원이 있을 경우 " )
+    public void employeeTrueIdCheckTest() {
+        //given
+        String id = "employeetest";
+        //when
+        int getResultIdCheck = loginService.idCheck(id);
+        //then
+        Assertions.assertThat(getResultIdCheck).isEqualTo(1);
+    }
+    @Test
+    @DisplayName("사원 idCheck 함수 테스트 사원이 없을 경우 " )
+    public void employeeNotIdCheckTest() {
+        //given
+        String id = "asdkajsdnwakdnakwj";
+        //when
+        int getResultIdCheck = loginService.idCheck(id);
+        //then
+        Assertions.assertThat(getResultIdCheck).isEqualTo(0);
+    }
+
 }

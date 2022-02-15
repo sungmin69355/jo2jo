@@ -65,6 +65,12 @@ public class LoginController {
         }
         return "redirect:/employees";
     }
+    @PostMapping("/idCheck")
+    @ResponseBody
+    public int idCheck(@RequestParam("id") String id){
+        int cnt = loginService.idCheck(id);
+        return cnt;
+    }
 
     @GetMapping("/logout")
     public String logout(Model model, HttpServletRequest request) {

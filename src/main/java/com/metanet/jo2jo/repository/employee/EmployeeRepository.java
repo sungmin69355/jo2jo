@@ -20,5 +20,6 @@ public interface EmployeeRepository {
     Integer insertEmployee(EmployeeRegisterForm employeeRegisterForm);
     List<EmployeeDetailDto> selectEmployeeDetail(EmployeeSelectDto params);
     Integer selectEmployeeTotalCount(EmployeeSelectDto params);
+    int idCheck(String id);
 
 }

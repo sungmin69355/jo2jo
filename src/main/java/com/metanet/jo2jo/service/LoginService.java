@@ -21,6 +21,8 @@ public class LoginService {
     public EmployeeDto employeeFindByLoginId(LoginDto loginDto){
         return employeeRepository.findByLoginId(loginDto);
     }
-
+    public int idCheck(String id) {
+        return employeeRepository.idCheck(id);
+    }
 
 }
