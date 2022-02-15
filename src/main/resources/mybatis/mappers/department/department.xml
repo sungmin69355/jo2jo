@@ -13,6 +13,17 @@
         select * From department
         ]]>
     </select>
+    <select id="findOneByDepartment" parameterType="Long" resultType="DepartmentDetailDto">
+
+        <![CDATA[
+        select d.DEPTNO, d.DEPTNAME as deptname, EMPNAME as manager, de.DEPTNAME as deptpidname
+        from DEPARTMENT d LEFT OUTER JOIN  EMPLOYEE e
+                                           on d.MANAGER = e.EMPNO
+                          Left OUTER JOIN DEPARTMENT de
+                                          on d.DEPTPID = de.DEPTNO
+        where d.DEPTNO =  #{deptNo}
+        ]]>
+    </select>
 
     <!-- 부서 insert -->
     <insert id="insertDepartment" parameterType="departmentForm">

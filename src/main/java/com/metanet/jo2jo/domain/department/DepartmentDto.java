@@ -11,7 +11,7 @@ public class DepartmentDto {
     private Long deptno;
     private String deptname;
     private Long manager;
-    private Long deptpid = null;
+    private Long deptpid;
 
     public DepartmentDto(Long deptno, String deptname, Long manager, Long deptpid) {
         this.deptno = deptno;

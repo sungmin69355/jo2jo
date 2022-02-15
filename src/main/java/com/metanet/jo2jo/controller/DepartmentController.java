@@ -1,7 +1,9 @@
 package com.metanet.jo2jo.controller;
 
+import com.metanet.jo2jo.domain.department.DepartmentDetailDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.department.DepartmentForm;
+import com.metanet.jo2jo.service.DepartmentDetailService;
 import com.metanet.jo2jo.service.DepartmentRegisterService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +27,7 @@ import java.util.Set;
 public class DepartmentController {
 
     private final DepartmentRegisterService departmentRegisterService;
+    private final DepartmentDetailService departmentDetailService;
 
     @GetMapping("/department/new")
     String departmentRegisterForm(HttpSession session, Model model){
@@ -60,6 +64,16 @@ public class DepartmentController {
             return "redirect:/";
         }
         return "redirect:/";
+    }
+    @GetMapping("/department/{deptNo}")
+    String departmentDetailForm(HttpSession session, Model model, @PathVariable Long deptNo){
+        if(session.getAttribute("user") != null){
+            DepartmentDetailDto departmentDetailDto  = departmentDetailService.selectDepartment(deptNo);
+            model.addAttribute("departmentDetailDto",departmentDetailDto);
+            return "department/department-detail";
+        }
+        return "redirect:/employees";
+
 
     }
 }
