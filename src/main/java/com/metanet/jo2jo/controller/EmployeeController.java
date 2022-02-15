@@ -112,5 +112,26 @@ public class EmployeeController {
         return "employee/employee-detail";
        
     }
+    
+  //사원조회 상세페이지(수정페이지)
+    @GetMapping("/employeeupdate")
+     String employeeUpdateForm(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, Model model) {
+    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
+    	
+    	if (session.getAttribute("user").equals("admin")) {
+            //부서 정보
+            List<DepartmentDto> findByAllDepartment = employeeRegisterService.findAllByDepartment();
+            //직급 정보
+            List<PositionDto> findAllByPosition = employeeRegisterService.findAllByPosition();
 
+            model.addAttribute("findByAllDepartment", findByAllDepartment);
+            model.addAttribute("findAllByPosition", findAllByPosition);
+            model.addAttribute("employeeRegisterForm", new EmployeeRegisterForm());
+            return "employee/employee-update";
+        } else {
+            return "redirect:index";
+        }
+          
+    }
+      
 }

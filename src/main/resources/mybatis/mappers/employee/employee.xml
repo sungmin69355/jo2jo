@@ -125,19 +125,24 @@
         	   ANNUAL AS annual,
         	   PHONE AS phone,
 			   ADDRESS AS address,
+			   PHOTOADDR AS photoaddr,
 			   EMAIL AS email,
 			   HIREDATE AS hiredate,
 			   REGNO AS regno,
 			   ID AS id,
 			   ACADEMIC AS academic,
 			   MILITARY AS military,
-			   GENDER as gender
+			   GENDER as gender,
+			   EMPNO as empno
 		FROM DEPARTMENT d , EMPLOYEE e ,"POSITION" p 
 		WHERE e.EMPNO = #{empno}
 		AND e.DEPTNO = d.DEPTNO
 		AND e.POSNO = p.POSNO
 	]]>		 	         
     </select>
+    
+   
+    
 
 	<!-- 사원아이디 조회 -->
 	<select id="idCheck" parameterType="String" resultType="int">
