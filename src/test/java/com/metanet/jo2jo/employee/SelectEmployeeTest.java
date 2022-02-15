@@ -20,11 +20,8 @@ public class SelectEmployeeTest {
 	  private EmployeeService employeeService;
   
 	  @Test
-	  
 	  @DisplayName("관리자와 사원은 사원조회가 가능하다.")
 	  void selectEmployee() {
-  
-
 		  //when		
 		  EmployeeSelectDto params = new EmployeeSelectDto(null, null, null, null, null, null, null);
 		  Integer empolyeeTotalCount = employeeService.EmployeeTotalCount(params);

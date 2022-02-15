@@ -14,5 +14,13 @@
         ]]>
     </select>
 
+    <!-- 부서 insert -->
+    <insert id="insertDepartment" parameterType="departmentForm">
+
+        <![CDATA[
+        insert into department(deptno, deptname, deptpid) values(seq_department_no.nextval,#{deptname},#{deptpid, jdbcType=VARCHAR })
+        ]]>
+    </insert>
+
 
 </mapper>
