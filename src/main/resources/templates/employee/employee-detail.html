@@ -342,114 +342,74 @@
                         <div class="card-block">
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-phone"></i><span>전화번호:[[${employeedetaillist.phone}]]</span>
+                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-home"></i><span>주소:[[${employeedetaillist.address}]]</span> 
+                                    <i class="icofont icofont-home"></i><span>주소: [[${employeedetaillist.address}]]</span> 
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
 
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-envelope"></i><span>email:[[${employeedetaillist.email}]]</span>
+                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
 
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-user-suited"></i><span>입사일:[[${employeedetaillist.hiredate}]]</span>
+                                    <i class="icofont icofont-user-suited"></i><span>입사일: [[${employeedetaillist.hiredate}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일:[[${employeedetaillist.regno}]]</span>
+                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-id-card"></i><span>ID:[[${employeedetaillist.id}]]</span>
+                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-group-students"></i><span>성별:[[${employeedetaillist.gender}]]</span>
+                                    <i class="icofont icofont-group-students"></i>
+                                    <span th:if="${employeedetaillist.gender} == 1">성별: 남자</span>
+                                    <span th:if="${employeedetaillist.gender} == 2">성별: 여자</span>
+                                    <span th:unless="${employeedetaillist.gender} == 1 or ${employeedetaillist.gender} == 2">성별: 없음</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-military"></i><span>병역:[[${employeedetaillist.military}]]</span>
+                                    <i class="icofont icofont-military"></i>
+                                    <span th:if="${employeedetaillist.military} == 1">병역: 군필</span>
+                                    <span th:if="${employeedetaillist.military} == 2">병역: 미필</span>
+                                    <span th:unless="${employeedetaillist.military} == 1 or ${employeedetaillist.military} == 2">병역: 없음</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-hat"></i><span>학력:[[${employeedetaillist.academic}]]</span>
+                                    <i class="icofont icofont-hat"></i><span>학력: [[${employeedetaillist.academic}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase">
+                                <button id ="updatebutton" type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="updateEmployee(this)">
                                     수정하기
                                 </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h5 class="card-header-text">Calendar</h5>
-                        </div>
-                        <div class="card-block">
-                            <!-- <h6 class="sub-title">Date Range Picker</h6> -->
-                            <input type="text" name="daterange" class="form-control" value="01/01/2015 - 01/31/2015" />
-
-                            <!--calendar start-->
-                            <div class="daterangepicker dropdown-menu">
-                            <div class="calendar left">
-                                <div class="daterangepicker_input">
-                                <input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />
-                                <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
-                                   <div class="calendar-time">
-                                        <div></div>
-                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
-                                    </div>
-                                </div>
-                            <div class="calendar-table"></div>
-                            </div>
-                            <div class="calendar right">
-                                <div class="daterangepicker_input">
-                                    <input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />
-                                    <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
-                                    <div class="calendar-time">
-                                        <div></div>
-                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
-                                    </div>
-                                </div>
-                            <div class="calendar-table"></div>
-                            </div>
-                            <div class="ranges">
-                                <div class="range_inputs">
-                                    <button class="applyBtn" disabled="disabled" type="button"></button>
-                                    <button class="cancelBtn" type="button"></button>
-                                </div>
-                            </div>
-                            </div>
-                            <!--calendar end-->
-
-                        </div>
-                    </div>
-                </div>
+	                              
+	                        </div>
+	                    </div>
+	                </div>
                 <div class="col-lg-8">
                     <div class="card">
 
@@ -865,16 +825,29 @@
     SyntaxHighlighter.all();
 </script>
 <script>
-var $window = $(window);
-var nav = $('.fixed-button');
-$window.scroll(function(){
-    if ($window.scrollTop() >= 200) {
-       nav.addClass('active');
-    }
-    else {
-       nav.removeClass('active');
-    }
-});
+	var $window = $(window);
+	var nav = $('.fixed-button');
+	$window.scroll(function(){
+	    if ($window.scrollTop() >= 200) {
+	       nav.addClass('active');
+	    }
+	    else {
+	       nav.removeClass('active');
+	    }
+	});
+</script>
+
+<script>
+	function updateEmployee() {
+	    var update = $('#updatebutton').serialize();
+	    $.ajax({
+	    	url:"/employeedetail",
+	    	type:"Post",
+	    	
+	    }).done(function(fragment) {
+	    	$("#piechart").replaceWith(fragment);
+	    });
+	}
 </script>
 
 </body>
