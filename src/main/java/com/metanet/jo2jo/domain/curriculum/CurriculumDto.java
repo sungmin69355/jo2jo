@@ -17,9 +17,9 @@ public class CurriculumDto {
     private String currname;
     @NotNull(message = "비용을 입력해주세요")
     private Long currcost;
-    @NotNull(message = "시작일을 입력해주세요")
+//    @NotNull(message = "시작일을 입력해주세요")
     private String startdate;
-    @NotNull(message = "종료일을 입력해주세요")
+//    @NotNull(message = "종료일을 입력해주세요")
     private String enddate;
     @NotEmpty(message = "부서 범위를 선택해주세요")
     private String deptrange;

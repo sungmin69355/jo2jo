@@ -45,7 +45,7 @@
         <![CDATA[
         SELECT 	*
         FROM 	CURRICULUM
-        WHERE   CURRNAME = #{currname}
+        WHERE   CURRNO = #{currno}
 	    ]]>
     </select>
 
@@ -54,8 +54,15 @@
         <![CDATA[
         UPDATE 	CURRICULUM
         SET 	COSTOTALCNT = #{costotalcnt}
-        WHERE 	CURRNAME = #{currname}
+        WHERE 	CURRNO = #{currno}
 	    ]]>
     </update>
+
+    <!--현재 시퀀스 번호 조회 -->
+    <select id="findCurrSequenceNo" resultType="Long">
+        SELECT  LAST_NUMBER
+        FROM    USER_SEQUENCES
+        WHERE   SEQUENCE_NAME = 'SEQ_CURRICULUM_NO'
+    </select>
 
 </mapper>

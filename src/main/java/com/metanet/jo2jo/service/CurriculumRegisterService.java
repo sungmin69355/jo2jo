@@ -51,4 +51,8 @@ public class CurriculumRegisterService {
     public List<DepartmentDto> findLowestDepartment(){
         return departmentRepository.findLowestDepartment();
     }
+
+    public Long findCurrSequenceNo(){
+        return curriculumRepository.findCurrSequenceNo();
+    }
 }

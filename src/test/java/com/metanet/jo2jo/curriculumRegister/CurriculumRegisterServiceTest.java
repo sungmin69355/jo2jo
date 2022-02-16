@@ -27,8 +27,9 @@ public class CurriculumRegisterServiceTest {
     @DisplayName("커리큘럼 등록이 가능해야 한다 색갸")
     public void registerCurriculumTest(){
         //given
+        Long currSequenceNo = curriculumRegisterService.findCurrSequenceNo();
         CurriculumDto curriculumDto = new CurriculumDto(
-                  null   //SEQ_CURRICULUM_NO.NEXTVAL
+                currSequenceNo   //SEQ_CURRICULUM_NO.NEXTVAL
                 , "테스트커리큘럼"
                 , 70000L
                 , "02/16/2022"
@@ -57,8 +58,9 @@ public class CurriculumRegisterServiceTest {
     @DisplayName("커리큘럼 등록이 되면 코스 총 개수가 업데이트되어야 한다")
     public void registerCostotalCntTest(){
         //given
+        Long currSequenceNo = curriculumRegisterService.findCurrSequenceNo();
         CurriculumDto curriculumDto = new CurriculumDto(
-                null    //SEQ_CURRICULUM_NO.NEXTVAL
+                currSequenceNo    //SEQ_CURRICULUM_NO.NEXTVAL
                 , "테스트커리큘럼"
                 , 70000L
                 , "02/16/2022"
