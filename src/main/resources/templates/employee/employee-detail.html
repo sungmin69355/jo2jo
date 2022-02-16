@@ -328,13 +328,15 @@
 
 
             <!-- 1-3-block row start -->
-            <div class="row" th:each="employeedetaillist:${employeedetaillist}">
+            <!--  보기모드 -->
+            <div id = "list" class="row" th:each="employeedetaillist:${employeedetaillist}">
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="user-block-2">
                             <img class="img-fluid" src="assets/images/widget/user-1.png" alt="user-header">
                             <h5></h5>
                             <h6></h6>
+       
                             <span>[[${employeedetaillist.empname}]]</span><br>
                             <span>[[${employeedetaillist.deptname}]]팀</span>
                             <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
@@ -342,407 +344,79 @@
                         <div class="card-block">
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-phone"></i><span>전화번호:[[${employeedetaillist.phone}]]</span>
+                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-home"></i><span>주소:[[${employeedetaillist.address}]]</span> 
+                                    <i class="icofont icofont-home"></i><span>주소: [[${employeedetaillist.address}]]</span> 
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
 
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-envelope"></i><span>email:[[${employeedetaillist.email}]]</span>
+                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
 
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-user-suited"></i><span>입사일:[[${employeedetaillist.hiredate}]]</span>
+                                    <i class="icofont icofont-user-suited"></i><span>입사일: [[${employeedetaillist.hiredate}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일:[[${employeedetaillist.regno}]]</span>
+                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-id-card"></i><span>ID:[[${employeedetaillist.id}]]</span>
+                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-group-students"></i><span>성별:[[${employeedetaillist.gender}]]</span>
+                                    <i class="icofont icofont-group-students"></i>
+                                    <span th:if="${employeedetaillist.gender} == 1">성별: 남자</span>
+                                    <span th:if="${employeedetaillist.gender} == 2">성별: 여자</span>
+                                    <span th:unless="${employeedetaillist.gender} == 1 or ${employeedetaillist.gender} == 2">성별: 없음</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-military"></i><span>병역:[[${employeedetaillist.military}]]</span>
+                                    <i class="icofont icofont-military"></i>
+                                    <span th:if="${employeedetaillist.military} == 1">병역: 군필</span>
+                                    <span th:if="${employeedetaillist.military} == 2">병역: 미필</span>
+                                    <span th:unless="${employeedetaillist.military} == 1 or ${employeedetaillist.military} == 2">병역: 없음</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-hat"></i><span>학력:[[${employeedetaillist.academic}]]</span>
+                                    <i class="icofont icofont-hat"></i>
+                                    <span th:if="${employeedetaillist.academic} == 0">학력: 고졸</span>
+                                    <span th:if="${employeedetaillist.academic} == 1">학력: 고졸</span>
+                                    <span th:unless="${employeedetaillist.academic} == 0 or ${employeedetaillist.academic} == 1" >학력:초대졸</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase">
+                                <!-- <input type="hidden" name = "empno" value ="${employeedetaillist.empno}"> -->
+                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
                                     수정하기
                                 </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h5 class="card-header-text">Calendar</h5>
-                        </div>
-                        <div class="card-block">
-                            <!-- <h6 class="sub-title">Date Range Picker</h6> -->
-                            <input type="text" name="daterange" class="form-control" value="01/01/2015 - 01/31/2015" />
-
-                            <!--calendar start-->
-                            <div class="daterangepicker dropdown-menu">
-                            <div class="calendar left">
-                                <div class="daterangepicker_input">
-                                <input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />
-                                <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
-                                   <div class="calendar-time">
-                                        <div></div>
-                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
-                                    </div>
-                                </div>
-                            <div class="calendar-table"></div>
-                            </div>
-                            <div class="calendar right">
-                                <div class="daterangepicker_input">
-                                    <input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />
-                                    <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
-                                    <div class="calendar-time">
-                                        <div></div>
-                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
-                                    </div>
-                                </div>
-                            <div class="calendar-table"></div>
-                            </div>
-                            <div class="ranges">
-                                <div class="range_inputs">
-                                    <button class="applyBtn" disabled="disabled" type="button"></button>
-                                    <button class="cancelBtn" type="button"></button>
-                                </div>
-                            </div>
-                            </div>
-                            <!--calendar end-->
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h5 class="card-header-text">표</h5>
-                        </div>
-                        <div class="card-block">
-                            <!-- Tables start -->
-                            <!-- Row start -->
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <!-- Basic Table starts -->
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h6 class="card-header-text">사원조회 페이지</h6>
-                                            <!--  <p>Basic example <code>without any additional modification</code> classes</p> -->
-                                        </div>
-                                        <div class="card-block">
-                                            <div class="row">
-                                                <div class="col-sm-12 table-responsive">
-                                                    <table class="table">
-                                                        <thead>
-                                                        <tr>
-                                                            <th>사원이름</th>
-                                                            <th>부서</th>
-                                                            <th>전화번호</th>
-                                                            <th>연차</th>
-                                                            <th>이메일</th>
-                                                            <th>생년월일</th>
-                                                            <th>Action</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>조민국</td>
-                                                            <td>Mark</td>
-                                                            <td>Otto</td>
-                                                            <td>@mdo</td>
-                                                            <td>Ducky</td>
-                                                            <td>Ducky</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Jacob</td>
-                                                            <td>Thornton</td>
-                                                            <td>@fat</td>
-                                                            <td>Ducky</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Larry</td>
-                                                            <td>the Bird</td>
-                                                            <td>@twitter</td>
-                                                            <td>Ducky</td>
-                                                            <td>Ducky</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Larry</td>
-                                                            <td>the Bird</td>
-                                                            <td>@twitter</td>
-                                                            <td>Ducky</td>
-                                                            <td>Ducky</td>
-                                                            <td></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>Larry</td>
-                                                            <td>the Bird</td>
-                                                            <td>@twitter</td>
-                                                            <td>Ducky</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>Larry</td>
-                                                            <td>the Bird</td>
-                                                            <td>@twitter</td>
-                                                            <td>Ducky</td>
-                                                        </tr>
-
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--Basic Table end-->
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-header" style="text-align: center;">
-                            <button type="button" class="btn btn-warning waves-effect waves-light text-uppercase m-l-10">
-                                주민등록번호
-                            </button>
-                            <button type="button" class="btn btn-warning waves-effect waves-light text-uppercase m-l-10">
-                                연봉
-                            </button>
-                        </div>
-                    </div>
-                </div>
-<!--                <div class="col-xl-4 col-lg-12 grid-item">-->
-<!--                    <div class="card">-->
-<!--                        <div class="card-block horizontal-card-img d-flex">-->
-<!--                            <img class="media-object img-circle" src="assets/images/avatar-3.png" alt="Generic placeholder image">-->
-<!--                            <div class="d-inlineblock  p-l-20">-->
-<!--                                <h6>Josephin Doe</h6>-->
-<!--                                <a href="#">contact@admin.com</a>-->
-<!--                            </div>-->
-<!--                            <h6 class="txt-warning rotate-txt">Designer</h6>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-                <!--<div class="col-xl-4 col-lg-12 grid-item">
-                    <div class="card">
-                        <div class="card-block horizontal-card-img d-flex">
-                            <img class="media-object img-circle" src="assets/images/lockscreen.png" alt="Generic placeholder image">
-                            <div class="d-inlineblock  p-l-20">
-                                <h6>Josephin Doe</h6>
-                                <a href="#">contact@admin.com</a>
-                            </div>
-                            <h6 class="txt-danger rotate-txt">Developer</h6>
-                        </div>
-                    </div>
-                </div>-->
-            </div>
-            <!-- 1-3-block row end -->
-
-            <!-- 4-blocks row start -->
-            <!--<div class="row dashboard-header">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card dashboard-product">
-                        <span>Products</span>
-                        <h2 class="dashboard-total-products">4500</h2>
-                        <span class="label label-warning">Sales</span>Arriving Today
-                        <div class="side-box">
-                            <i class="ti-signal text-warning-color"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card dashboard-product">
-                        <span>Products</span>
-                        <h2 class="dashboard-total-products">37,500</h2>
-                        <span class="label label-primary">Views</span>View Today
-                        <div class="side-box ">
-                            <i class="ti-gift text-primary-color"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card dashboard-product">
-                        <span>Products</span>
-                        <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                        <span class="label label-success">Sales</span>Reviews
-                        <div class="side-box">
-                            <i class="ti-direction-alt text-success-color"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card dashboard-product">
-                        <span>Products</span>
-                        <h2 class="dashboard-total-products">$<span>30,780</span></h2>
-                        <span class="label label-danger">Sales</span>Reviews
-                        <div class="side-box">
-                            <i class="ti-rocket text-danger-color"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- 4-blocks row end -->
-
-            <!-- 2-1 block start -->
-            <div class="row">
-                <div class="col-xl-8 col-lg-12">
-                    <div class="card">
-                        <div class="card-block">
-                            <div class="table-responsive">
-                                <table class="table m-b-0 photo-table">
-                                    <thead>
-                                    <tr class="text-uppercase">
-                                        <th>Photo</th>
-                                        <th>Project</th>
-                                        <th>Completed</th>
-                                        <th>Status</th>
-                                        <th>Date</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th>
-                                            <img class="img-fluid img-circle" src="assets/images/avatar-2.png" alt="User">
-                                        </th>
-                                        <td>Appestia Project
-                                            <p><i class="icofont icofont-clock-time"></i>Created 14.9.2016</p>
-                                        </td>
-                                        <td>
-                                            <span class="pie" style="display: none;">226,134</span><svg class="peity" height="30" width="30"><path d="M 15.000000000000002 0 A 15 15 0 1 1 4.209902994920235 25.41987555688496 L 15 15" fill="#2196F3"></path><path d="M 4.209902994920235 25.41987555688496 A 15 15 0 0 1 14.999999999999996 0 L 15 15" fill="#ccc"></path></svg>
-                                        </td>
-                                        <td>50%</td>
-                                        <td>October 21, 2015</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <img class="img-fluid img-circle" src="assets/images/avatar-4.png" alt="User">
-                                        </th>
-                                        <td>Contract with belife Company
-                                            <p><i class="icofont icofont-clock-time"></i>Created 20.10.2016</p>
-                                        </td>
-                                        <td>
-                                            <span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="30" width="30"><path d="M 15.000000000000002 0 A 15 15 0 0 1 28.00043211809656 22.482564048691025 L 15 15" fill="#2196F3"></path><path d="M 28.00043211809656 22.482564048691025 A 15 15 0 1 1 14.999999999999996 0 L 15 15" fill="#ccc"></path></svg>
-                                        </td>
-                                        <td>70%</td>
-                                        <td>November 21, 2015</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <img class="img-fluid img-circle" src="assets/images/avatar-1.png" alt="User">
-                                        </th>
-                                        <td>Web Consultancy project
-                                            <p><i class="icofont icofont-clock-time"></i>Created 20.10.2016</p>
-                                        </td>
-                                        <td>
-                                            <span class="pie" style="display: none;">1,4</span><svg class="peity" height="30" width="30"><path d="M 15.000000000000002 0 A 15 15 0 0 1 29.265847744427305 10.36474508437579 L 15 15" fill="#2196F3"></path><path d="M 29.265847744427305 10.36474508437579 A 15 15 0 1 1 14.999999999999996 0 L 15 15" fill="#ccc"></path></svg>
-                                        </td>
-                                        <td>40%</td>
-                                        <td>September 21, 2015</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <img class="img-fluid img-circle" src="assets/images/avatar-3.png" alt="User">
-                                        </th>
-                                        <td>Contract with belife Company
-                                            <p><i class="icofont icofont-clock-time"></i>Created 20.10.2016</p>
-                                        </td>
-                                        <td>
-                                            <span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="30" width="30"><path d="M 15.000000000000002 0 A 15 15 0 0 1 28.00043211809656 22.482564048691025 L 15 15" fill="#2196F3"></path><path d="M 28.00043211809656 22.482564048691025 A 15 15 0 1 1 14.999999999999996 0 L 15 15" fill="#ccc"></path></svg>
-                                        </td>
-                                        <td>70%</td>
-                                        <td>November 21, 2015</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <img class="img-fluid img-circle" src="assets/images/avatar-1.png" alt="User">
-                                        </th>
-                                        <td>Contract with belife Company
-                                            <p><i class="icofont icofont-clock-time"></i>Created 20.10.2016</p>
-                                        </td>
-                                        <td>
-                                            <span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="30" width="30"><path d="M 15.000000000000002 0 A 15 15 0 0 1 28.00043211809656 22.482564048691025 L 15 15" fill="#2196F3"></path><path d="M 28.00043211809656 22.482564048691025 A 15 15 0 1 1 14.999999999999996 0 L 15 15" fill="#ccc"></path></svg>
-                                        </td>
-                                        <td>70%</td>
-                                        <td>November 21, 2015</td>
-                                    </tr>
-                                    <tr>
-                                        <th>
-                                            <img class="img-fluid img-circle" src="assets/images/avatar-2.png" alt="User">
-                                        </th>
-                                        <td>Contract with belife Company
-                                            <p><i class="icofont icofont-clock-time"></i>Created 20.10.2016</p>
-                                        </td>
-                                        <td>
-                                            <span class="pie" style="display: none;">0.52/1.561</span><svg class="peity" height="30" width="30"><path d="M 15.000000000000002 0 A 15 15 0 0 1 28.00043211809656 22.482564048691025 L 15 15" fill="#2196F3"></path><path d="M 28.00043211809656 22.482564048691025 A 15 15 0 1 1 14.999999999999996 0 L 15 15" fill="#ccc"></path></svg>
-                                        </td>
-                                        <td>70%</td>
-                                        <td>November 21, 2015</td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-header-text">Bar chart</h5>
-                        </div>
-                        <div class="card-block">
-                            <div id="piechart" style="min-width: 250px; height: 460px; margin: 0 auto"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+	                              
+	                        </div>
+	                      </div>	                     
+                
+               
             <!-- 2-1 block end -->
         </div>
         <!-- Main content ends -->
@@ -865,16 +539,35 @@
     SyntaxHighlighter.all();
 </script>
 <script>
-var $window = $(window);
-var nav = $('.fixed-button');
-$window.scroll(function(){
-    if ($window.scrollTop() >= 200) {
-       nav.addClass('active');
-    }
-    else {
-       nav.removeClass('active');
-    }
-});
+	var $window = $(window);
+	var nav = $('.fixed-button');
+	$window.scroll(function(){
+	    if ($window.scrollTop() >= 200) {
+	       nav.addClass('active');
+	    }
+	    else {
+	       nav.removeClass('active');
+	    }
+	});
+</script>
+
+<script type="text/javascript">
+	function updateEmployee(empno) {
+	      
+	    	 $.ajax({
+	    		url:"/employee/employee-detail",
+	 	    	type:"Post",
+	 	    	contType : "html",
+	 	    	cache : false,
+	 	    	complete:function() {
+	 	    		location.href="/employeeupdate?empno="+empno;	    		
+	 	    	}
+	 	    	
+	 	    })
+	 	  
+	    
+	  
+	}
 </script>
 
 </body>
