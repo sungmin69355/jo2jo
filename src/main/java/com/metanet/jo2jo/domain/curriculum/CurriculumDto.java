@@ -51,4 +51,8 @@ public class CurriculumDto {
         this.educos5 = educos5;
         this.costotalcnt = costotalcnt;
     }
+
+    public CurriculumDto() {
+
+    }
 }
