@@ -3,6 +3,7 @@ package com.metanet.jo2jo.controller;
 import com.metanet.jo2jo.domain.department.DepartmentDetailDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.department.DepartmentForm;
+import com.metanet.jo2jo.domain.department.DepartmentOzDto;
 import com.metanet.jo2jo.service.DepartmentDetailService;
 import com.metanet.jo2jo.service.DepartmentRegisterService;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -73,7 +71,14 @@ public class DepartmentController {
             return "department/department-detail";
         }
         return "redirect:/employees";
-
-
+    }
+    @GetMapping("/organization")
+    String departments(HttpSession session, Model model){
+        if(session.getAttribute("user") != null){
+            List<DepartmentDto> departmentDto = departmentRegisterService.findAllByDepartment();
+            model.addAttribute("departmentDto",departmentDto);
+            return"department/organization";
+        }
+        return "redirect:/employees";
     }
 }
