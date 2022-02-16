@@ -6,9 +6,9 @@
    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <![endif]-->
 
    <!-- Meta -->
    <meta charset="utf-8">
@@ -76,853 +76,557 @@
    <!--color css-->
    <link rel="stylesheet" type="text/css" href="/assets/css/color/color-1.min.css" id="color" />
 
+
+   <script>
+        function createDIV(){
+            obj = document.getElementById("parent");
+            newDiv = document.createElement("div");
+            newDiv.innerHTML = '';
+            newDiv.innerHTML = '<div class="form-group row">
+										<label for="example-text-input" class="col-xs-2 col-form-label form-control-label">
+											<div class="checkbox-color checkbox-primary">
+												<input id="checkbox4" type="checkbox">
+												<label for="checkbox4" >
+													코스
+												</label>
+											</div>
+										</label>
+										<div class="col-sm-10">
+											<input class="form-control" type="text" maxlength="33" placeholder="Enter course">
+										</div>
+									</div>
+									<span>누르면 삭제 됩니다.</span>'
+            newDiv.setAttribute("id", "myDiv"); // 새롭게 만들어지는 div 태그에 id 값 저장
+            newDiv.style.backgroundColor = "yellow";
+
+            // 익명 함수 : 바로 그 이벤트를 실행하기위해 이름을 정하지 않고 바로실행
+            newDiv.onclick = function(){
+                p = this.parentElement; //부모 HTML 태그요소
+                p.removeChild(this); // 자신을 부모 태그로 부터 제거
+            }
+
+            obj.appendChild(newDiv);
+        }
+    </script>
 </head>
 
+
 <body class="sidebar-mini fixed">
-   <div class="wrapper">
-      <div class="loader-bg">
-         <div class="loader-bar">
-         </div>
+<div class="wrapper">
+   <div class="loader-bg">
+      <div class="loader-bar">
       </div>
-      <!-- Navbar-->
+   </div>
 
-      <!-- Side-Nav-->
+   <!-- Navbar-->
+<!--   <header th:replace="includes/header :: header"></header>-->
 
-      <!-- Sidebar chat start -->
-      <div id="sidebar" class="p-fixed header-users showChat">
-         <div class="had-container">
-            <div class="card card_main header-users-main">
-               <div class="card-content user-box">
+   <!-- Side-Nav-->
+<!--   <div th:replace="includes/navbar :: navbar"></div>-->
 
-                  <div class="md-group-add-on p-20">
+   <!-- Sidebar chat start -->
+   <div id="sidebar" class="p-fixed header-users showChat">
+      <div class="had-container">
+         <div class="card card_main header-users-main">
+            <div class="card-content user-box">
+
+               <div class="md-group-add-on p-20">
                      <span class="md-add-on">
                                     <i class="icofont icofont-search-alt-2 chat-search"></i>
                                  </span>
-                     <div class="md-input-wrapper">
-                        <input type="text" class="md-form-control" name="username" id="search-friends">
-                        <label>Search</label>
-                     </div>
-
+                  <div class="md-input-wrapper">
+                     <input type="text" class="md-form-control" name="username" id="search-friends">
+                     <label>Search</label>
                   </div>
-                  <div class="media friendlist-main">
 
-                     <h6>Friend List</h6>
+               </div>
+               <div class="media friendlist-main">
 
+                  <h6>Friend List</h6>
+
+               </div>
+               <div class="main-friend-list">
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
+                     </div>
                   </div>
-                  <div class="main-friend-list">
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                  <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Alice</div>
+                        <span>1 hour ago</span>
+                     </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="7" data-status="offline" data-username="Michael Scofield" data-toggle="tooltip" data-placement="left" title="Michael Scofield">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-3.png" alt="Generic placeholder image">
+                        <div class="live-status bg-danger"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Michael Scofield</div>
+                        <span>3 hours ago</span>
+                     </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="5" data-status="online" data-username="Irina Shayk" data-toggle="tooltip" data-placement="left" title="Irina Shayk">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-4.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Irina Shayk</div>
+                        <span>1 day ago</span>
+                     </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="6" data-status="offline" data-username="Sara Tancredi" data-toggle="tooltip" data-placement="left" title="Sara Tancredi">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-5.png" alt="Generic placeholder image">
+                        <div class="live-status bg-danger"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Sara Tancredi</div>
+                        <span>2 days ago</span>
+                     </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
+                     </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Alice</div>
+                        <span>1 hour ago</span>
+                     </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
 
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
                      </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Alice</div>
+                        <span>1 hour ago</span>
                      </div>
-                     <div class="media friendlist-box" data-id="7" data-status="offline" data-username="Michael Scofield" data-toggle="tooltip" data-placement="left" title="Michael Scofield">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-3.png" alt="Generic placeholder image">
-                           <div class="live-status bg-danger"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Michael Scofield</div>
-                           <span>3 hours ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="5" data-status="online" data-username="Irina Shayk" data-toggle="tooltip" data-placement="left" title="Irina Shayk">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-4.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Irina Shayk</div>
-                           <span>1 day ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="6" data-status="offline" data-username="Sara Tancredi" data-toggle="tooltip" data-placement="left" title="Sara Tancredi">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-5.png" alt="Generic placeholder image">
-                           <div class="live-status bg-danger"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Sara Tancredi</div>
-                           <span>2 days ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                  </div>
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
 
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
                      </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
+                  </div>
+                  <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Alice</div>
+                        <span>1 hour ago</span>
                      </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                  </div>
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
 
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
                      </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                  </div>
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
 
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
                      </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                  </div>
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
 
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
                      </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                  </div>
+                  <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
 
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
+                     <a class="media-left" href="#!">
+                        <img class="media-object img-circle" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+                        <div class="live-status bg-success"></div>
+                     </a>
+                     <div class="media-body">
+                        <div class="friend-header">Josephin Doe</div>
+                        <span>20min ago</span>
                      </div>
                   </div>
                </div>
             </div>
          </div>
-
       </div>
-      <div class="showChat_inner">
-         <div class="media chat-inner-header">
-            <a class="back_chatBox">
-               <i class="icofont icofont-rounded-left"></i> Josephin Doe
-            </a>
+
+   </div>
+   <div class="showChat_inner">
+      <div class="media chat-inner-header">
+         <a class="back_chatBox">
+            <i class="icofont icofont-rounded-left"></i> Josephin Doe
+         </a>
+      </div>
+      <div class="media chat-messages">
+         <a class="media-left photo-table" href="#!">
+            <img class="media-object img-circle m-t-5" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+            <div class="live-status bg-success"></div>
+         </a>
+         <div class="media-body chat-menu-content">
+            <div class="">
+               <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
+               <p class="chat-time">8:20 a.m.</p>
+            </div>
          </div>
-         <div class="media chat-messages">
-            <a class="media-left photo-table" href="#!">
-               <img class="media-object img-circle m-t-5" src="/assets/images/avatar-1.png" alt="Generic placeholder image">
+      </div>
+      <div class="media chat-messages">
+         <div class="media-body chat-menu-reply">
+            <div class="">
+               <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
+               <p class="chat-time">8:20 a.m.</p>
+            </div>
+         </div>
+         <div class="media-right photo-table">
+            <a href="#!">
+               <img class="media-object img-circle m-t-5" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
                <div class="live-status bg-success"></div>
             </a>
-            <div class="media-body chat-menu-content">
-               <div class="">
-                  <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
-                  <p class="chat-time">8:20 a.m.</p>
-               </div>
-            </div>
-         </div>
-         <div class="media chat-messages">
-            <div class="media-body chat-menu-reply">
-               <div class="">
-                  <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
-                  <p class="chat-time">8:20 a.m.</p>
-               </div>
-            </div>
-            <div class="media-right photo-table">
-               <a href="#!">
-                  <img class="media-object img-circle m-t-5" src="/assets/images/avatar-2.png" alt="Generic placeholder image">
-                  <div class="live-status bg-success"></div>
-               </a>
-            </div>
-         </div>
-         <div class="media chat-reply-box">
-            <div class="md-input-wrapper">
-               <input type="text" class="md-form-control" id="inputEmail" name="inputEmail">
-               <label>Share your thoughts</label>
-               <span class="highlight"></span>
-               <span class="bar"></span> <button type="button" class="chat-send waves-effect waves-light">
-                     <i class="icofont icofont-location-arrow f-20 "></i>
-                 </button>
-
-            </div>
-
          </div>
       </div>
-      <!-- Sidebar chat end-->
-      <div class="content-wrapper">
-         <!-- Container-fluid starts -->
-         <div class="container-fluid">
-            <!-- Main content starts -->
-            <div>
-               <!-- Row Starts -->
-               <div class="row">
-                  <div class="col-sm-12 p-0">
-                     <div class="main-header">
-                        <h4>커리큘럼 등록</h4>
-                        <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
-                           <li class="breadcrumb-item"><a href="index.html"><i class="icofont icofont-home"></i></a>
-                           </li>
-                           <li class="breadcrumb-item"><a href="#">커리큘럼</a>
-                           </li>
-                           <li class="breadcrumb-item"><a href="curriculum/new">커리큘럼 등록</a>
-                           </li>
-                        </ol>
-                     </div>
-                  </div>
+      <div class="media chat-reply-box">
+         <div class="md-input-wrapper">
+            <input type="text" class="md-form-control" id="inputEmail" name="inputEmail">
+            <label>Share your thoughts</label>
+            <span class="highlight"></span>
+            <span class="bar"></span> <button type="button" class="chat-send waves-effect waves-light">
+            <i class="icofont icofont-location-arrow f-20 "></i>
+         </button>
+
+         </div>
+
+      </div>
+   </div>
+   <!-- Sidebar chat end-->
+
+   <div class="content-wrapper">
+      <!-- Container-fluid starts -->
+      <div class="container-fluid">
+         <!-- Main content starts -->
+         <!-- Row Starts -->
+         <div class="row">
+            <div class="col-sm-12 p-0">
+               <div class="main-header">
+                  <h4>커리큘럼 등록</h4>
+                  <ol class="breadcrumb breadcrumb-title breadcrumb-arrow">
+                     <li class="breadcrumb-item"><a href="index.html"><i class="icofont icofont-home"></i></a>
+                     </li>
+                     <li class="breadcrumb-item"><a href="#">커리큘럼</a>
+                     </li>
+                     <li class="breadcrumb-item"><a href="curriculum/new">커리큘럼 등록</a>
+                     </li>
+                  </ol>
                </div>
-               <!-- Row end -->
+            </div>
+         </div>
+         <!-- Row end -->
 
-               <!-- Row start -->
-               <div class="row">
-                  <!-- Form Control starts -->
-                  <div class="col-lg-12">
-                     <div class="card">
-
-                        <div class="card-block">
-                           <form>
-                              <div class="form-check disabled">
-                                 <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" value="" disabled>
-                                            Option two is disabled
-                                        </label>
-                              </div>
-                           </form>
-                        </div>
-                     </div>
+         <!-- Multi-Select start -->
+         <!-- Row Start -->
+         <div class="row">
+            <!-- 새 커리큘럼 starts -->
+            <div class="col-lg-12">
+               <div class="card">
+                  <div class="card-header">
+                     <h5 class="card-header-text">커리큘럼 등록</h5>
                   </div>
-                  <!-- Form Control ends -->
 
-                  <!-- 새 커리큘럼 starts -->
-                  <div class="col-lg-12">
-                     <div class="card">
-                        <div class="card-header">
-                           <h5 class="card-header-text">새 커리큘럼</h5>
+                  <div class="card-block">
+                     <form action="/curriculum/new" method="POST">
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">커리큘럼 이름</label>
+                           <div class="col-sm-10">
+                              <input class="form-control" type="text" th:field="*{currname}" name="currname" aria-describedby="emailHelp" placeholder="Enter curriculum" id="example-text-input" maxlength="16">
+                              <div th:each="msg : ${#fields.errors('currname')}">
+                                 <p th:text="${msg}" style="color:red;"></p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">비용</label>
+                           <div class="col-sm-10">
+                              <div class="input-group">
+                                 <span class="input-group-addon" id="basic-addon3.1">₩</span>
+                                 <input class="form-control" type="number" th:field="*{currcost}" name="currcost" id="alighaddon3" placeholder="Enter cost">
+                                 <span class="input-group-addon" id="basic-addon3.2">0,000</span>
+                                 <div th:each="msg : ${#fields.errors('currcost')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-email-input" class="col-xs-2 col-form-label form-control-label">내용</label>
+                           <div class="col-sm-10">
+                              <!--                                    <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">-->
+                              <textarea class="form-control max-textarea" th:field="*{content}" name="content" id="example-email-input" placeholder="Enter content" maxlength="333" rows="4"></textarea>
+                              <small id="emailHelp" class="form-text text-muted">최대 333자</small>
+                              <div th:each="msg : ${#fields.errors('content')}">
+                                 <p th:text="${msg}" style="color:red;"></p>
+                              </div>
+                           </div>
                         </div>
 
-                        <div class="card-block">
-                           <form>
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">커리큘럼 이름</label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" aria-describedby="emailHelp" placeholder="Enter curriculum" id="example-text-input">
-<!--                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+                        <div class="form-group row">
+                           <!--										<label for="example-text-input" class="col-xs-2 col-form-label form-control-label">-->
+                           <!--											<div class="checkbox-color checkbox-primary">-->
+                           <!--												<input id="checkbox1" type="checkbox">-->
+                           <!--												<label for="checkbox1" >-->
+                           <!--													코스1-->
+                           <!--												</label>-->
+                           <!--											</div>-->
+                           <!--										</label>-->
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">코스1</label>
+                           <div class="col-sm-10">
+                              <input class="form-control" type="text" th:field="*{educos1}" name="educos1" maxlength="33" placeholder="Enter course">
+                              <div th:each="msg : ${#fields.errors('educos1')}">
+                                 <p th:text="${msg}" style="color:red;"></p>
+                              </div>
+                           </div>
+                           <!--										<a href="javascript:createDIV()">코스 추가(최대 5)</a><p></p>-->
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">코스2</label>
+                           <div class="col-sm-10">
+                              <input class="form-control" type="text" name="educos2" maxlength="33" placeholder="Enter course">
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">코스3</label>
+                           <div class="col-sm-10">
+                              <input class="form-control" type="text" name="educos3" maxlength="33" placeholder="Enter course">
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">코스4</label>
+                           <div class="col-sm-10">
+                              <input class="form-control" type="text" name="educos4" maxlength="33" placeholder="Enter course">
+                           </div>
+                        </div>
+                        <div class="form-group row" id = "parent">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">코스5</label>
+                           <div class="col-sm-10">
+                              <input class="form-control" type="text" name="educos5" maxlength="33" placeholder="Enter course">
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">교육 기간</label>
+                           <div class="col-sm-10">
+                              <input type="text" name="daterange" class="form-control">
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">강사명</label>
+                           <div class="col-sm-10">
+                              <div class="input-group">
+                                 <input type="text" id="iconaddon12" th:field="*{instructor}" name="instructor" class="form-control" placeholder="Enter instructor" maxlength="16">
+                                 <span class="input-group-addon"><i class="icofont icofont-ui-user"></i></span>
+                                 <div th:each="msg : ${#fields.errors('instructor')}">
+                                    <p th:text="${msg}" style="color:red;"></p>
                                  </div>
                               </div>
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">비용</label>
-                                 <div class="col-sm-10">
-                                    <div class="input-group">
-                                       <span class="input-group-addon" id="basic-addon3.1">₩</span>
-                                       <input type="number" class="form-control" id="alighaddon3" placeholder="Enter cost">
-                                       <span class="input-group-addon" id="basic-addon3.2">0,000</span>
-                                    </div>
-                                 </div>
+                           </div>
+                        </div>
+                        <div class="form-group row">
+                           <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">부서 범위</label>
+                           <div class="col-sm-10">
+                              <div class="col-md-4 text-right">
+                                 <button type="button" class="btn btn-inverse-default waves-effect waves-light m-b-5" id='select-all'>모두 선택</button>
+                                 <button type="button" class="btn btn-inverse-default waves-effect waves-light m-b-5" id='deselect-all'>모두 해제</button>
                               </div>
-                              <div class="form-group row">
-                                 <label for="example-email-input" class="col-xs-2 col-form-label form-control-label">내용</label>
-                                 <div class="col-sm-10">
-<!--                                    <input class="form-control" type="email" value="bootstrap@example.com" id="example-email-input">-->
-                                     <textarea class="form-control max-textarea" id="example-email-input" placeholder="Enter content" maxlength="333" rows="4"></textarea>
-                                 </div>
-                              </div>
-
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">
-                                    <div class="checkbox-color checkbox-primary">
-                                       <input id="checkbox1" type="checkbox">
-                                       <label for="checkbox1" >
-                                          코스1
-                                       </label>
-                                    </div>
-                                 </label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" maxlength="33" placeholder="Enter course">
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">
-                                    <div class="checkbox-color checkbox-primary" >
-                                       <input id="checkbox2" type="checkbox">
-                                       <label for="checkbox2">
-                                          코스2
-                                       </label>
-                                    </div>
-                                 </label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" maxlength="33" placeholder="Enter course">
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">
-                                    <div class="checkbox-color checkbox-primary">
-                                       <input id="checkbox3" type="checkbox">
-                                       <label for="checkbox3" >
-                                          코스3
-                                       </label>
-                                    </div>
-                                 </label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" maxlength="33" placeholder="Enter course">
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">
-                                    <div class="checkbox-color checkbox-primary">
-                                       <input id="checkbox4" type="checkbox">
-                                       <label for="checkbox4" >
-                                          코스4
-                                       </label>
-                                    </div>
-                                 </label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" maxlength="33" placeholder="Enter course">
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">
-                                    <div class="checkbox-color checkbox-primary">
-                                       <input id="checkbox5" type="checkbox">
-                                       <label for="checkbox5" >
-                                          코스5
-                                       </label>
-                                    </div>
-                                 </label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="text" maxlength="33" placeholder="Enter course">
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="example-date-input" class="col-xs-2 col-form-label form-control-label">시작일</label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="date" id="example-date-input">
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="example-date-input" class="col-xs-2 col-form-label form-control-label">종료일</label>
-                                 <div class="col-sm-10">
-                                    <input class="form-control" type="date">
-                                 </div>
-                              </div>
-                              <div class="form-group row">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">강사명</label>
-                                 <div class="col-sm-10">
-                                    <div class="input-group">
-                                    <input type="text" id="iconaddon12" class="form-control" placeholder="Enter instructor">
-                                    <span class="input-group-addon"><i class="icofont icofont-ui-user"></i></span>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="row m-b-30 advance-elements">
-                                 <label for="example-text-input" class="col-xs-2 col-form-label form-control-label">부서 범위</label>
-                                 <select id='optgroup' multiple='multiple'>
-                                    <optgroup label='Friends'>
-                                       <option value='1'>Yoda</option>
-                                       <option value='2' selected>Obiwan</option>
-                                    </optgroup>
-                                    <optgroup label='Enemies'>
-                                       <option value='3'>Palpatine</option>
-                                       <option value='4'>Darth Vader</option>
-                                    </optgroup>
+                              <div class="col-md-8">
+                                 <select id='public-methods' multiple='multiple' th:field="*{deptrange}" name="deptrange">
+                                    <option th:each="index : ${deptList}" th:value="${index?.deptname}" th:utext="${index?.deptname}"></option>
                                  </select>
+<!--                                 <div th:each="msg : ${#fields.errors('deptrange')}">-->
+<!--                                    <p th:text="${msg}" style="color:red;"></p>-->
+<!--                                 </div>-->
                               </div>
-                              <button type="submit" class="btn btn-success waves-effect waves-light m-r-30" style="margin:0% 0% 0% 50%;">등록하기</button>
-                           </form>
+                           </div>
                         </div>
-                     </div>
+                        <div class="text-center">
+                           <button type="submit" class="btn btn-success waves-effect waves-light m-r-30">등록하기</button>
+                        </div>
+                     </form>
                   </div>
-                  <!-- 새 커리큘럼 ends -->
                </div>
-               <!-- Row end -->
-
-               <!-- Row start -->
-               <div class="row">
-                  <!--input State starts-->
-                  <div class="col-lg-6">
-                     <div class="card">
-                        <div class="card-header">
-                           <h5 class="card-header-text">Validation with Helper</h5>
-                           <div class="f-right">
-                              <a href="" data-toggle="modal" data-target="#validation-helper-Modal"><i class="icofont icofont-code-alt"></i></a>
-                           </div>
-                        </div>
-                        <div class="modal fade modal-flex" id="validation-helper-Modal" tabindex="-1" role="dialog">
-                           <div class="modal-dialog modal-lg" role="document">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                    <h5 class="modal-title">Code Explanation for Validation with helper</h5>
-                                 </div>
-                                 <!-- end of modal-header -->
-                                 <div class="modal-body">
-                                    <pre class="brush: html;">
-				                      /* for input with success */
-
-										&lt;div class="form-group has-success"&gt;
-										    &lt;label class="form-control-label" for="inputSuccess1"&gt;Input with success&lt;/label&gt;
-										        &lt;input type="text" class="form-control form-control-success" id="inputSuccess1"&gt;
-										            &lt;div class="form-control-feedback"&gt;Success! You've done it.&lt;/div&gt;
-										                &lt;small class="form-text text-muted"&gt;Example help text that remains unchanged.&lt;/small&gt;
-										&lt;/div&gt;
-
-										/* for input with warning */
-
-										&lt;div class="form-group has-warning"&gt;
-										    &lt;label class="form-control-label" for="inputWarning1"&gt;Input with warning&lt;/label&gt;
-										        &lt;input type="text" class="form-control form-control-warning" id="inputWarning1"&gt;
-										            &lt;div class="form-control-feedback"&gt;Shucks, check the formatting of that and try again.&lt;/div&gt;
-										                &lt;small class="form-text text-muted"&gt;Example help text that remains unchanged.&lt;/small&gt;
-										&lt;/div&gt;
-
-										/* for input with danger */
-
-										&lt;div class="form-group has-danger"&gt;
-										    &lt;label class="form-control-label" for="inputDanger1">Input with danger&lt;/label&gt;
-										        &lt;input type="text" class="form-control form-control-danger" id="inputDanger1"&gt;
-										            &lt;div class="form-control-feedback"&gt;Sorry, that username's taken. Try another?&lt;/div&gt;
-										                &lt;small class="form-text text-muted"&gt;Example help text that remains unchanged.&lt;/small&gt;
-										&lt;/div&gt;
-
-										/* for checkbox */
-
-										&lt;div class="form-group"&gt;
-											&lt;div class="checkbox-color checkbox-primary"&gt;
-												&lt;input id="checkbox1" type="checkbox" checked="checked"&gt;
-													&lt;label for="checkbox1" class="text-primary">primary&lt;/label&gt;
-											&lt;/div&gt;
-											&lt;div class="checkbox-color checkbox-success"&gt;
-												&lt;input id="checkbox2" type="checkbox" checked="checked"&gt;
-													&lt;label for="checkbox2" class="text-success">Success&lt;/label&gt;
-											&lt;/div&gt;
-											&lt;div class="checkbox-color checkbox-danger"&gt;
-												&lt;input id="checkbox3" type="checkbox" checked="checked"&gt;
-													&lt;label for="checkbox3" class="text-danger">Danger&lt;/label&gt;
-											&lt;/div&gt;
-										&lt;/div&gt;
-                      			  	</pre>
-                                 </div>
-                                 <!-- end of modal-body -->
-                              </div>
-                              <!-- end of modal-content -->
-                           </div>
-                           <!-- end of modal-dialog -->
-                        </div>
-                        <!-- end of modal -->
-
-                        <div class="card-block">
-                           <div class="form-group has-success">
-                              <label class="form-control-label" for="inputSuccess1">Input with success</label>
-                              <input type="text" class="form-control form-control-success" id="inputSuccess1">
-                              <div class="form-control-feedback">Success! You've done it.</div>
-                              <small class="form-text text-muted">Example help text that remains unchanged.</small>
-                           </div>
-                           <div class="form-group has-warning">
-                              <label class="form-control-label" for="inputWarning1">Input with warning</label>
-                              <input type="text" class="form-control form-control-warning" id="inputWarning1">
-                              <div class="form-control-feedback">Shucks, check the formatting of that and try again.</div>
-                              <small class="form-text text-muted">Example help text that remains unchanged.</small>
-                           </div>
-                           <div class="form-group has-danger">
-                              <label class="form-control-label" for="inputDanger1">Input with danger</label>
-                              <input type="text" class="form-control form-control-danger" id="inputDanger1">
-                              <div class="form-control-feedback">Sorry, that username's taken. Try another?</div>
-                              <small class="form-text text-muted">Example help text that remains unchanged.</small>
-                           </div>
-                           <div class="form-group">
-                              <div class="checkbox-color checkbox-primary">
-<!--                                 <input id="checkbox1" type="checkbox" checked="checked">-->
-                                 <label for="checkbox1" class="text-primary">
-                                            primary
-                                        </label>
-                              </div>
-                              <div class="checkbox-color checkbox-success">
-<!--                                 <input id="checkbox2" type="checkbox" checked="checked">-->
-                                 <label for="checkbox2" class="text-success">
-                                            Success
-                                        </label>
-                              </div>
-                              <div class="checkbox-color checkbox-danger">
-<!--                                 <input id="checkbox3" type="checkbox" checked="checked">-->
-                                 <label for="checkbox3" class="text-danger">
-                                            Danger
-                                        </label>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                     <div class="card">
-                        <div class="card-header">
-                           <h5 class="card-header-text"> Validation</h5>
-                           <div class="f-right">
-                              <a href="" data-toggle="modal" data-target="#validation-input-Modal"><i class="icofont icofont-code-alt"></i></a>
-                           </div>
-                        </div>
-                        <div class="modal fade modal-flex" id="validation-input-Modal" tabindex="-1" role="dialog">
-                           <div class="modal-dialog modal-lg" role="document">
-                              <div class="modal-content">
-                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                    <h5 class="modal-title">Code Explanation for Validation</h5>
-                                 </div>
-                                 <!-- end of modal-header -->
-                                 <div class="modal-body">
-                                    <pre class="brush: html;">
-
-	                      	/* for input success */
-
-							&lt;div class="form-group row"&gt;
-							    &lt;div class="col-md-2 txt-success"&gt;
-							    	&lt;label for="InputSuccess" class="form-control-label"&gt;Success&lt;/label&gt;
-							    &lt;/div&gt;
-							    &lt;div class="col-md-10"&gt;
-							    	&lt;input type="text" class="form-control input-success" id="InputSuccess"&gt;
-							    &lt;/div&gt;
-							&lt;/div&gt;
-
-							/* for input Warning */
-
-							&lt;div class="form-group row"&gt;
-							    &lt;div class="col-md-2 txt-warning"&gt;
-							    	&lt;label for="InputWarning" class="form-control-label"&gt;Warning&lt;/label&gt;
-							    &lt;/div&gt;
-							    &lt;div class="col-md-10"&gt;
-							    	&lt;input type="text" class="form-control input-warning" id="InputWarning" >&lt;/div&gt;
-							&lt;/div&gt;
-
-							/* for input Danger */
-
-							&lt;div class="form-group row"&gt;
-							    &lt;div class="col-md-2 txt-danger"&gt;
-							    	&lt;label for="InputDanger" class="form-control-label"&gt;Danger&lt;/label&gt;
-							    &lt;/div&gt;
-							    &lt;div class="col-md-10"&gt;
-							    	&lt;input type="text" class="form-control input-danger" id="InputDanger"&gt;&lt;/div&gt;
-							&lt;/div&gt;
-
-							/* for input with success */
-
-							&lt;div class="form-group row"&gt;
-							    &lt;div class="col-md-2 txt-success"&gt;
-							    	&lt;label class="form-control-label"&gt;Input with success&lt;/label&gt;
-							    &lt;/div&gt;
-							    &lt;div class="col-md-10"&gt;
-							        &lt;input type="text" class="form-control input-success" id="inputWithSuccess"&gt;
-							            &lt;i class="fa fa-check input-icon txt-success">&lt;/i&gt;
-							    &lt;/div&gt;
-							&lt;/div&gt;
-
-							/* for input with warning */
-
-							&lt;div class="form-group row"&gt;
-							    &lt;div class="col-md-2 txt-warning"&gt;
-							    	&lt;label class="form-control-label"&gt;Input with warning&lt;/label&gt;
-							    &lt;/div&gt;
-							    &lt;div class="col-md-10"&gt;
-									&lt;input type="text" class="form-control input-warning" id="inputWithWarning"&gt;
-									&lt;i class="fa fa-exclamation-triangle input-icon txt-warning"&gt;&lt;/i&gt;
-								&lt;/div&gt;
-							&lt;/div&gt;
-
-							/* for input with danger */
-
-							&lt;div class="form-group row"&gt;
-							    &lt;div class="col-md-2 txt-danger"&gt;
-							    	&lt;label class="form-control-label"&gt;Input with Danger&lt;/label&gt;
-							    &lt;/div&gt;
-							    &lt;div class="col-md-10"&gt;
-									&lt;input type="text" class="form-control input-danger" id="inputWithDanger"&gt;
-									&lt;i class="fa fa-times input-icon txt-danger"&gt;&lt;/i&gt;
-								&lt;/div&gt;
-							&lt;/div&gt;
-
-							/* for input By Checkbox */
-
-							&lt;div class="form-group row"&gt;
-								&lt;div class="col-md-2"&gt;
-									&lt;label for="chkcustom" class="form-control-label"&gt;Checkbox&lt;/label&gt;
-								&lt;/div&gt;
-								&lt;div class="col-md-10 has-success"&gt;
-									&lt;label class="custom-control custom-checkbox"&gt;
-										&lt;input type="checkbox" class="custom-control-input"&gt;
-										&lt;span class="custom-control-indicator"&gt;&lt;/span&gt;
-										&lt;span class="custom-control-description"&gt;Check this custom checkbox&lt;/span&gt;
-									&lt;/label&gt;
-								&lt;/div&gt;
-							&lt;/div&gt;
-
-							/* for input By Radio */
-
-							&lt;div class="form-group row"&gt;
-								&lt;div class="col-md-2"&gt;
-									&lt;label for="radio1" class="form-control-label"&gt;Radio Button&lt;/label&gt;
-								&lt;/div&gt;
-								&lt;div class="col-md-10 has-danger"&gt;
-									&lt;label class="custom-control custom-radio"&gt;
-										&lt;input id="radio1" name="radio" type="radio" class="custom-control-input"&gt;
-										&lt;span class="custom-control-indicator"&gt;&lt;/span&gt;
-										&lt;span class="custom-control-description"&gt;Toggle this custom radio&lt;/span&gt;
-									&lt;/label&gt;
-								&lt;/div&gt;
-							&lt;/div&gt;
-         			</pre>
-                                 </div>
-                                 <!-- end of modal-body -->
-                              </div>
-                              <!-- end of modal-content -->
-                           </div>
-                           <!-- end of modal-dialog -->
-                        </div>
-                        <!-- end of modal -->
-                        <div class="card-block">
-                           <div class="form-group row">
-                              <div class="col-md-2 txt-success "><label for="InputSuccess" class="form-control-label">Success</label></div>
-                              <div class="col-md-10"><input type="text" class="form-control input-success" id="InputSuccess"></div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-2 txt-warning "><label for="InputWarning" class="form-control-label">Warning</label></div>
-                              <div class="col-md-10"><input type="text" class="form-control input-warning" id="InputWarning"></div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-2 txt-danger "><label for="InputDanger" class="form-control-label">Danger</label></div>
-                              <div class="col-md-10"><input type="text" class="form-control input-danger" id="InputDanger"></div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-2 txt-success "><label class="form-control-label">Input with success</label></div>
-                              <div class="col-md-10">
-                                 <input type="text" class="form-control input-success" id="inputWithSuccess">
-                                 <i class="icofont icofont-check input-icon txt-success"></i>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-2 txt-warning "><label class="form-control-label">Input with warning</label></div>
-                              <div class="col-md-10">
-                                 <input type="text" class="form-control input-warning" id="inputWithWarning">
-                                 <i class="icofont icofont-warning input-icon txt-warning"></i>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-2 txt-danger "><label class="form-control-label">Input with Danger</label></div>
-                              <div class="col-md-10">
-                                 <input type="text" class="form-control input-danger" id="inputWithDanger">
-                                 <i class="fa fa-times input-icon txt-danger"></i>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-2 "><label class="form-control-label">Checkbox</label></div>
-                              <div class="col-md-10 has-success">
-                                 <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input">
-                                    <span class="custom-control-indicator"></span>
-                                    <span class="custom-control-description">Check this custom checkbox</span>
-                                 </label>
-                              </div>
-                           </div>
-                           <div class="form-group row">
-                              <div class="col-md-2 "><label class="form-control-label">Radio Button</label></div>
-                              <div class="col-md-10 has-danger">
-                                 <label class="custom-control custom-radio">
-                                            <input id="radio1" name="radio" type="radio" class="custom-control-input">
-                                            <span class="custom-control-indicator"></span>
-                                            <span class="custom-control-description">Toggle this custom radio</span>
-                                        </label>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!--input State ends-->
-
-               </div>
-               <!-- Row end -->
-
             </div>
-            <!-- Main content ends -->
+            <!-- 새 커리큘럼 ends -->
+
          </div>
-         <!-- Container-fluid ends -->
+         <!-- Row end -->
+         <!-- Multi-Select end -->
+
+
       </div>
+      <!-- Container-fluid ends -->
    </div>
+</div>
 
-   <!-- Warning Section Starts -->
-   <!-- Older IE warning message -->
-   <!--[if lt IE 9]>
-   <div class="ie-warning">
-      <h1>Warning!!</h1>
-      <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-      <div class="iew-container">
-         <ul class="iew-download">
-            <li>
-               <a href="http://www.google.com/chrome/">
-                  <img src="/assets/images/browser/chrome.png" alt="Chrome">
-                  <div>Chrome</div>
-               </a>
-            </li>
-            <li>
-               <a href="https://www.mozilla.org/en-US/firefox/new/">
-                  <img src="/assets/images/browser/firefox.png" alt="Firefox">
-                  <div>Firefox</div>
-               </a>
-            </li>
-            <li>
-               <a href="http://www.opera.com">
-                  <img src="/assets/images/browser/opera.png" alt="Opera">
-                  <div>Opera</div>
-               </a>
-            </li>
-            <li>
-               <a href="https://www.apple.com/safari/">
-                  <img src="/assets/images/browser/safari.png" alt="Safari">
-                  <div>Safari</div>
-               </a>
-            </li>
-            <li>
-               <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
-                  <img src="/assets/images/browser/ie.png" alt="">
-                  <div>IE (9 & above)</div>
-               </a>
-            </li>
-         </ul>
-      </div>
-      <p>Sorry for the inconvenience!</p>
+
+<!-- Warning Section Starts -->
+<!-- Older IE warning message -->
+<!--[if lt IE 9]>
+<div class="ie-warning">
+   <h1>Warning!!</h1>
+   <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+   <div class="iew-container">
+      <ul class="iew-download">
+         <li>
+            <a href="http://www.google.com/chrome/">
+               <img src="/assets/images/browser/chrome.png" alt="Chrome">
+               <div>Chrome</div>
+            </a>
+         </li>
+         <li>
+            <a href="https://www.mozilla.org/en-US/firefox/new/">
+               <img src="/assets/images/browser/firefox.png" alt="Firefox">
+               <div>Firefox</div>
+            </a>
+         </li>
+         <li>
+            <a href="http://www.opera.com">
+               <img src="/assets/images/browser/opera.png" alt="Opera">
+               <div>Opera</div>
+            </a>
+         </li>
+         <li>
+            <a href="https://www.apple.com/safari/">
+               <img src="/assets/images/browser/safari.png" alt="Safari">
+               <div>Safari</div>
+            </a>
+         </li>
+         <li>
+            <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+               <img src="/assets/images/browser/ie.png" alt="">
+               <div>IE (9 & above)</div>
+            </a>
+         </li>
+      </ul>
    </div>
-   <![endif]-->
-   <!-- Warning Section Ends -->
+   <p>Sorry for the inconvenience!</p>
+</div>
+<![endif]-->
+<!-- Warning Section Ends -->
 
-   <!-- Required Jqurey -->
-   <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
-   <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-   <script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
+<!-- Required Jqurey -->
+<script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
 
-   <!-- Required Fremwork -->
-   <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- Required Fremwork -->
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-   <!-- waves effects.js -->
-   <script src="/assets/plugins/Waves/waves.min.js"></script>
+<!-- waves effects.js -->
+<script src="/assets/plugins/Waves/waves.min.js"></script>
 
-   <!-- Scrollbar JS-->
-   <script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-   <script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
+<!-- Scrollbar JS-->
+<script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
 
-   <!--classic JS-->
-   <script src="/assets/plugins/classie/classie.js"></script>
+<!--classic JS-->
+<script src="/assets/plugins/classie/classie.js"></script>
 
-   <!-- notification -->
-   <script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+<!-- notification -->
+<script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
 
-   <!-- Date picker.js -->
-   <script src="/assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
-   <script src="/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+<!-- Date picker.js -->
+<script src="/assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
+<script src="/assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
 
-   <!-- Select 2 js -->
-   <script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
+<!-- Select 2 js -->
+<script src="/assets/plugins/select2/dist/js/select2.full.min.js"></script>
 
-   <!-- Max-Length js -->
-   <script src="/assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
+<!-- Max-Length js -->
+<script src="/assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
 
-   <!-- Multi Select js -->
-   <script src="/assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
-   <script src="/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
-   <script type="text/javascript" src="/assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+<!-- Multi Select js -->
+<script src="/assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
+<script src="/assets/plugins/multiselect/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="/assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
 
-   <!-- Tags js -->
-   <script src="/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+<!-- Tags js -->
+<script src="/assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
 
-   <!-- Bootstrap Datepicker js -->
-   <script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-   <script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
+<!-- Bootstrap Datepicker js -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
 
-   <!-- bootstrap range picker -->
-   <script type="text/javascript" src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap range picker -->
+<script type="text/javascript" src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 
-   <!-- color picker -->
-   <script type="text/javascript" src="/assets/plugins/spectrum/spectrum.js"></script>
-   <script type="text/javascript" src="/assets/plugins/jscolor/jscolor.js"></script>
+<!-- color picker -->
+<script type="text/javascript" src="/assets/plugins/spectrum/spectrum.js"></script>
+<script type="text/javascript" src="/assets/plugins/jscolor/jscolor.js"></script>
 
-   <!-- Highliter js -->
-   <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
-   <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
-   <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
-   <script type="text/javascript">SyntaxHighlighter.all();</script>
+<!-- highlite js -->
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
 
-   <!-- custom js -->
-   <script type="text/javascript" src="/assets/js/main.min.js"></script>
-   <script type="text/javascript" src="/assets/pages/elements.js"></script>
-   <script src="/assets/js/menu.min.js"></script>
-   <script type="text/javascript">SyntaxHighlighter.all();</script>
+<!-- custom js -->
+<script type="text/javascript" src="/assets/js/main.min.js"></script>
+<script type="text/javascript" src="/assets/pages/advance-form.js"></script>
+<script src="/assets/js/menu.min.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
 </body>
 
 </html>

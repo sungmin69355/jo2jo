@@ -14,5 +14,15 @@
         ]]>
     </select>
 
+    <select id="findLowestDepartment" resultType="DepartmentDto">
+        <![CDATA[
+            SELECT	*
+            FROM	DEPARTMENT
+            WHERE		CONNECT_BY_ISLEAF  = 1
+                    AND	CONNECT_BY_ISCYCLE = 0
+            START WITH DEPTPID = 1000
+            CONNECT BY NOCYCLE PRIOR DEPTNO = DEPTPID
+            ]]>
+    </select>
 
 </mapper>
