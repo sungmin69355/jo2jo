@@ -400,7 +400,10 @@
                             </div>
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
-                                    <i class="icofont icofont-hat"></i><span>학력: [[${employeedetaillist.academic}]]</span>
+                                    <i class="icofont icofont-hat"></i>
+                                    <span th:if="${employeedetaillist.academic} == 0">학력: 고졸</span>
+                                    <span th:if="${employeedetaillist.academic} == 1">학력: 고졸</span>
+                                    <span th:unless="${employeedetaillist.academic} == 0 or ${employeedetaillist.academic} == 1" >학력:초대졸</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>

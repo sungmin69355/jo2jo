@@ -1,24 +1,24 @@
 package com.metanet.jo2jo.domain.employee;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 @Getter
 @Setter
 @ToString
-public class EmployeeRegisterForm {
-    @NotNull(message = "직급을 선택해주세요")
+public class EmployeeUpdateForm {
+	@NotNull(message = "사원번호는 notnull")
+	private Long empno;
+	@NotNull(message = "직급을 선택해주세요")
     private  Long posno;
     @NotNull(message = "부서를 선택해주세요")
     private  Long deptno;
-    @NotBlank(message = "이름을 입력해주세요")
-    private  String empname;
     @Email(message = "이메일 형식을 확인해주세요")
     @NotBlank(message = "이메일을 입력해주세요")
     private  String email;
@@ -45,26 +45,30 @@ public class EmployeeRegisterForm {
     private  Long military;
     @NotNull(message = "성별을 선택해주세요")
     private  Long gender;
-
-    public EmployeeRegisterForm(Long posno, Long deptno, String empname, String email, String phone, String address, String photoaddr, String regno, Long annual, String id, String password, Long salary, String hiredate, String academic, Long military, Long gender) {
-        this.posno = posno;
-        this.deptno = deptno;
-        this.empname = empname;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.photoaddr = photoaddr;
-        this.regno = regno;
-        this.annual = annual;
-        this.id = id;
-        this.password = password;
-        this.salary = salary;
-        this.hiredate = hiredate;
-        this.academic = academic;
-        this.military = military;
-        this.gender = gender;
+    
+    public EmployeeUpdateForm() {
     }
 
-    public EmployeeRegisterForm() {
-    }
+	public EmployeeUpdateForm(Long empno, Long posno,Long deptno,String email,String phone,
+			 String address, String photoaddr,
+			 String regno,Long annual,String id,
+			 String password,Long salary,String hiredate,String academic,
+			 Long military, Long gender) {
+		this.empno = empno;
+		this.posno = posno;
+		this.deptno = deptno;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.photoaddr = photoaddr;
+		this.regno = regno;
+		this.annual = annual;
+		this.id = id;
+		this.password = password;
+		this.salary = salary;
+		this.hiredate = hiredate;
+		this.academic = academic;
+		this.military = military;
+		this.gender = gender;
+	}
 }

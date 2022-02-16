@@ -115,6 +115,30 @@
 		values(seq_employee_no.nextval,#{deptno},#{posno},#{empname},#{email},#{phone},#{address},#{photoaddr},#{regno},#{annual},#{id},#{password},#{salary},#{hiredate},#{academic},#{military},#{gender})
     	]]>
 	</insert>
+	
+	<!-- 사원 수정-->
+	<update id="updateEmployee"  parameterType="EmployeeUpdateForm">
+		<![CDATA[
+		UPDATE EMPLOYEE 
+			SET
+			       deptno = #{deptno},
+				   posno = #{posno},
+				   email = #{ email},
+				   phone = #{ phone},
+				   address = #{ address},
+				   regno = #{regno},
+				   annual = #{ annual},
+				   id = #{id },
+				   password = #{password},
+				   salary = #{salary},
+				   hiredate = #{hiredate},
+				   academic = #{academic},
+				   military = #{military},
+				   gender = #{gender}
+	
+		where empno = #{empno}
+    	]]>
+	</update>
    
       <!-- 사원조회상세페이징  민감정보-->
     <select id="selectEmployeeDetail" parameterType="EmployeeSelectDto" resultType="EmployeeDetailDto">      

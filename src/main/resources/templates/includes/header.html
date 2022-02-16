@@ -9,7 +9,7 @@
     <!-- Sidebar toggle button-->
     <a href="#!" data-toggle="offcanvas" class="sidebar-toggle"></a>
 
-    <a href="index.html" class="logo"><img class="img-fluid able-logo" src="assets/images/Logo/metanetDT_Logo.jpeg"
+    <a href="index.html" class="logo"><img class="img-fluid able-logo" src="/assets/images/Logo/metanetDT_Logo.jpeg"
                                            alt="Theme-logo"></a>
     <nav class="navbar navbar-static-top">
 
@@ -80,10 +80,11 @@
 
                 </li>
                 <!-- User Menu-->
+                <th:block th:if="${session.info != null }">
                 <li class="dropdown">
                     <a href="#!" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                        class="dropdown-toggle drop icon-circle drop-image">
-                        <span><img class="img-circle " src="assets/images/avatar-1.png" style="width:40px;"
+                        <span><img class="img-circle " src="/assets/images/avatar-1.png" style="width:40px;"
                                    alt="User Image"></span>
                         <span th:text="${session.info.id}"></span><span><i
                             class=" icofont icofont-simple-down"></i></span>
@@ -99,6 +100,7 @@
 
                     </ul>
                 </li>
+                </th:block>
             </ul>
 
             <!-- search -->
