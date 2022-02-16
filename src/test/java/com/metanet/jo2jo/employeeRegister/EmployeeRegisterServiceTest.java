@@ -1,4 +1,4 @@
-package com.metanet.jo2jo.EmployeeRegister;
+package com.metanet.jo2jo.employeeRegister;
 
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;

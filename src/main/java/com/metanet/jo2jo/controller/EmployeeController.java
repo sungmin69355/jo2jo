@@ -1,6 +1,7 @@
 package com.metanet.jo2jo.controller;
 
 import com.metanet.jo2jo.domain.department.DepartmentDto;
+import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.service.EmployeeRegisterService;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
-import com.metanet.jo2jo.service.EmployeeService;
+import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
+import com.metanet.jo2jo.service.EmployeeSelectService;
+import com.metanet.jo2jo.service.EmployeeUpdateService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,13 +36,14 @@ import java.util.UUID;
 @Slf4j
 @PropertySource("classpath:/common.properties")
 public class EmployeeController {
-    private final EmployeeService employeeService;
+    private final EmployeeSelectService employeeService;
     private final EmployeeRegisterService employeeRegisterService;
+    private final EmployeeUpdateService employeeUpdateService;
 
     //사원조회 부서추가
     @GetMapping("/employees")
     String employeeMain(@ModelAttribute("params") EmployeeSelectDto params, Model model) {
-        model.addAttribute("employeelist", employeeService.employeelist(params));
+        model.addAttribute("employeelist", employeeService.employeeList(params));
         return "employee/employee-main";
 
     }
@@ -107,9 +112,66 @@ public class EmployeeController {
   //사원조회 상세페이지
     @GetMapping("/employeedetail")
      String employeeDetail(@ModelAttribute("params") EmployeeSelectDto params, Model model) {    	
-    	model.addAttribute("employeedetaillist", employeeService.employeeDetaillist(params));
+    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
         return "employee/employee-detail";
        
     }
+    
+  //사원수정(수정페이지)
+    @GetMapping("/employeeupdate")
+     String employeeUpdateForm(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, Model model) {
+    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
+    	
+    	if (session.getAttribute("user").equals("admin")) {
+    		
+    		//부서 정보
+            List<DepartmentDto> findByAllDepartment = employeeUpdateService.findAllByDepartment();
+            //직급 정보
+            List<PositionDto> findAllByPosition = employeeUpdateService.findAllByPosition();
+            model.addAttribute("findByAllDepartment", findByAllDepartment);
+            model.addAttribute("findAllByPosition", findAllByPosition);
+            model.addAttribute("employeeUpdateForm", new EmployeeUpdateForm());
+            return "employee/employee-update";
+        } else {
+            return "redirect:index";
+        }
+          
+    }
+    //사원 수정
+    @PostMapping("/employeeupdate")
+    String employeeUpdate(HttpSession session, Model model, @RequestParam(name="file", required = false) MultipartFile file, @Valid EmployeeUpdateForm  employeeUpdateForm, BindingResult bindingResult) throws IOException {
 
+        if (session.getAttribute("user").equals("admin")) {
+            System.out.println(employeeUpdateForm.toString());
+            //Valid 검증
+            if (bindingResult.hasErrors()) {
+                //부서 정보
+                List<DepartmentDto> findByAllDepartment = employeeUpdateService.findAllByDepartment();
+                //직급 정보
+                List<PositionDto> findAllByPosition = employeeUpdateService.findAllByPosition();
+                model.addAttribute("findByAllDepartment", findByAllDepartment);
+                model.addAttribute("findAllByPosition", findAllByPosition);
+                return "employee/employee-update";
+            }
+            //update 로직
+            if( !file.isEmpty() ) {   //---파일이 없으면 true를 리턴. false일 경우에만 처리함.
+                String uuid = UUID.randomUUID().toString()+".jpg";
+                File converFile = new File(savePath, uuid);
+                file.transferTo(converFile);  //--- 저장할 경로를 설정 해당 경로는 각자 원하는 위치로 설정하면 됩니다. 다만, 해당 경로에 접근할 수 있는 권한이 없으면 에러 발생
+                employeeUpdateForm.setPhotoaddr(uuid);
+                Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
+                System.out.println(updateEmployeeResult);
+            }else{
+                //공동이미지 삽입
+            	employeeUpdateForm.setPhotoaddr("/images/user/aaa.jpg");
+                Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
+                System.out.println(updateEmployeeResult);
+            }
+            //결과
+            return "redirect:employees";
+        }
+        return "redirect:index";
+    }
+    
+      
 }

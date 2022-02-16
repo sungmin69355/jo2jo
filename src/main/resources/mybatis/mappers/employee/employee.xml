@@ -39,7 +39,7 @@
 						  EMPNAME LIKE('%'|| #{searchKeyword} || '%')
 						  OR DEPTNAME LIKE('%'|| #{searchKeyword} ||'%')
 						  OR PHONE LIKE('%'|| #{searchKeyword} ||'%')
-						  OR ANNUAL LIKE('%'|| #{searchKeyword} ||'%')
+						  OR ANNUAL = #{searchKeyword}
 						  OR EMAIL  LIKE('%'|| #{searchKeyword} ||'%')
 						)
 				</otherwise>
@@ -109,12 +109,37 @@
 					 			       
     </select>
 	<!-- 사원 등록 -->
-	<select id="insertEmployee"  parameterType="EmployeeRegisterForm">
+	<insert id="insertEmployee"  parameterType="EmployeeRegisterForm">
 		<![CDATA[
 		insert into employee
 		values(seq_employee_no.nextval,#{deptno},#{posno},#{empname},#{email},#{phone},#{address},#{photoaddr},#{regno},#{annual},#{id},#{password},#{salary},#{hiredate},#{academic},#{military},#{gender})
     	]]>
-	</select>
+	</insert>
+	
+	<!-- 사원 수정-->
+	<update id="updateEmployee"  parameterType="EmployeeUpdateForm">
+		<![CDATA[
+		UPDATE EMPLOYEE 
+			SET
+			       deptno = #{deptno},
+				   posno = #{posno},
+				   email = #{ email},
+				   phone = #{ phone},
+				   address = #{ address},
+				   photoaddr = #{photoaddr},
+				   regno = #{regno},
+				   annual = #{ annual},
+				   id = #{id },
+				   password = #{password},
+				   salary = #{salary},
+				   hiredate = #{hiredate},
+				   academic = #{academic},
+				   military = #{military},
+				   gender = #{gender}
+	
+		where empno = #{empno}
+    	]]>
+	</update>
    
       <!-- 사원조회상세페이징  민감정보-->
     <select id="selectEmployeeDetail" parameterType="EmployeeSelectDto" resultType="EmployeeDetailDto">      
@@ -125,19 +150,24 @@
         	   ANNUAL AS annual,
         	   PHONE AS phone,
 			   ADDRESS AS address,
+			   PHOTOADDR AS photoaddr,
 			   EMAIL AS email,
 			   HIREDATE AS hiredate,
 			   REGNO AS regno,
 			   ID AS id,
 			   ACADEMIC AS academic,
 			   MILITARY AS military,
-			   GENDER AS gender  
+			   GENDER as gender,
+			   EMPNO as empno
 		FROM DEPARTMENT d , EMPLOYEE e ,"POSITION" p 
 		WHERE e.EMPNO = #{empno}
 		AND e.DEPTNO = d.DEPTNO
 		AND e.POSNO = p.POSNO
 	]]>		 	         
     </select>
+    
+   
+    
 
 	<!-- 사원아이디 조회 -->
 	<select id="idCheck" parameterType="String" resultType="int">
