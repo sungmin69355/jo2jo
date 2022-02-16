@@ -117,7 +117,7 @@ public class EmployeeController {
        
     }
     
-  //사원조회 (수정페이지)
+  //사원수정(수정페이지)
     @GetMapping("/employeeupdate")
      String employeeUpdateForm(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, Model model) {
     	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
