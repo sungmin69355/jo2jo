@@ -83,8 +83,7 @@ public class CurriculumController {
 
             curriculum.setStartdate(dateArr[0]);
             curriculum.setEnddate(dateArr[1]);
-            curriculum.setStartdate(dateArr[0]);
-            curriculum.setEnddate(dateArr[1]);
+            curriculum.setCurrcost(newCurrcost);
             curriculum.setEducos1(educosList.get(0));
             curriculum.setEducos2(educosList.get(1));
             curriculum.setEducos3(educosList.get(2));

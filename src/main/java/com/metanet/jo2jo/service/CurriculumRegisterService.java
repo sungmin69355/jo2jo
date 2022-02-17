@@ -5,8 +5,8 @@ import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.repository.curriculum.CurriculumRepository;
 import com.metanet.jo2jo.repository.department.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,19 +29,19 @@ public class CurriculumRegisterService {
 
     public Long registerCurriculumCostotalcnt(CurriculumDto curriculumDto){
         Long count = 0L;
-        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos1()!=""){
+        if(!StringUtils.isEmpty(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos1())){
             count++;
         }
-        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos2()!=""){
+        if(!StringUtils.isEmpty(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos2())){
             count++;
         }
-        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos3()!=""){
+        if(!StringUtils.isEmpty(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos3())){
             count++;
         }
-        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos4()!=""){
+        if(!StringUtils.isEmpty(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos4())){
             count++;
         }
-        if(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos5()!=""){
+        if(!StringUtils.isEmpty(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos5())){
             count++;
         }
         curriculumDto.setCostotalcnt(count);
