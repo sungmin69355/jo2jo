@@ -49,10 +49,10 @@
     <section class="sidebar" id="sidebar-scroll">
          <!-- Sidebar Menu-->
         <ul class="sidebar-menu" th:if=${session.user}==admin>
-            <li class="nav-level"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i>조직도<i class="icon-arrow-down"></i></a>
+            <li class="nav-level"><a class="waves-effect waves-dark" href="/organizaition"><i class="icon-briefcase"></i>조직도<i class="icon-arrow-down"></i></a>
             
             	<ul class="treeview-menu">
-                	<li><a class="waves-effect waves-dark" href="index.html"><i class="icon-speedometer"></i>조직도 보기</a></li>
+                	<li><a class="waves-effect waves-dark" href="/organization"><i class="icon-speedometer"></i>조직도 보기</a></li>
                      <!-- <i class="icon-speedometer"></i><span> 조직도 보기</span> --> 
                     
                 
@@ -94,10 +94,10 @@
 	         
 	           <!-- Sidebar Menu-->
         <ul class="sidebar-menu" th:if=${session.user}==employee>
-            <li class="nav-level"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i>조직도<i class="icon-arrow-down"></i></a>
+            <li class="nav-level"><a class="waves-effect waves-dark" href="/organizaition"><i class="icon-briefcase"></i>조직도<i class="icon-arrow-down"></i></a>
             
             	<ul class="treeview-menu">
-                	<li><a class="waves-effect waves-dark" href="index.html"><i class="icon-speedometer"></i>조직도 보기</a></li>
+                	<li><a class="waves-effect waves-dark" href="/organization"><i class="icon-speedometer"></i>조직도 보기</a></li>
                      <!-- <i class="icon-speedometer"></i><span> 조직도 보기</span> --> 
                     
                 
@@ -108,7 +108,7 @@
                 <ul class="treeview-menu">
                 	<!-- <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-briefcase"></i><span>사원등록</span></a>
                 	</li> -->
-                	<li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-chart"></i><span> 사원조회</span></a> 
+                	<li class="treeview"><a class="waves-effect waves-dark" href="/employees"><i class="icon-chart"></i><span> 사원조회</span></a> 
                     </li>
                    
                 </ul>

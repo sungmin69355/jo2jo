@@ -401,16 +401,15 @@
             </div>
 
 
-            <!-- 1-3-block row start -->
+             <!-- 1-3-block row start -->
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card" th:each="employeedetaillist:${employeedetaillist}">                       
+                    <div class="card">                       
                         <form action="/employeeupdate" th:object="${employeeUpdateForm}" method="post" enctype="multipart/form-data">
-				                  <div class="user-block-2">
-				                        <img class="img-fluid" src="assets/images/widget/user-1.png" alt="user-header">
+				                  <div class="user-block-2" th:each="employeedetaillist:${employeedetaillist}">
+				                        <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"alt="user-header">
 										<input type="file" class="form-control form-control-sm" name="file" id="file"><br>
 				                        <input type ="hidden" name="empno" th:value=${employeedetaillist.empno}>
-
 				                        <span>[[${employeedetaillist.empname}]]</span><br>  
 				                        <h5>부서 : <select class="form-select form-select-lg mb-3" th:field="*{deptno}" >
 				                            <option th:each="findByAllDepartment:${findByAllDepartment}"th:value="${findByAllDepartment.deptno}">[[${findByAllDepartment.deptname}]]</option>
@@ -443,7 +442,7 @@
 				                            </div> -->
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active1">
 				                                <i class="icofont icofont-phone"></i> 전화 번호
 				                                <input type="text"  th:field="*{phone}" id="phone" class="form-control" placeholder="phoneNumber">
 				                                <div th:each="msg : ${#fields.errors('phone')}">
@@ -452,7 +451,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active2">
 				                                <i class="icofont icofont-home"></i> 주소
 				                                <input type="text" th:field="*{address}" id="address" class="form-control" placeholder="address">
 				                                <div th:each="msg : ${#fields.errors('address')}">
@@ -462,7 +461,7 @@
 				                        </div>
 				
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active3">
 				                                <i class="icofont icofont-email"></i> email
 				                                <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="Email">
 				                                <div th:each="msg : ${#fields.errors('email')}">
@@ -471,7 +470,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active4">
 				                                <i class="icofont icofont-user-suited"></i> 입사일
 				                                <div th:each="msg : ${#fields.errors('hiredate')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
@@ -485,7 +484,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active5">
 				                                <i class="icofont icofont-id-card"></i> ID
 				                                <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="ID" oninput="checkId()">
 				                                <div th:each="msg : ${#fields.errors('id')}">
@@ -496,7 +495,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active6">
 				                                <i class="icofont icofont-id-card"></i> 비밀번호
 				                                <input type="password" th:field="*{password}" id="password" class="form-control" placeholder="password">
 				                                <div th:each="msg : ${#fields.errors('password')}">
@@ -505,7 +504,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active7">
 				                                <i class="icofont icofont-id-card"></i> 주민등록번호
 				                                <input type="text" th:field="*{regno}" id="regno" class="form-control" placeholder="register">
 				                                <div th:each="msg : ${#fields.errors('regno')}">
@@ -514,7 +513,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active8">
 				                                <i class="icofont icofont-letter"></i> 연봉
 				                                <input type="text" th:field="*{salary}" id="salary" class="form-control" placeholder="salary">
 				                                <div th:each="msg : ${#fields.errors('salary')}">
@@ -523,7 +522,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active9">
 				                                <i class="icofont icofont-group-students"></i> 성별
 				                                <div class="form-radio" >
 				                                    <div class="radio radio-inline">
@@ -545,7 +544,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active10">
 				                                <i class="icofont icofont-military"></i> 병역
 				                                <div class="form-radio">
 				                                    <div class="radio radio-inline">
@@ -573,7 +572,7 @@
 				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
-				                            <div class="user-block-2-active">
+				                            <div class="user-block-2-active11">
 				                                <i class="icofont icofont-hat"></i> 학력
 				                                <div class="form-radio">
 				                                    <div class="radio radio-inline">

@@ -105,7 +105,7 @@
                         <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
 
                             <a class="media-left" href="#!">
-                                <img class="media-object img-circle" src="assets/images/avatar-1.png" alt="Generic placeholder image">
+                                <img class="media-object img-circle" src="assets/images/user/test2.jpg" alt="Generic placeholder image">
                                 <div class="live-status bg-success"></div>
                             </a>
                             <div class="media-body">
@@ -329,11 +329,11 @@
 
             <!-- 1-3-block row start -->
             <!--  보기모드 -->
-            <div id = "list" class="row" th:each="employeedetaillist:${employeedetaillist}">
+            <div id = "list" class="row" th:if ="${session.user}==admin" th:each="employeedetaillist:${employeedetaillist}">
                 <div class="col-lg-4">
                     <div class="card">
                         <div class="user-block-2">
-                            <img class="img-fluid" src="assets/images/widget/user-1.png" alt="user-header">
+                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
                             <h5></h5>
                             <h6></h6>
        
@@ -414,6 +414,165 @@
                                 </button>
 	                              
 	                        </div>
+	                      </div>	                     
+                
+               
+            <!-- 2-1 block end -->
+        </div>
+        <!-- Main content ends -->
+        <!-- Container-fluid ends -->
+        <div class="fixed-button">
+            <a href="#!" class="btn btn-md btn-primary">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
+            </a>
+        </div>
+    </div>
+</div>
+
+			<!-- 1-3-block row start -->
+            <!--  보기모드 -->
+            <div id = "list" class="row" th:if ="${session.user}==employee and ${session.info.id}==${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="user-block-2">
+                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
+                            <h5></h5>
+                            <h6></h6>
+       
+                            <span>[[${employeedetaillist.empname}]]</span><br>
+                            <span>[[${employeedetaillist.deptname}]]팀</span>
+                            <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
+                        </div>
+                        <div class="card-block">
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-home"></i><span>주소: [[${employeedetaillist.address}]]</span> 
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+
+                            </div>
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-user-suited"></i><span>입사일: [[${employeedetaillist.hiredate}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-group-students"></i>
+                                    <span th:if="${employeedetaillist.gender} == 1">성별: 남자</span>
+                                    <span th:if="${employeedetaillist.gender} == 2">성별: 여자</span>
+                                    <span th:unless="${employeedetaillist.gender} == 1 or ${employeedetaillist.gender} == 2">성별: 없음</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-military"></i>
+                                    <span th:if="${employeedetaillist.military} == 1">병역: 군필</span>
+                                    <span th:if="${employeedetaillist.military} == 2">병역: 미필</span>
+                                    <span th:unless="${employeedetaillist.military} == 1 or ${employeedetaillist.military} == 2">병역: 없음</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-hat"></i>
+                                    <span th:if="${employeedetaillist.academic} == 0">학력: 고졸</span>
+                                    <span th:if="${employeedetaillist.academic} == 1">학력: 고졸</span>
+                                    <span th:unless="${employeedetaillist.academic} == 0 or ${employeedetaillist.academic} == 1" >학력:초대졸</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            <!-- <div class="text-center">
+                                <input type="hidden" name = "empno" value ="${employeedetaillist.empno}">
+                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
+                                    수정하기
+                                </button>
+	                              
+	                        </div> -->
+	                      </div>	                     
+                
+               
+            <!-- 2-1 block end -->
+        </div>
+        <!-- Main content ends -->
+        <!-- Container-fluid ends -->
+        <div class="fixed-button">
+            <a href="#!" class="btn btn-md btn-primary">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
+            </a>
+        </div>
+    </div>
+</div>
+
+			<!-- 1-3-block row start -->
+            <!--  보기모드 -->
+            <div id = "list" class="row" th:if ="${session.user}==employee and ${session.info.id} != ${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="user-block-2">
+                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
+                            <h5></h5>
+                            <h6></h6>
+       
+                            <span>[[${employeedetaillist.empname}]]</span><br>
+                            <span>[[${employeedetaillist.deptname}]]팀</span>
+                            <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
+                        </div>
+                        <div class="card-block">
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+   
+
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+
+                            </div>
+                            
+                            
+                            <div class="user-block-2-activities">
+                                <div class="user-block-2-active">
+                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
+                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
 	                      </div>	                     
                 
                

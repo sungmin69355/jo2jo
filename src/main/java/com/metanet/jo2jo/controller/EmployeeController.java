@@ -1,5 +1,6 @@
 package com.metanet.jo2jo.controller;
 
+import com.metanet.jo2jo.domain.Login.LoginDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
@@ -27,7 +28,10 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -42,9 +46,15 @@ public class EmployeeController {
 
     //사원조회 부서추가
     @GetMapping("/employees")
-    String employeeMain(@ModelAttribute("params") EmployeeSelectDto params, Model model) {
-        model.addAttribute("employeelist", employeeService.employeeList(params));
-        return "employee/employee-main";
+    String employeeMain(HttpSession session, @ModelAttribute("params")  EmployeeSelectDto params, Model model) {
+    	if(session.getAttribute("user").equals("admin") || session.getAttribute("user").equals("employee")) {
+    		 model.addAttribute("employeelist", employeeService.employeeList(params));
+    	        return "employee/employee-main";
+    	} else {
+    		  session.invalidate();
+    		  return "redirect:index";
+    	}
+       
 
     }
 
@@ -62,6 +72,8 @@ public class EmployeeController {
             model.addAttribute("employeeRegisterForm", new EmployeeRegisterForm());
             return "employee/employee-register";
         } else {
+        	
+        	session.invalidate();
             return "redirect:index";
         }
     }
@@ -111,7 +123,7 @@ public class EmployeeController {
    
   //사원조회 상세페이지
     @GetMapping("/employeedetail")
-     String employeeDetail(@ModelAttribute("params") EmployeeSelectDto params, Model model) {    	
+     String employeeDetail(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, Model model) {    	
     	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
         return "employee/employee-detail";
        
@@ -133,7 +145,7 @@ public class EmployeeController {
             model.addAttribute("employeeUpdateForm", new EmployeeUpdateForm());
             return "employee/employee-update";
         } else {
-            return "redirect:index";
+            return "redirect:/employeeupdate";
         }
           
     }
@@ -145,6 +157,14 @@ public class EmployeeController {
             System.out.println(employeeUpdateForm.toString());
             //Valid 검증
             if (bindingResult.hasErrors()) {
+            	Map map = bindingResult.getModel(); //테스트용
+                Set keys = map.keySet();
+                Iterator it = keys.iterator();
+                while(it.hasNext()) {
+                    Object key = it.next();
+                    Object val = map.get(key);
+                    System.out.println("에러내용 :: "+val);
+                }
                 //부서 정보
                 List<DepartmentDto> findByAllDepartment = employeeUpdateService.findAllByDepartment();
                 //직급 정보

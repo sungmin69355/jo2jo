@@ -26,7 +26,11 @@ public class DepartmentController {
 
     private final DepartmentRegisterService departmentRegisterService;
     private final DepartmentDetailService departmentDetailService;
-
+    
+    @GetMapping("/departments")
+    String departmentMain(Model model) {
+    	return "department/department-main";
+    }
     @GetMapping("/department/new")
     String departmentRegisterForm(HttpSession session, Model model){
         if (session.getAttribute("user").equals("admin")) {

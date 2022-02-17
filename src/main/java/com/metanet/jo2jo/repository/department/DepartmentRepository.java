@@ -16,5 +16,8 @@ public interface DepartmentRepository {
     List<DepartmentDto> findLowestDepartment(); //최하위부서
     Integer insertDepartment(DepartmentForm departmentForm);
     DepartmentDetailDto findOneByDepartment(Long deptNo);
+    List<DepartmentDto> selectDepartment();
+
+
 
 }
