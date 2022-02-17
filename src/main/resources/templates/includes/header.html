@@ -80,6 +80,7 @@
 
                 </li>
                 <!-- User Menu-->
+                <th:block th:if="${session.info != null }">
                 <li class="dropdown">
                     <a href="#!" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
                        class="dropdown-toggle drop icon-circle drop-image">
@@ -99,6 +100,7 @@
 
                     </ul>
                 </li>
+                </th:block>
             </ul>
 
             <!-- search -->

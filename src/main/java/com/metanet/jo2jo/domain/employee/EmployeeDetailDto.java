@@ -21,5 +21,6 @@ public class EmployeeDetailDto {
 	private String academic;
 	private Long military;
 	private Long gender;
+	private Long empno;
 	
 }

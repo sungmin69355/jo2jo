@@ -36,13 +36,6 @@ public class HomeController {
     String home1(){
         return "accordion";
     }
-    
-  //ui제작 테스트용
-    @GetMapping("/department")
-    String departmentRegister() {
-        return "department/department-register";
-    }
-
 
     @GetMapping("/accordion")
     public String accordion(){
