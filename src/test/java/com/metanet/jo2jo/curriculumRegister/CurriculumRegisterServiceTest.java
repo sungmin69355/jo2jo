@@ -24,7 +24,8 @@ public class CurriculumRegisterServiceTest {
         //given
         Long currSequenceNo = curriculumRegisterService.findCurrSequenceNo();
         CurriculumDto curriculumDto = new CurriculumDto(
-                currSequenceNo   //SEQ_CURRICULUM_NO.NEXTVAL
+                null
+                , currSequenceNo   //SEQ_CURRICULUM_NO.NEXTVAL
                 , "테스트커리큘럼"
                 , 70000L
                 , "02/16/2022"
@@ -55,7 +56,8 @@ public class CurriculumRegisterServiceTest {
         //given
         Long currSequenceNo = curriculumRegisterService.findCurrSequenceNo();
         CurriculumDto curriculumDto = new CurriculumDto(
-                currSequenceNo    //SEQ_CURRICULUM_NO.NEXTVAL
+                null
+                , currSequenceNo    //SEQ_CURRICULUM_NO.NEXTVAL
                 , "테스트커리큘럼"
                 , 70000L
                 , "02/16/2022"
