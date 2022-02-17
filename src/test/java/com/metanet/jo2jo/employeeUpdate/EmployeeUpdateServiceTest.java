@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.metanet.jo2jo.domain.department.DepartmentDto;
+import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.service.EmployeeUpdateService;
@@ -48,10 +49,9 @@ public class EmployeeUpdateServiceTest {
 	 @Transactional //자동 rollback
 	 @DisplayName("사원 수정이 가능해야한다.")
 	 public void updateEmployeeTest() {
-		 //given
-//		 EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm(1003L,1004L, 10005L, "조민국", 
-//				 "jo@example.com", "010-3333-7777", "고양", "c83ffe1b-63b3-4bda-b8d3-e5c84a4eed44.jpg", 
-//				 null, null, "test6000","1234",8000L , "2022-03-07", Long.valueOf(1), Long.valueOf(1));
+		 
+//		 EmployeeDetailDto employeeDetailDto = new EmployeeDetailDto();
+//		 employeeDetailDto.setEmpno(1003L);
 		 EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm(
 				 1003L,1004L, 10005L,"jo@example.com", "010-3333-7777", "고양", 
 				 "c83ffe1b-63b3-4bda-b8d3-e5c84a4eed44.jpg", "930104-1011111", Long.valueOf(1), 
@@ -60,9 +60,10 @@ public class EmployeeUpdateServiceTest {
 		 
 		 //when
 	     Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
+	     System.out.println(updateEmployeeResult);
 
 	     //then
-	     assertTrue(updateEmployeeResult == null);
+	     assertTrue(updateEmployeeResult == 1);
 			 
 		 
 	 }

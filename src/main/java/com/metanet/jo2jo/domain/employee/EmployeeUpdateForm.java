@@ -46,8 +46,7 @@ public class EmployeeUpdateForm {
     @NotNull(message = "성별을 선택해주세요")
     private  Long gender;
     
-    public EmployeeUpdateForm() {
-    }
+   
 
 	public EmployeeUpdateForm(Long empno, Long posno,Long deptno,String email,String phone,
 			 String address, String photoaddr,
@@ -71,4 +70,7 @@ public class EmployeeUpdateForm {
 		this.military = military;
 		this.gender = gender;
 	}
+	
+	 public EmployeeUpdateForm() {
+	 }
 }
