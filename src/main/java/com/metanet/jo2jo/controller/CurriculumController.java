@@ -3,15 +3,14 @@ package com.metanet.jo2jo.controller;
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.service.CurriculumRegisterService;
+import com.metanet.jo2jo.service.CurriculumSelectService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -23,6 +22,16 @@ import java.util.*;
 @Slf4j
 public class CurriculumController {
     private final CurriculumRegisterService curriculumRegisterService;
+    private final CurriculumSelectService curriculumSelectService;
+
+    //커리큘럼 메인
+    @GetMapping("/curriculums")
+    String curriculumMain(@ModelAttribute("params") CurriculumDto params, Model model){
+        List<CurriculumDto> curriculumList = curriculumSelectService.curriculumList(params);
+//        System.out.println(curriculumList.get(0).toString());
+        model.addAttribute("curriculumList", curriculumList);
+        return "curriculum/curriculum-main";
+    }
 
     //커리큘럼 등록
     @GetMapping("/curriculum/new")
@@ -44,7 +53,7 @@ public class CurriculumController {
     @PostMapping("/curriculum/new")
     String curriculumRegister(@ModelAttribute CurriculumDto curriculum,
                               @RequestParam("daterange") String daterange,
-                              HttpSession session, Model model, @Valid CurriculumDto curriculumDto,
+                              HttpSession session, Model model, @ModelAttribute("curriculumDto") @Valid CurriculumDto curriculumDto,
                               BindingResult bindingResult)  throws IOException {
         if (session.getAttribute("user").equals("admin")) {
             //Valid 검증
@@ -83,8 +92,7 @@ public class CurriculumController {
 
             curriculum.setStartdate(dateArr[0]);
             curriculum.setEnddate(dateArr[1]);
-            curriculum.setStartdate(dateArr[0]);
-            curriculum.setEnddate(dateArr[1]);
+            curriculum.setCurrcost(newCurrcost);
             curriculum.setEducos1(educosList.get(0));
             curriculum.setEducos2(educosList.get(1));
             curriculum.setEducos3(educosList.get(2));
@@ -98,4 +106,6 @@ public class CurriculumController {
 
         return "redirect:/";
     }
+
+
 }

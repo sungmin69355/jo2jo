@@ -2,9 +2,6 @@ package com.metanet.jo2jo.curriculumRegister;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
-import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
-import com.metanet.jo2jo.repository.curriculum.CurriculumRepository;
-import com.metanet.jo2jo.repository.department.DepartmentRepository;
 import com.metanet.jo2jo.service.CurriculumRegisterService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -19,17 +16,16 @@ import java.util.List;
 public class CurriculumRegisterServiceTest {
     @Autowired
     private CurriculumRegisterService curriculumRegisterService;
-    private CurriculumRepository curriculumRepository;
-    private DepartmentRepository departmentRepository;
 
     @Test
     @Transactional
-    @DisplayName("커리큘럼 등록이 가능해야 한다 색갸")
+    @DisplayName("커리큘럼 등록이 가능해야 한다")
     public void registerCurriculumTest(){
         //given
         Long currSequenceNo = curriculumRegisterService.findCurrSequenceNo();
         CurriculumDto curriculumDto = new CurriculumDto(
-                currSequenceNo   //SEQ_CURRICULUM_NO.NEXTVAL
+                null
+                , currSequenceNo   //SEQ_CURRICULUM_NO.NEXTVAL
                 , "테스트커리큘럼"
                 , 70000L
                 , "02/16/2022"
@@ -60,7 +56,8 @@ public class CurriculumRegisterServiceTest {
         //given
         Long currSequenceNo = curriculumRegisterService.findCurrSequenceNo();
         CurriculumDto curriculumDto = new CurriculumDto(
-                currSequenceNo    //SEQ_CURRICULUM_NO.NEXTVAL
+                null
+                , currSequenceNo    //SEQ_CURRICULUM_NO.NEXTVAL
                 , "테스트커리큘럼"
                 , 70000L
                 , "02/16/2022"
