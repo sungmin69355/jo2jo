@@ -44,7 +44,7 @@ public class CurriculumController {
     @PostMapping("/curriculum/new")
     String curriculumRegister(@ModelAttribute CurriculumDto curriculum,
                               @RequestParam("daterange") String daterange,
-                              HttpSession session, Model model, @Valid CurriculumDto curriculumDto,
+                              HttpSession session, Model model, @ModelAttribute("curriculumDto") @Valid CurriculumDto curriculumDto,
                               BindingResult bindingResult)  throws IOException {
         if (session.getAttribute("user").equals("admin")) {
             //Valid 검증
