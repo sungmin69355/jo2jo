@@ -14,10 +14,13 @@ public class EmployeeDetailDto {
 	private Long annual;
 	private String phone;
 	private String address;
+	private String photoaddr;
 	private String email;
 	private String hiredate;
 	private String regno;
 	private String id;
+	private String password;
+	private Long salary;
 	private String academic;
 	private Long military;
 	private Long gender;

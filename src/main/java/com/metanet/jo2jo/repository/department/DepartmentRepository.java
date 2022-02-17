@@ -14,4 +14,5 @@ public interface DepartmentRepository {
     List<DepartmentDto> findAllByDepartment();
     Integer insertDepartment(DepartmentForm departmentForm);
     DepartmentDetailDto findOneByDepartment(Long deptNo);
+    List<DepartmentDto> selectDepartment();
 }

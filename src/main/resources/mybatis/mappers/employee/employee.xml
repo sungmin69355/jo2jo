@@ -83,7 +83,8 @@
          		PHONE AS phone,
          		ANNUAL AS annual,
          		EMAIL AS email,       		 
-				EMPNO AS empno
+				EMPNO AS empno,
+				ID AS id
 		FROM 
 		 		(
 		 		SELECT ROWNUM R,
@@ -92,7 +93,8 @@
 		 			   PHONE,
 		 			   ANNUAL,
 		 			   EMAIL,
-		 			   EMPNO
+		 			   EMPNO,
+		 			   ID
 				FROM DEPARTMENT d, EMPLOYEE e
 				WHERE e.DEPTNO = d.DEPTNO
 				AND ROWNUM <= #{endPage}
@@ -155,6 +157,8 @@
 			   HIREDATE AS hiredate,
 			   REGNO AS regno,
 			   ID AS id,
+			   PASSWORD AS password,
+			   SALARY AS salary,
 			   ACADEMIC AS academic,
 			   MILITARY AS military,
 			   GENDER as gender,
