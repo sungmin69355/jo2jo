@@ -4,14 +4,18 @@ import com.metanet.jo2jo.domain.department.DepartmentDetailDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.department.DepartmentForm;
 import com.metanet.jo2jo.domain.department.DepartmentOzDto;
+import com.metanet.jo2jo.domain.department.DepartmentSelectDto;
 import com.metanet.jo2jo.service.DepartmentDetailService;
 import com.metanet.jo2jo.service.DepartmentRegisterService;
+import com.metanet.jo2jo.service.DepartmentSelectService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -26,10 +30,19 @@ public class DepartmentController {
 
     private final DepartmentRegisterService departmentRegisterService;
     private final DepartmentDetailService departmentDetailService;
+    private final DepartmentSelectService departmentSelectService;
     
+    //부서조회 메인페이지
     @GetMapping("/departments")
-    String departmentMain(Model model) {
-    	return "department/department-main";
+    String departmentMain(HttpSession session, Model model, @ModelAttribute("params") DepartmentSelectDto params) {
+    	if(session.getAttribute("user").equals("admin") || session.getAttribute("user").equals("employee")) {
+    				
+	     	model.addAttribute("departmentlist",departmentSelectService.selectDepartment(params));
+	    	return "department/department-main";
+    	} else {
+    		session.invalidate();
+  		    return "redirect:index";
+    	}
     }
     @GetMapping("/department/new")
     String departmentRegisterForm(HttpSession session, Model model){

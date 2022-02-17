@@ -6,6 +6,35 @@
 
 <mapper namespace="com.metanet.jo2jo.repository.department.DepartmentRepository">
 
+	<sql id="search2">
+		<!-- 검색 키워드가 있을 때 -->
+		<if test="searchKeyword != null and searchType != ''">
+			<choose>
+				<!-- 검색 유형이 있을 때 -->
+				<when test="searchType != null and searchType != ''">
+					<choose>
+						<when test="'deptname'.equals(searchType)">						
+							AND d.DEPTNAME LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'manager'.equals(searchType)">
+							AND EMPNAME LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						
+					</choose>
+				</when>
+				<!-- 검색 유형이 없을 때 -->
+				<otherwise>
+					AND
+						(
+						   d.DEPTNAME LIKE('%'|| #{searchKeyword} || '%')
+						  OR  EMPNAME LIKE('%'|| #{searchKeyword} ||'%')
+
+						)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+
     <!-- 부서 select all -->
     <select id="findAllByDepartment" resultType="DepartmentDto">
 
@@ -43,5 +72,38 @@
             CONNECT BY NOCYCLE PRIOR DEPTNO = DEPTPID
             ]]>
     </select>
+     <!-- 부서조회 총개수 -->
+     <select id="selectDepartmentTotalCount" resultType ="Integer">
+		  <![CDATA[	
+			 SELECT count(*) 
+			 FROM DEPARTMENT d LEFT OUTER JOIN  EMPLOYEE e
+                                    on d.MANAGER = e.EMPNO
+                          	   Left OUTER JOIN DEPARTMENT de
+                                    on d.DEPTPID = de.DEPTNO
+		  ]]>						 	
+		  <include refid="search2"></include>	  	
+	</select>
+    
+    <!-- 부서조회 -->
+     <select id="selectDepartment" resultType="DepartmentSelectDto" parameterType="DepartmentSelectDto">
+        <![CDATA[
+           SELECT R AS rn,  deptno,  deptname, manager
+		   FROM
+		   	  (
+        			SELECT ROWNUM R, d.DEPTNO, d.DEPTNAME as deptname, EMPNAME as manager
+        			FROM DEPARTMENT d LEFT OUTER JOIN  EMPLOYEE e
+                                           on d.MANAGER = e.EMPNO
+                          	  		  Left OUTER JOIN DEPARTMENT de
+                                           on d.DEPTPID = de.DEPTNO
+                     where ROWNUM <= #{endPage}
+           ]]>
+                     <if test="searchKeyword != null">
+					 	<include refid="search2"></include>
+					 </if>
+		   <![CDATA[
+        		)
+			WHERE R >= #{startPage}
+           ]]>
+     </select>
 
 </mapper>

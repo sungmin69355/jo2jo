@@ -75,30 +75,87 @@
                      <div class="card-header">
                         <h6 class="card-header-text">부서조회 페이지</h6>
                         <!--  <p>Basic example <code>without any additional modification</code> classes</p> --> 														       
+                     </div>
+                     <div class="card-block">
+                        <div class="row">
+                            <div class="col-sm-12 table-responsive">
+                            	<div id="adv-search"  class="input-group">                            		
+				                     <form id="searchForm" th:action="@{/departments}" method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+														<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
+														<input type="hidden" name="currentPageNo" value="1" />
+														<input type="hidden" name="recordsPerPage" th:value="${params.recordsPerPage}" />
+														<input type="hidden" name="pageSize" th:value="${params.pageSize}" />
+														<div class="form-group">
+															<label for="filter">검색 유형</label>
+															<select name="searchType" class="form-control">
+																<option value="" th:selected="${#strings.isEmpty(params.searchType)}">선택안함</option>
+																<option value="deptname" th:selected="${#strings.equals(params.searchType, 'deptname')}">부서명</option>
+																<option value="manager" th:selected="${#strings.equals(params.searchType, 'manager')}">부서장</option>						
+															</select>
+														</div>
+														<div class="form-group">
+															<label for="contain">키워드</label>
+															<input type="text" name="searchKeyword" class="form-control" th:value="${params.searchKeyword}"/> 																																																							 												      		
+													  </div>
+													  <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
+											</form>													  			
+							  	</div>     
                               <table class="table">                             
                                  <thead>                                 	 
-                                    <tr>
-                                       <th></th>
+                                    <tr> 
+                                       <th></th>                                      
+                                       <th>번호</th>
                                        <th>부서명</th>
                                        <th>부서장</th>
-                                      
+                                       <th>상세페이지</th>                                      
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr>
-                                       <td></td> 
-                                       <td>[[2]]</td>
-                                       <td>[[3]]</td>
-                                  
-     								                                      
-                                    </tr>
-                                    <tr>
-                                    	                             	
-                                    </tr>
-                                                                   
+                                    <tr th:each="departmentlist:${departmentlist}">
+                                       <td></td>                                     
+                                       <td>[[${departmentlist.rn}]]</td> 
+                                       <td>[[${departmentlist.deptname}]]</td>
+                                       <td>[[${departmentlist.manager}]]</td>                                      
+                                       <td>
+                                        <input type="hidden" name="deptno" value="${departmentlist.deptno}">
+                                       <a href="/department/"
+                                       		th:attrappend="href=${departmentlist.deptno}"
+                                       	>   								   	 	
+     								   	<i class="icofont icofont-ui-text-chat"></i>
+     								   </a>
+     								   <td>                                      								                                      
+                                    </tr>                                                                  
                                  </tbody>                                    
                               </table>                                                                   
-							<div>                   
+							  <div class ="paging">                          
+		                           <nav aria-label="Page navigation example" th:if="${params != null and params.paginationInfo.totalRecordCount > 0}" th:object="${params.paginationInfo}" th:with="info=${params.paginationInfo}">
+									  <ul class="pagination">
+									    <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(1)} ]])">									    
+									    	<a class="page-link" href="javascript:void(0)" aria-label="Previous" aria-hidden="true">
+									    	 <<
+									    	</a>
+									    </li>
+									    <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.firstPage - 1)} ]])">									    
+									    	<a class="page-link" href="javascript:void(0)" aria-label="Previous" aria-hidden="true">
+									    	 Previous
+									    	</a>
+									    </li>
+									    <li class="page-item"  th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:id="${pageNo == params.currentPageNo} ? 'active'">
+									    	<a class="page-link" href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(pageNo)} ]])"></a>
+									    </li>
+									     <li class="page-item"  th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.lastPage + 1)} ]])">
+									     	<a class="page-link" href="javascript:void(0)" aria-label="NEXT" aria-hidden="true">
+									    	 NEXT
+									    	</a>
+									     </li>
+									     <li class="page-item" th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${params.makeQueryString(info.totalPageCount)} ]])">
+									     	<a class="page-link" href="javascript:void(0)" aria-label="NEXT" aria-hidden="true">
+									    	 >>
+									    	</a>
+									     </li>
+									  </ul>								  
+									</nav>  
+							</div>				                  
                            </div>												
 	                        </div>
 	                     </div>
@@ -106,8 +163,38 @@
 	                </div>
 	              </div>
    <!-- Warning Section Ends -->
- 
+   <th:block layout:fragment="script"> 
+	   <script th:inline="javascript">						
+	   function movePage(uri, queryString)  {
+			location.href = uri + queryString;
+		}
+		
+		function searchBoard(form) {
+			/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
+				if (isEmpty(form) == true) {
+				var searchKeyword = document.getElementById("mainSearchKeyword");
+				if (isEmpty(searchKeyword.value) == true) {
+					alert("키워드를 입력해 주세요.");
+					searchKeyword.focus();
+					return false;
+				}
+				
+				
 
+				form = document.getElementById("searchForm");
+				form.searchKeyword.value = searchKeyword.value;
+				form.submit();
+			}
+
+			if (isEmpty(form.searchKeyword.value) == true) {
+				alert("키워드를 입력해 주세요.");
+				form.searchKeyword.focus();
+				return false;
+			}
+		}
+	 
+		</script>
+	</th:block>
    <!-- Required Jqurey -->
    <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
    <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
