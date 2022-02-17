@@ -4,6 +4,7 @@ import com.metanet.jo2jo.domain.department.DepartmentDetailDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.department.DepartmentForm;
 import com.metanet.jo2jo.domain.department.DepartmentOzDto;
+import com.metanet.jo2jo.service.DepartmentDeleteService;
 import com.metanet.jo2jo.service.DepartmentDetailService;
 import com.metanet.jo2jo.service.DepartmentRegisterService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class DepartmentController {
 
     private final DepartmentRegisterService departmentRegisterService;
     private final DepartmentDetailService departmentDetailService;
+    private final DepartmentDeleteService departmentDeleteService;
 
     @GetMapping("/department/new")
     String departmentRegisterForm(HttpSession session, Model model){
@@ -63,6 +65,7 @@ public class DepartmentController {
         }
         return "redirect:/";
     }
+
     @GetMapping("/department/{deptNo}")
     String departmentDetailForm(HttpSession session, Model model, @PathVariable Long deptNo){
         if(session.getAttribute("user") != null){
@@ -72,6 +75,7 @@ public class DepartmentController {
         }
         return "redirect:/employees";
     }
+
     @GetMapping("/organization")
     String departments(HttpSession session, Model model){
         if(session.getAttribute("user") != null){
@@ -81,4 +85,18 @@ public class DepartmentController {
         }
         return "redirect:/employees";
     }
+
+    @GetMapping("/department/{deptNo}/delete")
+    String departmentDelete(HttpSession session,@PathVariable Long deptNo){
+        if(session.getAttribute("user").equals("admin")){
+            Integer deleteDepartmentResult = departmentDeleteService.deleteDepartment(deptNo);
+            System.out.println(deleteDepartmentResult);
+            return "redirect:/employees";
+        }
+
+        return "redirect:";
+    }
+
+
+
 }
