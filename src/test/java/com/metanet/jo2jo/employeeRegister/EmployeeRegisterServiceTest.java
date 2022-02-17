@@ -51,7 +51,7 @@ public class EmployeeRegisterServiceTest {
         EmployeeRegisterForm employeeRegisterForm = new EmployeeRegisterForm(
                 10001L, 1011L, "조성민", "test@naver.com", "010-0000-0000", "서울특별시 강동구 길동 40-10 ~ ",
                 "/images/user/aaa.jpg", "000000-1000000", Long.valueOf(1), "employeeTestId", "1234", Long.valueOf(100000000),
-                "03/03/2022", "1", Long.valueOf(0), Long.valueOf(2)
+                "2022-02-03", "1", Long.valueOf(0), Long.valueOf(2)
         );
 
         //when

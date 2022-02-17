@@ -13,7 +13,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class EmployeeUpdateForm {
-	@NotNull(message = "사원번호는 notnull")
+	@NotNull(message="사원번호는 notnull")
 	private Long empno;
 	@NotNull(message = "직급을 선택해주세요")
     private  Long posno;

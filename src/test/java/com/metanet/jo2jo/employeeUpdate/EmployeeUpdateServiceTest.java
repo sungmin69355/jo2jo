@@ -49,14 +49,20 @@ public class EmployeeUpdateServiceTest {
 	 @DisplayName("사원 수정이 가능해야한다.")
 	 public void updateEmployeeTest() {
 		 //given
-		 EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm(1003L,1003L, 10003L, null, 
-				 null, null, null, null, null, null, null, null, null, null, null, null);
+//		 EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm(1003L,1004L, 10005L, "조민국", 
+//				 "jo@example.com", "010-3333-7777", "고양", "c83ffe1b-63b3-4bda-b8d3-e5c84a4eed44.jpg", 
+//				 null, null, "test6000","1234",8000L , "2022-03-07", Long.valueOf(1), Long.valueOf(1));
+		 EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm(
+				 1003L,1004L, 10005L,"jo@example.com", "010-3333-7777", "고양", 
+				 "c83ffe1b-63b3-4bda-b8d3-e5c84a4eed44.jpg", "930104-1011111", Long.valueOf(1), 
+				"test6000", "1234", 8000L, "2022-02-03", "2" ,Long.valueOf(1),Long.valueOf(1)
+		 );
 		 
 		 //when
-	     Integer insertEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
+	     Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
 
 	     //then
-	     assertTrue(insertEmployeeResult == null);
+	     assertTrue(updateEmployeeResult == null);
 			 
 		 
 	 }
