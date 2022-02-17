@@ -51,12 +51,13 @@ public class EmployeeUpdateServiceTest {
 	 public void updateEmployeeTest() {
 		 
 //		 EmployeeDetailDto employeeDetailDto = new EmployeeDetailDto();
-//		 employeeDetailDto.setEmpno(1003L);
+//		 employeeDetailDto.setEmpno(654L);
 		 EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm(
-				 1003L,1004L, 10005L,"jo@example.com", "010-3333-7777", "고양", 
+				 654L,10004L, 1001L,"jo@example.com", "010-3333-7777", "고양", 
 				 "c83ffe1b-63b3-4bda-b8d3-e5c84a4eed44.jpg", "930104-1011111", Long.valueOf(1), 
 				"test6000", "1234", 8000L, "2022-02-03", "2" ,Long.valueOf(1),Long.valueOf(1)
 		 );
+		
 		 
 		 //when
 	     Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);

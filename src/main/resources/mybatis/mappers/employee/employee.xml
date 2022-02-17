@@ -122,7 +122,7 @@
 	<update id="updateEmployee"  parameterType="EmployeeUpdateForm">
 		<![CDATA[
 		UPDATE EMPLOYEE 
-			SET
+			SET 
 			       deptno = #{deptno},
 				   posno = #{posno},
 				   email = #{ email},
