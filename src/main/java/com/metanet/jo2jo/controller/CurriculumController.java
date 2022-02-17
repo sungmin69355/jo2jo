@@ -27,17 +27,17 @@ public class CurriculumController {
     //커리큘럼 등록
     @GetMapping("/curriculum/new")
     String curriculumRegisterForm(HttpSession session, Model model){
-//        if (session.getAttribute("user").equals("admin")) {
-//
-//        }
+        if (session.getAttribute("user").equals("admin")) {
+            //최하위 부서 리스트
+            List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
 
-        //최하위 부서 리스트
-        List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
+            model.addAttribute("deptList", deptList);
+            model.addAttribute("curriculumDto", new CurriculumDto());
 
-        model.addAttribute("deptList", deptList);
-        model.addAttribute("curriculumDto", new CurriculumDto());
-
-        return "curriculum/curriculum-register";
+            return "curriculum/curriculum-register";
+        } else{
+            return "redirect:/";
+        }
     }
 
 
@@ -46,56 +46,56 @@ public class CurriculumController {
                               @RequestParam("daterange") String daterange,
                               HttpSession session, Model model, @Valid CurriculumDto curriculumDto,
                               BindingResult bindingResult)  throws IOException {
-//        if (session.getAttribute("user").equals("admin")) {
-//
-//        }
+        if (session.getAttribute("user").equals("admin")) {
+            //Valid 검증
+            if (bindingResult.hasErrors()) {
+                //최하위 부서 리스트
+                List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
 
-        //Valid 검증
-        if (bindingResult.hasErrors()) {
-            //최하위 부서 리스트
-            List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
+                model.addAttribute("deptList", deptList);
+                model.addAttribute("curriculumDto", new CurriculumDto());
 
-            model.addAttribute("deptList", deptList);
-            model.addAttribute("curriculumDto", new CurriculumDto());
+                return "curriculum/curriculum-register";
+            }
 
-            return "curriculum/curriculum-register";
+            //daterange -> startdate, enddate
+            String[] dateArr = daterange.split(" - ");
+
+            //currcost 전처리
+            Long newCurrcost = curriculum.getCurrcost() * 10000L;
+
+            //deptrange 전처리
+            String newDeptrange = curriculum.getDeptrange().replace(',' ,' ');  //','을 ' '으로 치환
+
+            //educos 전처리
+            List<String> educosList = new ArrayList<>(){{
+                add(curriculum.getEducos1());
+                add(curriculum.getEducos2());
+                add(curriculum.getEducos3());
+                add(curriculum.getEducos4());
+                add(curriculum.getEducos5());
+            }} ;
+            educosList.removeAll(Arrays.asList("",null));
+            int temp = 5-educosList.size();
+            for(int i=0; i<temp; i++){
+                educosList.add("");
+            }
+
+            curriculum.setStartdate(dateArr[0]);
+            curriculum.setEnddate(dateArr[1]);
+            curriculum.setStartdate(dateArr[0]);
+            curriculum.setEnddate(dateArr[1]);
+            curriculum.setEducos1(educosList.get(0));
+            curriculum.setEducos2(educosList.get(1));
+            curriculum.setEducos3(educosList.get(2));
+            curriculum.setEducos4(educosList.get(3));
+            curriculum.setEducos5(educosList.get(4));
+
+            CurriculumDto newCurriculum = curriculumRegisterService.saveCurriculum(curriculum);
+            Long newCostotalcnt = curriculumRegisterService.registerCurriculumCostotalcnt(newCurriculum);
+            return "curriculums";
         }
-        //daterange -> startdate, enddate
-        String[] dateArr = daterange.split(" - ");
 
-        //currcost 전처리
-        Long newCurrcost = curriculum.getCurrcost() * 10000L;
-
-        //deptrange 전처리
-        String newDeptrange = curriculum.getDeptrange().replace(',' ,' ');  //','을 ' '으로 치환
-
-        //educos 전처리
-        List<String> educosList = new ArrayList<>(){{
-            add(curriculum.getEducos1());
-            add(curriculum.getEducos2());
-            add(curriculum.getEducos3());
-            add(curriculum.getEducos4());
-            add(curriculum.getEducos5());
-        }} ;
-        educosList.removeAll(Arrays.asList("",null));
-        int temp = 5-educosList.size();
-        for(int i=0; i<temp; i++){
-            educosList.add("");
-        }
-
-        curriculum.setStartdate(dateArr[0]);
-        curriculum.setEnddate(dateArr[1]);
-        curriculum.setStartdate(dateArr[0]);
-        curriculum.setEnddate(dateArr[1]);
-        curriculum.setEducos1(educosList.get(0));
-        curriculum.setEducos2(educosList.get(1));
-        curriculum.setEducos3(educosList.get(2));
-        curriculum.setEducos4(educosList.get(3));
-        curriculum.setEducos5(educosList.get(4));
-
-        CurriculumDto newCurriculum = curriculumRegisterService.saveCurriculum(curriculum);
-        Long newCostotalcnt = curriculumRegisterService.registerCurriculumCostotalcnt(newCurriculum);
-        return "curriculums";
-//        return "curriculum/curriculums";
+        return "redirect:/";
     }
 }
