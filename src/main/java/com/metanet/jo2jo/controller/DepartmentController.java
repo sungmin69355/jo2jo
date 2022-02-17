@@ -27,6 +27,7 @@ public class DepartmentController {
 
     private final DepartmentRegisterService departmentRegisterService;
     private final DepartmentDetailService departmentDetailService;
+    private final DepartmentDeleteService departmentDeleteService;
     
     @GetMapping("/departments")
     String departmentMain(Model model) {
