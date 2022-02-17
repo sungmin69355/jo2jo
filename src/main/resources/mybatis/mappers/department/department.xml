@@ -106,4 +106,14 @@
            ]]>
      </select>
 
+    <delete id="deleteDepartment" parameterType="Long">
+        <![CDATA[
+        delete
+        from DEPARTMENT D
+        where D.DEPTNO = #{deptNo} and not exists(select *
+                                             from DEPARTMENT DE
+                                             where DE.DEPTPID = #{deptNo})
+        ]]>
+    </delete>
+
 </mapper>

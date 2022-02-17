@@ -20,7 +20,6 @@ public interface DepartmentRepository {
     DepartmentDetailDto findOneByDepartment(Long deptNo);
     List<DepartmentSelectDto> selectDepartment(DepartmentSelectDto params);
     Integer selectDepartmentTotalCount(DepartmentSelectDto params);
-
-
-
+    Integer deleteDepartment(Long deptNo);
+    List<DepartmentDto> selectDepartment();
 }
