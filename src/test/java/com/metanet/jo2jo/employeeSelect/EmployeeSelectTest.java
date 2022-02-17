@@ -14,15 +14,16 @@ import com.metanet.jo2jo.service.EmployeeSelectService;
   
   
 @SpringBootTest 
-public class SelectEmployeeTest { 
+public class EmployeeSelectTest { 
 	  @Autowired 
 	  private EmployeeSelectService employeeService;
   
 	  @Test	  
 	  @DisplayName("관리자와 사원은 사원조회가 가능하다.")
-	  public void selectEmployee(EmployeeSelectDto params) {
+	  public void selectEmployee() {
 		 
-		  //when	
+		  //when
+		  EmployeeSelectDto params = new EmployeeSelectDto(null, null, null, null, null, null, null, null);
 		  Integer employeeSelectTotal = employeeService.employeeTotalCount(params);
 		  List<EmployeeSelectDto> employeeSelectList =  employeeService.employeeList(params);
 		 		  
@@ -37,7 +38,7 @@ public class SelectEmployeeTest {
 		  }
 		  
 		  
-		  else if(employeeSelectTotal == 0)  {
+		  else if(employeeSelectTotal < 0)  {
 			  employeeSelectList = Collections.emptyList();
 			  
 				 for(EmployeeSelectDto employeeSelectDto : employeeSelectList) {
