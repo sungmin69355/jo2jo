@@ -19,11 +19,11 @@ public class EmployeeSelectTest {
 	  private EmployeeSelectService employeeService;
   
 	  @Test	  
-	  @DisplayName("관리자와 사원은 사원조회가 가능하다.")
+	  @DisplayName("사원 메인페이지(10행) 조회가 가능해야 한다")
 	  public void selectEmployee() {
 		 
 		  //when
-		  EmployeeSelectDto params = new EmployeeSelectDto(null, null, null, null, null, null, null, null);
+		  EmployeeSelectDto params = new EmployeeSelectDto();
 		  Integer employeeSelectTotal = employeeService.employeeTotalCount(params);
 		  List<EmployeeSelectDto> employeeSelectList =  employeeService.employeeList(params);
 		 		  
