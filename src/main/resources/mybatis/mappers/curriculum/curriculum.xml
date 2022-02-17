@@ -26,8 +26,8 @@
         VALUES (SEQ_CURRICULUM_NO.NEXTVAL
               , #{currname}
               , #{currcost}
-              , TO_DATE(#{startdate},'YYYY-MM-DD')
-              , TO_DATE(#{enddate},'YYYY-MM-DD')
+              , TO_DATE(#{startdate},'MM/DD/YYYY')
+              , TO_DATE(#{enddate},'MM/DD/YYYY')
               , #{deptrange}
               , #{content}
               , #{instructor}
@@ -40,8 +40,8 @@
 	    ]]>
     </insert>
 
-    <!-- 커리큘럼 이름 하나 select -->
-    <select id="findOneCurriculum" parameterType="long" resultType="CurriculumDto">
+    <!-- 커리큘럼 하나 select -->
+    <select id="findOneCurriculum" parameterType="CurriculumDto" resultType="CurriculumDto">
         <![CDATA[
         SELECT 	*
         FROM 	CURRICULUM
@@ -57,5 +57,12 @@
         WHERE 	CURRNO = #{currno}
 	    ]]>
     </update>
+
+    <!--현재 시퀀스 번호 조회 -->
+    <select id="findCurrSequenceNo" resultType="Long">
+        SELECT  LAST_NUMBER
+        FROM    USER_SEQUENCES
+        WHERE   SEQUENCE_NAME = 'SEQ_CURRICULUM_NO'
+    </select>
 
 </mapper>

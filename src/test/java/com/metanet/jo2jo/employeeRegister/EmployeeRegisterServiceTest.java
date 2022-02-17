@@ -56,9 +56,10 @@ public class EmployeeRegisterServiceTest {
 
         //when
         Integer insertEmployeeResult = employeeRegisterService.insertEmployee(employeeRegisterForm);
+        System.out.println(insertEmployeeResult);
 
         //then
-        assertTrue(insertEmployeeResult == null);
+        assertTrue(insertEmployeeResult == 1);
     }
 
 

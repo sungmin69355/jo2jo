@@ -10,8 +10,7 @@ import java.util.Optional;
 @Mapper
 public interface CurriculumRepository {
     Long registerCurriculum(CurriculumDto curriculumDto);
-    Optional<CurriculumDto> findOneCurriculum(Long currno);
-    int registerCurriculumCostotalcnt(CurriculumDto curriculumDto);
-    커밋되라 커밋되라
-
+    Optional<CurriculumDto> findOneCurriculum(CurriculumDto curriculumDto);
+    int registerCurriculumCostotalcnt(CurriculumDto curriculumDto); //코스 총 개수 costotalcnt 등록
+    Long findCurrSequenceNo();
 }
