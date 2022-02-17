@@ -1,4 +1,4 @@
-package com.metanet.jo2jo.employeeRegister;
+package com.metanet.jo2jo.EmployeeRegister;
 
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
@@ -56,9 +56,10 @@ public class EmployeeRegisterServiceTest {
 
         //when
         Integer insertEmployeeResult = employeeRegisterService.insertEmployee(employeeRegisterForm);
+        System.out.println(insertEmployeeResult);
 
         //then
-        assertTrue(insertEmployeeResult == null);
+        assertTrue(insertEmployeeResult == 1);
     }
 
 
