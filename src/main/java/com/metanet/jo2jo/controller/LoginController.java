@@ -62,6 +62,7 @@ public class LoginController {
             session = request.getSession();
             session.setAttribute("user" , employee);
             session.setAttribute("info", employeeDto);
+            System.out.println(session.getAttribute("empno"));
         }
         return "redirect:/employees";
     }

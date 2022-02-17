@@ -2,7 +2,7 @@ package com.metanet.jo2jo.mybatis;
 
 import javax.sql.DataSource;
 
-import org.junit.jupiter.api.Assertions;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +14,6 @@ public class MyBatisTest {
 
     @Test
     public void DB접속테스트() throws Exception {
-        Assertions.assertNotNull(ds);
+        Assertions.assertThat(ds != null);
     }
 }

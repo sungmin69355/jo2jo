@@ -17,10 +17,11 @@ public class EmployeeSelectDto extends CommonDto{
 	private Long annual;
     private String email;
     private Long empno;
+    private String id;
    
     
     	
-	public EmployeeSelectDto(Long rn, String empname, String deptname, String phone, Long annual,String email, Long empno) {	
+	public EmployeeSelectDto(Long rn, String empname, String deptname, String phone, Long annual,String email, Long empno,String id) {	
 		this.rn = rn;
 		this.empname = empname;
 		this.deptname = deptname;
@@ -28,6 +29,7 @@ public class EmployeeSelectDto extends CommonDto{
 		this.annual = annual;
 		this.email = email;
 		this.empno = empno;
+		this.id = id;
 	}
 
 

@@ -1,5 +1,6 @@
 package com.metanet.jo2jo.domain.curriculum;
 
+import com.metanet.jo2jo.domain.commons.CommonDto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -11,7 +12,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
-public class CurriculumDto {
+public class CurriculumDto extends CommonDto {
+    private Long r; //paging을 위한 rownum
     private Long currno;
     @NotBlank(message = "이름을 입력해주세요")
     private String currname;
@@ -35,7 +37,8 @@ public class CurriculumDto {
     private String educos5;
     private Long costotalcnt;
 
-    public CurriculumDto(Long currno, String currname, Long currcost, String startdate, String enddate, String deptrange, String content, String instructor, String educos1, String educos2, String educos3, String educos4, String educos5, Long costotalcnt) {
+    public CurriculumDto(Long r, Long currno, String currname, Long currcost, String startdate, String enddate, String deptrange, String content, String instructor, String educos1, String educos2, String educos3, String educos4, String educos5, Long costotalcnt) {
+        this.r = r;
         this.currno = currno;
         this.currname = currname;
         this.currcost = currcost;
