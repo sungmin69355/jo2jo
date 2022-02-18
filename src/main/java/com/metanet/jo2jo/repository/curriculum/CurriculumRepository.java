@@ -17,4 +17,6 @@ public interface CurriculumRepository {
 
     Integer selectCurriculumTotalCount(CurriculumDto curriculumDto);    //커리큘럼 토탈카운트
     List<CurriculumDto> selectCurriculum(CurriculumDto curriculumDto);  //메인페이지 조회
+
+    Long updateCurriculum(CurriculumDto curriculumDto); //커리큘럼 업데이트
 }

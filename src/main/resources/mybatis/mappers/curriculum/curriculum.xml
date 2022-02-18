@@ -112,6 +112,26 @@
 	    ]]>
     </insert>
 
+    <!-- 커리큘럼 등록(코스총개수) -->
+    <update id="updateCurriculum" parameterType="CurriculumDto">
+        <![CDATA[
+        UPDATE 	CURRICULUM
+        SET 	CURRNAME    = #{currname}
+              , CURRCOST    = #{currcost}
+              , STARTDATE   = #{startdate}
+              , ENDDATE     = #{enddate}
+              , DEPTRANGE   = #{deptrange}
+              , CONTENT     = #{content}
+              , INSTRUCTOR  = #{instructor}
+              , EDUCOS1     = #{educos1}
+              , EDUCOS2     = #{educos2}
+              , EDUCOS3     = #{educos3}
+              , EDUCOS4     = #{educos4}
+                EDUCOS5     = #{educos5}
+        WHERE 	CURRNO = #{currno}
+	    ]]>
+    </update>
+
     <!-- 커리큘럼 하나 select -->
     <select id="findOneCurriculum" parameterType="CurriculumDto" resultType="CurriculumDto">
         <![CDATA[

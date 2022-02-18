@@ -9,6 +9,7 @@ import com.metanet.jo2jo.service.curriculum.CurriculumRegisterService;
 import com.metanet.jo2jo.service.curriculum.CurriculumSelectService;
 
 
+import com.metanet.jo2jo.service.curriculum.CurriculumUpdateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ public class CurriculumController {
     private final CurriculumRegisterService curriculumRegisterService;
     private final CurriculumSelectService curriculumSelectService;
     private final CurriculumDetailService curriculumDetailService;
+    private final CurriculumUpdateService curriculumUpdateService;
 
     //커리큘럼 메인
     @GetMapping("/curriculums")
@@ -67,31 +69,68 @@ public class CurriculumController {
         return "redirect:/";
     }
 
-//    @PostMapping("/curriculum/{currno}/update")
-//    public String curriculumUpdateForm(HttpSession session, Model model, @PathVariable Long currno, @Valid CurriculumDto curriculumForm, BindingResult bindingResult){
-//        if(session.getAttribute("user").equals("admin")) {
-//            CurriculumDto curriculumDto = curriculumUpdateService.selectCurriculum(currno);
-//            if(curriculumDto != null) {
-//                //Valid 검증
-//                if (bindingResult.hasErrors()) {
-//                    return getModel(model, currno);
-//                }
-//                System.out.println(curriculumForm.toString());
-//                System.out.println(currno);
-//                curriculumForm.setCurrno(currno);
-//                Integer updateCurriculumResult = curriculumUpdateService.updateDepartment(curriculumForm);
-//                System.out.println(updateCurriculumResult);
-//            }
-//
-//        }
-//    }
+    @PostMapping("/curriculum/{currno}/update")
+    public String curriculumUpdateForm(@ModelAttribute CurriculumDto curriculum,
+                                       @RequestParam("daterange") String daterange,
+                                       HttpSession session, Model model, @PathVariable Long currno, @Valid CurriculumDto curriculumForm, BindingResult bindingResult){
+        if(session.getAttribute("user").equals("admin")) {
+            curriculumForm.setCurrno(currno);
+            CurriculumDto curriculumDto = curriculumUpdateService.findOneCurriculum(curriculumForm).get();
+            if(curriculumDto != null) {
+                //Valid 검증
+                if (bindingResult.hasErrors()) {
+                    return getModel(model, currno);
+                }
+                //daterange -> startdate, enddate
+                String[] dateArr = daterange.split(" - ");
+
+                //currcost 전처리
+                Long newCurrcost = curriculum.getCurrcost() * 10000L;
+
+                //deptrange 전처리
+                String newDeptrange = curriculum.getDeptrange().replace(',' ,' ');  //','을 ' '으로 치환
+
+                //educos 전처리
+                List<String> educosList = new ArrayList<>(){{
+                    add(curriculum.getEducos1());
+                    add(curriculum.getEducos2());
+                    add(curriculum.getEducos3());
+                    add(curriculum.getEducos4());
+                    add(curriculum.getEducos5());
+                }} ;
+                educosList.removeAll(Arrays.asList("",null));
+                int temp = 5-educosList.size();
+                for(int i=0; i<temp; i++){
+                    educosList.add("");
+                }
+
+                curriculum.setStartdate(dateArr[0]);
+                curriculum.setEnddate(dateArr[1]);
+                curriculum.setCurrcost(newCurrcost);
+                curriculum.setEducos1(educosList.get(0));
+                curriculum.setEducos2(educosList.get(1));
+                curriculum.setEducos3(educosList.get(2));
+                curriculum.setEducos4(educosList.get(3));
+                curriculum.setEducos5(educosList.get(4));
+
+                curriculumUpdateService.updateCurriculum(curriculum);
+                Long newCostotalcnt = curriculumUpdateService.updateCurriculumCostotalcnt(curriculum);
+                return "curriculums";
+            }
+        }
+
+        return "redirect:/curriculums";
+    }
 
     private String getModel(Model model, @PathVariable Long currno) {
-//        List<EmployeeDto> findByEmployeesRelevantDepartment = departmentUpdateService.findByEmployeesRelevantDepartment(deptNo);
-//        List<DepartmentDto> findByAllDepartment = departmentUpdateService.findAllByDepartment();
-//        model.addAttribute("departmentForm", new DepartmentForm());
-//        model.addAttribute("findByAllDepartment", findByAllDepartment);
-//        model.addAttribute("findByEmployeesRelevantDepartment", findByEmployeesRelevantDepartment);
+        CurriculumDto curriculum = new CurriculumDto();
+        curriculum.setCurrno(currno);
+        curriculum = curriculumUpdateService.findOneCurriculum(curriculum).get();
+        List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
+
+        model.addAttribute("deptList", deptList);
+        model.addAttribute("curriculumForm", new CurriculumDto());
+        model.addAttribute("curriculum", curriculum);
         return "/curriculum/curriculum-update";
     }
 
