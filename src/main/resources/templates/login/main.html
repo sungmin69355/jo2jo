@@ -3,6 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="stylesheet" type="text/css"> <!-- href="./style.css"-->
+        <script> function alert_button(){
+            alert('인사팀 문의 : 010-0000-0000(과장 김아무개)');
+        }
+        </script>
     </head>
     <style>
         *{
@@ -108,7 +112,7 @@
     <body width="100%" height="100%">
     <img src="/assets/images/Logo/metanetDT_Logo.jpeg" alt="Logo">
     <form action="/login" th:object="${loginDto}" method="post" class="loginForm">
-        <h1 style="font-size:2.7em; align-content: center">인사관리 시스템</h1>
+        <h1 style="font-size: 2rem; align-content: center">인사관리 시스템</h1>
         <div class="idForm">
             <input type="text" th:field="*{id}" class="id" placeholder="ID"/>
             <div th:each="msg : ${#fields.errors('id')}">
@@ -132,7 +136,7 @@
             로그인
         </button>
         <div class="bottomText">
-            <a href="#">Forgot password?</a>
+            <a href="#" onclick="javascript:alert_button()">Forgot password?</a>
         </div>
     </form>
     </body>

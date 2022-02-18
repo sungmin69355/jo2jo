@@ -3,7 +3,7 @@ package com.metanet.jo2jo.controller;
 import com.metanet.jo2jo.domain.Login.LoginDto;
 import com.metanet.jo2jo.domain.administrator.AdminDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDto;
-import com.metanet.jo2jo.service.LoginService;
+import com.metanet.jo2jo.service.login.LoginService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

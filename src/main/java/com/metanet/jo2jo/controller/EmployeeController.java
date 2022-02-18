@@ -1,11 +1,12 @@
 package com.metanet.jo2jo.controller;
 
-import com.metanet.jo2jo.domain.Login.LoginDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
-import com.metanet.jo2jo.service.EmployeeRegisterService;
+import com.metanet.jo2jo.repository.Educated.EducatedRepository;
+import com.metanet.jo2jo.service.educated.EducatedSelectService;
+import com.metanet.jo2jo.service.employee.EmployeeRegisterService;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.PropertySource;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
-import com.metanet.jo2jo.service.EmployeeSelectService;
-import com.metanet.jo2jo.service.EmployeeUpdateService;
+import com.metanet.jo2jo.service.employee.EmployeeSelectService;
+import com.metanet.jo2jo.service.employee.EmployeeUpdateService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,6 +44,7 @@ public class EmployeeController {
     private final EmployeeSelectService employeeService;
     private final EmployeeRegisterService employeeRegisterService;
     private final EmployeeUpdateService employeeUpdateService;
+    private final EducatedSelectService educatedSelectService;
 
     //사원조회 부서추가
     @GetMapping("/employees")
@@ -123,8 +125,9 @@ public class EmployeeController {
    
   //사원조회 상세페이지
     @GetMapping("/employeedetail")
-     String employeeDetail(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, Model model) {    	
+     String employeeDetail(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("params2")EmployeeDetailDto employeeDetailDto, Model model) {    	
     	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
+    	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
         return "employee/employee-detail";
        
     }
