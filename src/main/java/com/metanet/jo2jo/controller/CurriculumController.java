@@ -3,9 +3,7 @@ package com.metanet.jo2jo.controller;
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 
-import com.metanet.jo2jo.service.CurriculumDetailService;
-import com.metanet.jo2jo.service.CurriculumRegisterService;
-import com.metanet.jo2jo.service.CurriculumSelectService;
+import com.metanet.jo2jo.service.curriculum.CurriculumDetailService;
 
 import com.metanet.jo2jo.service.curriculum.CurriculumRegisterService;
 import com.metanet.jo2jo.service.curriculum.CurriculumSelectService;

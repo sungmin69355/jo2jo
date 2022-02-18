@@ -1,4 +1,4 @@
-package com.metanet.jo2jo.service;
+package com.metanet.jo2jo.service.curriculum;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.repository.curriculum.CurriculumRepository;

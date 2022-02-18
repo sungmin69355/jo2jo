@@ -1,7 +1,7 @@
 package com.metanet.jo2jo.curriculumDetail;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
-import com.metanet.jo2jo.service.CurriculumDetailService;
+import com.metanet.jo2jo.service.curriculum.CurriculumDetailService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
