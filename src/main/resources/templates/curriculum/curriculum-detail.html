@@ -80,9 +80,9 @@
 </div>
 <div class="wrapper">
     <!-- Navbar-->
-<!--    <header th:replace="includes/header :: header"></header>-->
+    <header th:replace="includes/header :: header"></header>
     <!-- Side-Nav-->
-<!--    <div th:replace="includes/navbar :: navbar"></div>-->
+    <div th:replace="includes/navbar :: navbar"></div>
     <!-- Sidebar chat start -->
     <div id="sidebar" class="p-fixed header-users showChat">
         <div class="had-container">
@@ -489,15 +489,11 @@
                 </div>
                 <!-- Container-fluid ends -->
 
-
-<!--                <div class="fixed-button">-->
-<!--                    <a href="/curriculums" class="btn btn-md btn-primary">-->
-<!--                        <i class="fa fa-shopping-cart" aria-hidden="true"></i> 돌아가기-->
-<!--                    </a>-->
-<!--                </div>-->
             </div>
+
+            <!--세션에 따른 버튼 설정-->
             <div class="text-center" th:if="${session.user}==admin" style="margin:0 0 15px 0;">
-                <a href="/curriculums" >
+                <a href="/curriculum/" th:attrappend="href=${curriculum.getCurrno()}+'/update'">
                 <button type="submit" class="btn btn-primary waves-effect waves-light text-uppercase">업데이트</button>
                 </a>
                 <a href="/curriculums" >

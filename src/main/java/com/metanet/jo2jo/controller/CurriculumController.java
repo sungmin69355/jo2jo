@@ -31,7 +31,6 @@ public class CurriculumController {
     String curriculumMain(@ModelAttribute("params") CurriculumDto params, HttpSession session, Model model){
         if(session.getAttribute("user") != null) {
             List<CurriculumDto> curriculumList = curriculumSelectService.curriculumList(params);
-//        System.out.println(curriculumList.get(0).toString());
             model.addAttribute("curriculumList", curriculumList);
             return "curriculum/curriculum-main";
         }
@@ -43,12 +42,54 @@ public class CurriculumController {
     public String curriculumDetail(@PathVariable Long currno, @ModelAttribute CurriculumDto curriculum, HttpSession session, Model model) {
         if(session.getAttribute("user") != null){
             curriculum.setCurrno(currno);
-//            System.out.println(curriculumDetailService.findOneCurriculum(curriculum).toString());
+            System.out.println(curriculumDetailService.findOneCurriculum(curriculum).toString());
             model.addAttribute("curriculum",curriculumDetailService.findOneCurriculum(curriculum).get());
 
             return "curriculum/curriculum-detail";
         }
         return "redirect:/";
+    }
+
+    //커리큘럼 업데이트
+    @GetMapping("/curriculum/{currno}/update")
+    public String curriculumUpdate(@PathVariable Long currno, HttpSession session, Model model) {
+        if(session.getAttribute("user").equals("admin")) {
+            CurriculumDto curriculumDto = new CurriculumDto();
+            curriculumDto.setCurrno(currno);
+            model.addAttribute("curriculum",curriculumDetailService.findOneCurriculum(curriculumDto).get());
+            if(curriculumDto != null) {
+                return getModel(model, currno);
+            }
+        }
+        return "redirect:/";
+    }
+
+//    @PostMapping("/curriculum/{currno}/update")
+//    public String curriculumUpdateForm(HttpSession session, Model model, @PathVariable Long currno, @Valid CurriculumDto curriculumForm, BindingResult bindingResult){
+//        if(session.getAttribute("user").equals("admin")) {
+//            CurriculumDto curriculumDto = curriculumUpdateService.selectCurriculum(currno);
+//            if(curriculumDto != null) {
+//                //Valid 검증
+//                if (bindingResult.hasErrors()) {
+//                    return getModel(model, currno);
+//                }
+//                System.out.println(curriculumForm.toString());
+//                System.out.println(currno);
+//                curriculumForm.setCurrno(currno);
+//                Integer updateCurriculumResult = curriculumUpdateService.updateDepartment(curriculumForm);
+//                System.out.println(updateCurriculumResult);
+//            }
+//
+//        }
+//    }
+
+    private String getModel(Model model, @PathVariable Long currno) {
+//        List<EmployeeDto> findByEmployeesRelevantDepartment = departmentUpdateService.findByEmployeesRelevantDepartment(deptNo);
+//        List<DepartmentDto> findByAllDepartment = departmentUpdateService.findAllByDepartment();
+//        model.addAttribute("departmentForm", new DepartmentForm());
+//        model.addAttribute("findByAllDepartment", findByAllDepartment);
+//        model.addAttribute("findByEmployeesRelevantDepartment", findByEmployeesRelevantDepartment);
+        return "/curriculum/curriculum-update";
     }
 
     //커리큘럼 등록
