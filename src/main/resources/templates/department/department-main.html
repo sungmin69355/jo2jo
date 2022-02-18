@@ -99,7 +99,7 @@
 													  </div>
 													  <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
 											</form>													  			
-							  	</div>     
+							  		</div>     
                               <table class="table">                             
                                  <thead>                                 	 
                                     <tr> 
@@ -107,23 +107,26 @@
                                        <th>번호</th>
                                        <th>부서명</th>
                                        <th>부서장</th>
-                                       <th>상세페이지</th>                                      
+                                       <th>Action</th>                                      
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr th:each="departmentlist:${departmentlist}">
+                                    <tr th:if="${not #lists.isEmpty(departmentlist)}" th:each="departmentlist:${departmentlist}">
                                        <td></td>                                     
                                        <td>[[${departmentlist.rn}]]</td> 
                                        <td>[[${departmentlist.deptname}]]</td>
                                        <td>[[${departmentlist.manager}]]</td>                                      
                                        <td>
                                         <input type="hidden" name="deptno" value="${departmentlist.deptno}">
-                                       <a href="/department/"
-                                       		th:attrappend="href=${departmentlist.deptno}"
-                                       	>   								   	 	
-     								   	<i class="icofont icofont-ui-text-chat"></i>
-     								   </a>
-     								   <td>                                      								                                      
+	                                       <a href="/department/"
+	                                       		th:attrappend="href=${departmentlist.deptno}"
+	                                       	>   								   	 	
+	     								   	<i class="icofont icofont-ui-text-chat"></i>
+	     								   </a>
+	     								<td>                                      								                                      
+                                    </tr>
+                                    <tr th:unless="${not #lists.isEmpty(departmentlist)}"  >
+                                    	<td colspan="5">조회된 결과가 없습니다.</td>                               	
                                     </tr>                                                                  
                                  </tbody>                                    
                               </table>                                                                   
@@ -155,46 +158,49 @@
 									     </li>
 									  </ul>								  
 									</nav>  
-							</div>				                  
+								</div>						
+							<div>                   
                            </div>												
 	                        </div>
 	                     </div>
 	                  </div>
 	                </div>
 	              </div>
+	            </div>
+	          </div>
    <!-- Warning Section Ends -->
    <th:block layout:fragment="script"> 
-	   <script th:inline="javascript">						
-	   function movePage(uri, queryString)  {
-			location.href = uri + queryString;
-		}
-		
-		function searchBoard(form) {
-			/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
-				if (isEmpty(form) == true) {
-				var searchKeyword = document.getElementById("mainSearchKeyword");
-				if (isEmpty(searchKeyword.value) == true) {
-					alert("키워드를 입력해 주세요.");
-					searchKeyword.focus();
-					return false;
+			<script th:inline="javascript">						
+				function movePage(uri, queryString)  {
+					location.href = uri + queryString;
 				}
 				
-				
+				function searchBoard(form) {
+					/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
+						if (isEmpty(form) == true) {
+						var searchKeyword = document.getElementById("mainSearchKeyword");
+						if (isEmpty(searchKeyword.value) == true) {
+							alert("키워드를 입력해 주세요.");
+							searchKeyword.focus();
+							return false;
+						}											
+						form = document.getElementById("searchForm");
+						form.searchKeyword.value = searchKeyword.value;
+						form.submit();
+					}
 
-				form = document.getElementById("searchForm");
-				form.searchKeyword.value = searchKeyword.value;
-				form.submit();
-			}
+					if (isEmpty(form.searchKeyword.value) == true) {
+						alert("키워드를 입력해 주세요.");
+						form.searchKeyword.focus();
+						return false;
+					}
+				}
+				/*[- end of function -]*/
+	
 
-			if (isEmpty(form.searchKeyword.value) == true) {
-				alert("키워드를 입력해 주세요.");
-				form.searchKeyword.focus();
-				return false;
-			}
-		}
-	 
-		</script>
-	</th:block>
+
+			</script>
+	   </th:block>                 
    <!-- Required Jqurey -->
    <script src="assets/plugins/jquery/dist/jquery.min.js"></script>
    <script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
