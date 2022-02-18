@@ -3,10 +3,14 @@ package com.metanet.jo2jo.controller;
 import com.metanet.jo2jo.domain.department.DepartmentDetailDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.department.DepartmentForm;
+import com.metanet.jo2jo.domain.department.DepartmentOzDto;
+import com.metanet.jo2jo.domain.department.DepartmentSelectDto;
+
 import com.metanet.jo2jo.domain.employee.EmployeeDto;
 import com.metanet.jo2jo.service.department.DepartmentDeleteService;
 import com.metanet.jo2jo.service.department.DepartmentDetailService;
 import com.metanet.jo2jo.service.department.DepartmentRegisterService;
+import com.metanet.jo2jo.service.department.DepartmentSelectService;
 import com.metanet.jo2jo.service.department.DepartmentUpdateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,12 +33,25 @@ public class DepartmentController {
 
     private final DepartmentRegisterService departmentRegisterService;
     private final DepartmentDetailService departmentDetailService;
-    private final DepartmentDeleteService departmentDeleteService;
+
+    private final DepartmentSelectService departmentSelectService;
+    private final DepartmentDeleteService departmentDeleteService;  
+    //부서조회 메인페이지
+
+
     private final DepartmentUpdateService departmentUpdateService;
     
+
     @GetMapping("/departments")
-    String departmentMain(Model model) {
-    	return "department/department-main";
+    String departmentMain(HttpSession session, Model model, @ModelAttribute("params") DepartmentSelectDto params) {
+    	if(session.getAttribute("user").equals("admin") || session.getAttribute("user").equals("employee")) {
+    				
+	     	model.addAttribute("departmentlist",departmentSelectService.selectDepartment(params));
+	    	return "department/department-main";
+    	} else {
+    		session.invalidate();
+  		    return "redirect:index";
+    	}
     }
   
     @GetMapping("/department/new")
