@@ -77,10 +77,12 @@ public class DepartmentController {
     String departmentDetailForm(HttpSession session, Model model, @PathVariable Long deptNo){
         if(session.getAttribute("user") != null){
             DepartmentDetailDto departmentDetailDto  = departmentDetailService.selectDepartment(deptNo);
-            model.addAttribute("departmentDetailDto",departmentDetailDto);
-            return "department/department-detail";
+            if(departmentDetailDto != null){
+                model.addAttribute("departmentDetailDto",departmentDetailDto);
+                return "department/department-detail";
+            }
         }
-        return "redirect:/employees";
+        return "redirect:/departments";
     }
 
     @GetMapping("/organization")
