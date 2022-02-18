@@ -5,11 +5,13 @@ import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.department.DepartmentForm;
 import com.metanet.jo2jo.domain.department.DepartmentOzDto;
 import com.metanet.jo2jo.domain.department.DepartmentSelectDto;
-import com.metanet.jo2jo.service.DepartmentDeleteService;
-import com.metanet.jo2jo.service.DepartmentDetailService;
-import com.metanet.jo2jo.service.DepartmentRegisterService;
-import com.metanet.jo2jo.service.DepartmentSelectService;
 
+import com.metanet.jo2jo.domain.employee.EmployeeDto;
+import com.metanet.jo2jo.service.department.DepartmentDeleteService;
+import com.metanet.jo2jo.service.department.DepartmentDetailService;
+import com.metanet.jo2jo.service.department.DepartmentRegisterService;
+import com.metanet.jo2jo.service.department.DepartmentSelectService;
+import com.metanet.jo2jo.service.department.DepartmentUpdateService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -31,9 +33,15 @@ public class DepartmentController {
 
     private final DepartmentRegisterService departmentRegisterService;
     private final DepartmentDetailService departmentDetailService;
+
     private final DepartmentSelectService departmentSelectService;
-    private final DepartmentDeleteService departmentDeleteService;   
+    private final DepartmentDeleteService departmentDeleteService;  
     //부서조회 메인페이지
+
+
+    private final DepartmentUpdateService departmentUpdateService;
+    
+
     @GetMapping("/departments")
     String departmentMain(HttpSession session, Model model, @ModelAttribute("params") DepartmentSelectDto params) {
     	if(session.getAttribute("user").equals("admin") || session.getAttribute("user").equals("employee")) {
@@ -54,7 +62,7 @@ public class DepartmentController {
             model.addAttribute("findByAllDepartment", findByAllDepartment);
             return "department/department-register";
         }else{
-            return "redirect:/";
+            return "redirect:/departments";
         }
     }
 
@@ -78,19 +86,21 @@ public class DepartmentController {
                 return "department/department-register";
             }
             Integer insertDepartment = departmentRegisterService.insertDepartment(departmentForm);
-            return "redirect:/";
+            return "redirect:/departments";
         }
-        return "redirect:/";
+        return "redirect:/departments";
     }
 
     @GetMapping("/department/{deptNo}")
     String departmentDetailForm(HttpSession session, Model model, @PathVariable Long deptNo){
         if(session.getAttribute("user") != null){
             DepartmentDetailDto departmentDetailDto  = departmentDetailService.selectDepartment(deptNo);
-            model.addAttribute("departmentDetailDto",departmentDetailDto);
-            return "department/department-detail";
+            if(departmentDetailDto != null){
+                model.addAttribute("departmentDetailDto",departmentDetailDto);
+                return "department/department-detail";
+            }
         }
-        return "redirect:/employees";
+        return "redirect:/departments";
     }
 
     @GetMapping("/organization")
@@ -108,12 +118,51 @@ public class DepartmentController {
         if(session.getAttribute("user").equals("admin")){
             Integer deleteDepartmentResult = departmentDeleteService.deleteDepartment(deptNo);
             System.out.println(deleteDepartmentResult);
-            return "redirect:/employees";
+            return "redirect:/departments";
         }
 
-        return "redirect:";
+        return "redirect:/departments";
     }
 
+    @GetMapping("/department/{deptNo}/update")
+    String departmentUpdateForm(HttpSession session,Model model, @PathVariable Long deptNo){
+        if(session.getAttribute("user").equals("admin")) {
+            DepartmentDetailDto departmentDetailDto = departmentUpdateService.selectDepartment(deptNo);
+            if(departmentDetailDto != null) {
+                return getModel(model, deptNo);
+            }
+        }
+        return "redirect:/departments";
+    }
+
+    @PostMapping("/department/{deptNo}/update")
+    String departmentUpdate(HttpSession session,Model model, @PathVariable Long deptNo, @Valid DepartmentForm departmentForm, BindingResult bindingResult){
+        if(session.getAttribute("user").equals("admin")) {
+            DepartmentDetailDto departmentDetailDto = departmentUpdateService.selectDepartment(deptNo);
+            if(departmentDetailDto != null) {
+                //Valid 검증
+                if (bindingResult.hasErrors()) {
+                    return getModel(model, deptNo);
+                }
+                System.out.println(departmentForm.toString());
+                System.out.println(deptNo);
+                departmentForm.setDeptno(deptNo);
+                Integer updateDepartmentResult = departmentUpdateService.updateDepartment(departmentForm);
+                System.out.println(updateDepartmentResult);
+            }
+
+        }
+        return "redirect:/departments";
+    }
+
+    private String getModel(Model model, @PathVariable Long deptNo) {
+        List<EmployeeDto> findByEmployeesRelevantDepartment = departmentUpdateService.findByEmployeesRelevantDepartment(deptNo);
+        List<DepartmentDto> findByAllDepartment = departmentUpdateService.findAllByDepartment();
+        model.addAttribute("departmentForm", new DepartmentForm());
+        model.addAttribute("findByAllDepartment", findByAllDepartment);
+        model.addAttribute("findByEmployeesRelevantDepartment", findByEmployeesRelevantDepartment);
+        return "/department/department-update";
+    }
 
 
 }

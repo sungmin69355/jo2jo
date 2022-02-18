@@ -2,7 +2,7 @@ package com.metanet.jo2jo.login;
 
 import com.metanet.jo2jo.domain.Login.LoginDto;
 import com.metanet.jo2jo.domain.administrator.AdminDto;
-import com.metanet.jo2jo.service.LoginService;
+import com.metanet.jo2jo.service.login.LoginService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

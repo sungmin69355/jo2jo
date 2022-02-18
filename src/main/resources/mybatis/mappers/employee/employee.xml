@@ -57,6 +57,11 @@
         WHERE ID = #{id} and PASSWORD = #{password}
         ]]>
     </select>
+
+	<!-- 해당부서원 조회 -->
+	<select id="findByEmployeesRelevantDepartment" parameterType="Long" resultType="EmployeeDto">
+		SELECT * FROM EMPLOYEE where deptno = #{deptNo}
+	</select>
     
     <!-- 사원조회 -->
     <select id="selectEmployee2" resultType="EmployeeDto">      
@@ -170,11 +175,10 @@
 	]]>		 	         
     </select>
     
-   
-    
 
 	<!-- 사원아이디 조회 -->
 	<select id="idCheck" parameterType="String" resultType="int">
 		SELECT COUNT(ID) FROM EMPLOYEE where ID = #{id}
 	</select>
+
 </mapper>

@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.metanet.jo2jo.domain.department.DepartmentSelectDto;
-import com.metanet.jo2jo.service.DepartmentSelectService;
+import com.metanet.jo2jo.service.department.DepartmentSelectService;
+
 
 @SpringBootTest
 public class DepartmentSelectServiceTest {

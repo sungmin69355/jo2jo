@@ -1,13 +1,12 @@
 package com.metanet.jo2jo.controller;
 
-import com.metanet.jo2jo.domain.Login.LoginDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.repository.Educated.EducatedRepository;
-import com.metanet.jo2jo.service.EducatedSelectService;
-import com.metanet.jo2jo.service.EmployeeRegisterService;
+import com.metanet.jo2jo.service.educated.EducatedSelectService;
+import com.metanet.jo2jo.service.employee.EmployeeRegisterService;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.PropertySource;
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
-import com.metanet.jo2jo.service.EmployeeSelectService;
-import com.metanet.jo2jo.service.EmployeeUpdateService;
+import com.metanet.jo2jo.service.employee.EmployeeSelectService;
+import com.metanet.jo2jo.service.employee.EmployeeUpdateService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
