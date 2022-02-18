@@ -2,8 +2,8 @@ package com.metanet.jo2jo.controller;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
-import com.metanet.jo2jo.service.CurriculumRegisterService;
-import com.metanet.jo2jo.service.CurriculumSelectService;
+import com.metanet.jo2jo.service.curriculum.CurriculumRegisterService;
+import com.metanet.jo2jo.service.curriculum.CurriculumSelectService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
