@@ -31,6 +31,9 @@ public class EmployeeSelectDto extends CommonDto{
 		this.empno = empno;
 		this.id = id;
 	}
+	public EmployeeSelectDto() {
+	
+	}
 
 
 
