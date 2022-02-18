@@ -2,6 +2,7 @@ package com.metanet.jo2jo.controller;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
+import com.metanet.jo2jo.service.CurriculumDetailService;
 import com.metanet.jo2jo.service.CurriculumRegisterService;
 import com.metanet.jo2jo.service.CurriculumSelectService;
 
@@ -23,14 +24,31 @@ import java.util.*;
 public class CurriculumController {
     private final CurriculumRegisterService curriculumRegisterService;
     private final CurriculumSelectService curriculumSelectService;
+    private final CurriculumDetailService curriculumDetailService;
 
     //커리큘럼 메인
     @GetMapping("/curriculums")
-    String curriculumMain(@ModelAttribute("params") CurriculumDto params, Model model){
-        List<CurriculumDto> curriculumList = curriculumSelectService.curriculumList(params);
+    String curriculumMain(@ModelAttribute("params") CurriculumDto params, HttpSession session, Model model){
+        if(session.getAttribute("user") != null) {
+            List<CurriculumDto> curriculumList = curriculumSelectService.curriculumList(params);
 //        System.out.println(curriculumList.get(0).toString());
-        model.addAttribute("curriculumList", curriculumList);
-        return "curriculum/curriculum-main";
+            model.addAttribute("curriculumList", curriculumList);
+            return "curriculum/curriculum-main";
+        }
+        return "redirect:/";
+    }
+
+    //커리큘럼 상세
+    @GetMapping("/curriculum/{currno}")
+    public String curriculumDetail(@PathVariable Long currno, @ModelAttribute CurriculumDto curriculum, HttpSession session, Model model) {
+        if(session.getAttribute("user") != null){
+            curriculum.setCurrno(currno);
+//            System.out.println(curriculumDetailService.findOneCurriculum(curriculum).toString());
+            model.addAttribute("curriculum",curriculumDetailService.findOneCurriculum(curriculum).get());
+
+            return "curriculum/curriculum-detail";
+        }
+        return "redirect:/";
     }
 
     //커리큘럼 등록
