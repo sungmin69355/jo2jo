@@ -2,80 +2,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>사원 상세</title>
-    <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+   <title>Quantum Able Bootstrap 4 Admin Dashboard Template</title>
+   <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <!-- Favicon icon -->
-    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/x-icon">
-    <link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+   <!-- Meta -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="description" content="codedthemes">
+   <meta name="keywords" content=", Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+   <meta name="author" content="codedthemes">
 
-    <!-- Google font-->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
+   <!-- Favicon icon -->
+   <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon">
+   <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
 
-    <!-- themify -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+   <!-- Google font-->
+   <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500,700" rel="stylesheet">
 
-    <!-- iconfont -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/icofont/css/icofont.css">
+   <!-- themify -->
+   <link rel="stylesheet" type="text/css" href="/assets/icon/themify-icons/themify-icons.css">
 
-    <!-- simple line icon -->
-    <link rel="stylesheet" type="text/css" href="assets/icon/simple-line-icons/css/simple-line-icons.css">
+   <!-- iconfont -->
+   <link rel="stylesheet" type="text/css" href="/assets/icon/icofont/css/icofont.css">
+
+   <!-- simple line icon -->
+   <link rel="stylesheet" type="text/css" href="/assets/icon/simple-line-icons/css/simple-line-icons.css">
+
+   <!-- Required Fremwork -->
+   <link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+
+   <!-- bash syntaxhighlighter css -->
+   <link type="text/css" rel="stylesheet" href="/assets/plugins/syntaxhighlighter/styles/shCoreDjango.css" />
+
+   <!-- Style.css -->
+   <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+
+   <!-- Responsive.css-->
+   <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
 
 
-    <!--Date Picker Material Icon Css-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Required Fremwork -->
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/css/bootstrap.min.css">
-
-    <!-- Select 2 css -->
-    <link rel="stylesheet" href="assets/plugins/select2/dist/css/select2.min.css" />
-    <link rel="stylesheet" type="text/css" href="assets/plugins/select2/css/s2-docs.css">
-
-    <!-- Multi Select css -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" />
-    <link rel="stylesheet" href="assets/plugins/multiselect/css/multi-select.css" />
-
-    <!-- Color Picker css -->
-    <link rel="stylesheet" href="assets/plugins/spectrum/spectrum.css" />
-
-    <!--color css-->
-    <link rel="stylesheet" type="text/css" href="assets/css/color/color-1.min.css" id="color" />
-
-    <!-- Tags css -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.css" />
-
-    <!-- Style.css -->
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-
-    <!-- Responsive.css-->
-    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
-
-    <!-- Date Picker css -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" />
-
-    <!--Date Picker Material Icon Css-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-    <!-- Bootstrap Date-Picker css -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datetimepicker.css" />
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap-daterangepicker/daterangepicker.css" />
 
 </head>
 
-<body class="sidebar-mini fixed">
-<div class="loader-bg">
-    <div class="loader-bar">
-    </div>
-</div>
 <div class="wrapper">
     <!-- Navbar-->
     <header th:replace="includes/header :: header"></header>
@@ -314,126 +288,211 @@
 
         </div>
     </div>
-    <!-- Sidebar chat end-->
+      <!-- Sidebar chat end-->
+      <div class="content-wrapper">
+         <!-- Container-fluid starts -->
+         <div class="container-fluid">
+            <!-- Main content starts -->
+          
+               <!-- Row Starts -->
+               <!-- Row end -->
 
-    <div class="content-wrapper">
-        <!-- Container-fluid starts -->
-        <!-- Main content starts -->
-        <div class="container-fluid">
-            <div class="row">
-                <div class="main-header">
-
-                </div>
-            </div>
-
-
-            <!-- 1-3-block row start -->
-            <!--  보기모드 -->
-            <div id = "list" class="row" th:if ="${session.user}==admin" th:each="employeedetaillist:${employeedetaillist}">
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="user-block-2">
-                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
-                            <h5></h5>
-                            <h6></h6>
-       
-                            <span>[[${employeedetaillist.empname}]]</span><br>
-                            <span>[[${employeedetaillist.deptname}]]팀</span>
-                            <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
-                        </div>
-                        <div class="card-block">
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-home"></i><span>주소: [[${employeedetaillist.address}]]</span> 
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-user-suited"></i><span>입사일: [[${employeedetaillist.hiredate}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-group-students"></i>
-                                    <span th:if="${employeedetaillist.gender} == 1">성별: 남자</span>
-                                    <span th:if="${employeedetaillist.gender} == 2">성별: 여자</span>
-                                    <span th:unless="${employeedetaillist.gender} == 1 or ${employeedetaillist.gender} == 2">성별: 없음</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-military"></i>
-                                    <span th:if="${employeedetaillist.military} == 1">병역: 군필</span>
-                                    <span th:if="${employeedetaillist.military} == 2">병역: 미필</span>
-                                    <span th:unless="${employeedetaillist.military} == 1 or ${employeedetaillist.military} == 2">병역: 없음</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-hat"></i>
-                                    <span th:if="${employeedetaillist.academic} == 0">학력: 고졸</span>
-                                    <span th:if="${employeedetaillist.academic} == 1">학력: 고졸</span>
-                                    <span th:unless="${employeedetaillist.academic} == 0 or ${employeedetaillist.academic} == 1" >학력:초대졸</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <!-- <input type="hidden" name = "empno" value ="${employeedetaillist.empno}"> -->
-                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
-                                    수정하기
-                                </button>
-	                              
+               <!-- Row start -->
+               <!-- 1-3-block row start -->
+               <!--  보기모드 -->
+	            <div class="row" >
+	                <div class="col-lg-4">
+	                    <div class="card" th:if ="${session.user}==admin" th:each="employeedetaillist:${employeedetaillist}">
+	                        <div class="user-block-2" >
+	                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
+	                            <h5></h5>
+	                            <h6></h6>
+	       
+	                            <span>[[${employeedetaillist.empname}]]</span><br>
+	                            <span>[[${employeedetaillist.deptname}]]팀</span>
+	                            <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
 	                        </div>
-	                      </div>	                     
-                
-               
-            <!-- 2-1 block end -->
-        </div>
-        <!-- Main content ends -->
-        <!-- Container-fluid ends -->
-        <div class="fixed-button">
-            <a href="#!" class="btn btn-md btn-primary">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-            </a>
-        </div>
-    </div>
-</div>
-
-			<!-- 1-3-block row start -->
-            <!--  보기모드 -->
-            <div id = "list" class="row" th:if ="${session.user}==employee and ${session.info.id}==${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
-                <div class="col-lg-4">
-                    <div class="card">
+	                        <div class="card-block">
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-home"></i><span>주소: [[${employeedetaillist.address}]]</span> 
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-user-suited"></i><span>입사일: [[${employeedetaillist.hiredate}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-group-students"></i>
+	                                    <span th:if="${employeedetaillist.gender} == 1">성별: 남자</span>
+	                                    <span th:if="${employeedetaillist.gender} == 2">성별: 여자</span>
+	                                    <span th:unless="${employeedetaillist.gender} == 1 or ${employeedetaillist.gender} == 2">성별: 없음</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-military"></i>
+	                                    <span th:if="${employeedetaillist.military} == 1">병역: 군필</span>
+	                                    <span th:if="${employeedetaillist.military} == 2">병역: 미필</span>
+	                                    <span th:unless="${employeedetaillist.military} == 1 or ${employeedetaillist.military} == 2">병역: 없음</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-hat"></i>
+	                                    <span th:if="${employeedetaillist.academic} == 0">학력: 고졸</span>
+	                                    <span th:if="${employeedetaillist.academic} == 1">학력: 고졸</span>
+	                                    <span th:unless="${employeedetaillist.academic} == 0 or ${employeedetaillist.academic} == 1" >학력:초대졸</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="text-center">
+	                                <!-- <input type="hidden" name = "empno" value ="${employeedetaillist.empno}"> -->
+	                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
+	                                    수정하기
+	                                </button>
+			                              
+		                        </div>	              
+							</div>
+						
+			          	</div>	     
+	                 </div>                             
+                  <!-- Form Control ends -->
+                  
+                  
+                  <!-- Row start -->
+               <!-- 1-3-block row start -->
+               <!--  보기모드 -->
+	            <div class="row" >
+	                <div class="col-lg-4">
+	                    <div class="card" th:if ="${session.user}==employee and ${session.info.id}==${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
+	                        <div class="user-block-2" >
+	                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
+	                            <h5></h5>
+	                            <h6></h6>
+	       
+	                            <span>[[${employeedetaillist.empname}]]</span><br>
+	                            <span>[[${employeedetaillist.deptname}]]팀</span>
+	                            <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
+	                        </div>
+	                        <div class="card-block">
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-home"></i><span>주소: [[${employeedetaillist.address}]]</span> 
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-user-suited"></i><span>입사일: [[${employeedetaillist.hiredate}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-group-students"></i>
+	                                    <span th:if="${employeedetaillist.gender} == 1">성별: 남자</span>
+	                                    <span th:if="${employeedetaillist.gender} == 2">성별: 여자</span>
+	                                    <span th:unless="${employeedetaillist.gender} == 1 or ${employeedetaillist.gender} == 2">성별: 없음</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-military"></i>
+	                                    <span th:if="${employeedetaillist.military} == 1">병역: 군필</span>
+	                                    <span th:if="${employeedetaillist.military} == 2">병역: 미필</span>
+	                                    <span th:unless="${employeedetaillist.military} == 1 or ${employeedetaillist.military} == 2">병역: 없음</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <div class="user-block-2-activities">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-hat"></i>
+	                                    <span th:if="${employeedetaillist.academic} == 0">학력: 고졸</span>
+	                                    <span th:if="${employeedetaillist.academic} == 1">학력: 고졸</span>
+	                                    <span th:unless="${employeedetaillist.academic} == 0 or ${employeedetaillist.academic} == 1" >학력:초대졸</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                            <!-- <div class="text-center">
+	                                <input type="hidden" name = "empno" value ="${employeedetaillist.empno}">
+	                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
+	                                    수정하기
+	                                </button>
+			                              
+		                        </div>	      -->         
+							</div>
+						
+			          	</div>	     
+	                 </div> 
+	                 </div>                            
+                  <!-- Form Control ends -->
+                  
+                    <!-- Row start -->
+               <!-- 1-3-block row start -->
+               <!--  보기모드 -->
+	            <div class="row" >
+	                <div class="col-lg-4">	                    
+	                  <div class="card" th:if ="${session.user}==employee and ${session.info.id}!=${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
                         <div class="user-block-2">
                             <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
                             <h5></h5>
@@ -443,113 +502,12 @@
                             <span>[[${employeedetaillist.deptname}]]팀</span>
                             <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
                         </div>
+                        
                         <div class="card-block">
                             <div class="user-block-2-activities">
                                 <div class="user-block-2-active">
                                     <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-home"></i><span>주소: [[${employeedetaillist.address}]]</span> 
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-envelope"></i><span>email: [[${employeedetaillist.email}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-user-suited"></i><span>입사일: [[${employeedetaillist.hiredate}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-group-students"></i>
-                                    <span th:if="${employeedetaillist.gender} == 1">성별: 남자</span>
-                                    <span th:if="${employeedetaillist.gender} == 2">성별: 여자</span>
-                                    <span th:unless="${employeedetaillist.gender} == 1 or ${employeedetaillist.gender} == 2">성별: 없음</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-military"></i>
-                                    <span th:if="${employeedetaillist.military} == 1">병역: 군필</span>
-                                    <span th:if="${employeedetaillist.military} == 2">병역: 미필</span>
-                                    <span th:unless="${employeedetaillist.military} == 1 or ${employeedetaillist.military} == 2">병역: 없음</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-hat"></i>
-                                    <span th:if="${employeedetaillist.academic} == 0">학력: 고졸</span>
-                                    <span th:if="${employeedetaillist.academic} == 1">학력: 고졸</span>
-                                    <span th:unless="${employeedetaillist.academic} == 0 or ${employeedetaillist.academic} == 1" >학력:초대졸</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                            </div>
-                            <!-- <div class="text-center">
-                                <input type="hidden" name = "empno" value ="${employeedetaillist.empno}">
-                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
-                                    수정하기
-                                </button>
-	                              
-	                        </div> -->
-	                      </div>	                     
-                
-               
-            <!-- 2-1 block end -->
-        </div>
-        <!-- Main content ends -->
-        <!-- Container-fluid ends -->
-        <div class="fixed-button">
-            <a href="#!" class="btn btn-md btn-primary">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-            </a>
-        </div>
-    </div>
-</div>
-
-			<!-- 1-3-block row start -->
-            <!--  보기모드 -->
-            <div id = "list" class="row" th:if ="${session.user}==employee and ${session.info.id} != ${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="user-block-2">
-                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
-                            <h5></h5>
-                            <h6></h6>
-       
-                            <span>[[${employeedetaillist.empname}]]</span><br>
-                            <span>[[${employeedetaillist.deptname}]]팀</span>
-                            <span>[[${employeedetaillist.posname}]] [[${employeedetaillist.annual}]]년차</span>
-                        </div>
-                        <div class="card-block">
-                            <div class="user-block-2-activities">
-                                <div class="user-block-2-active">
-                                    <i class="icofont icofont-phone"></i><span>전화번호: [[${employeedetaillist.phone}]]</span>
-                                    <label class="badge badge-lg badge-inverse-default"></label>
+                                  <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
                             </div>
    
@@ -568,149 +526,153 @@
                                     <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
                                 </div>
+                         
+                            
                             </div>
-                            
-                            
-                            
-                            
+                            <!-- <div class="text-center">
+                                <input type="hidden" name = "empno" value ="${employeedetaillist.empno}">
+                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
+                                    수정하기
+                                </button>
+	                              
+	                        </div> -->
 	                      </div>	                     
                 
-               
-            <!-- 2-1 block end -->
-        </div>
-        <!-- Main content ends -->
-        <!-- Container-fluid ends -->
-        <div class="fixed-button">
-            <a href="#!" class="btn btn-md btn-primary">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
-            </a>
-        </div>
-    </div>
-</div>
+							</div>
+						
+			          	</div>	     
+	                 </div>                             
+                  <!-- Form Control ends -->
+                  
+                      
+                    <div class="card">
 
-<!-- Warning Section Starts -->
-<!-- Older IE warning message -->
-<!--[if lt IE 9]>
-<div class="ie-warning">
-    <h1>Warning!!</h1>
-    <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
-    <div class="iew-container">
-        <ul class="iew-download">
-            <li>
-                <a href="http://www.google.com/chrome/">
-                    <img src="assets/images/browser/chrome.png" alt="Chrome">
-                    <div>Chrome</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.mozilla.org/en-US/firefox/new/">
-                    <img src="assets/images/browser/firefox.png" alt="Firefox">
-                    <div>Firefox</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://www.opera.com">
-                    <img src="assets/images/browser/opera.png" alt="Opera">
-                    <div>Opera</div>
-                </a>
-            </li>
-            <li>
-                <a href="https://www.apple.com/safari/">
-                    <img src="assets/images/browser/safari.png" alt="Safari">
-                    <div>Safari</div>
-                </a>
-            </li>
-            <li>
-                <a href="http://windows.microsoft.
-                      /en-us/internet-explorer/download-ie">
-                    <img src="assets/images/browser/ie.png" alt="">
-                    <div>IE (9 & above)</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <p>Sorry for the inconvenience!</p>
-</div>
-<![endif]-->
-<!-- Warning Section Ends -->
+                        <div class="card-header">
+                            <h5 class="card-header-text">Calendar</h5>
+                        </div>
+                        <div class="card-block">
+                            <!-- <h6 class="sub-title">Date Range Picker</h6> -->
+                            <input type="text" name="daterange" class="form-control" value="01/01/2015 - 01/31/2015" />
 
-<!-- Required Jqurey -->
-<script src="assets/plugins/jquery/dist/jquery.min.js"></script>
-<script src="assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="assets/plugins/tether/dist/js/tether.min.js"></script>
+                            <!--calendar start-->
+                            <div class="daterangepicker dropdown-menu">
+                            <div class="calendar left">
+                                <div class="daterangepicker_input">
+                                <input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />
+                                <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+                                   <div class="calendar-time">
+                                        <div></div>
+                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
+                                    </div>
+                                </div>
+                            <div class="calendar-table"></div>
+                            </div>
+                            <div class="calendar right">
+                                <div class="daterangepicker_input">
+                                    <input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />
+                                    <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+                                    <div class="calendar-time">
+                                        <div></div>
+                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
+                                    </div>
+                                </div>
+                            <div class="calendar-table"></div>
+                            </div>
+                            <div class="ranges">
+                                <div class="range_inputs">
+                                    <button class="applyBtn" disabled="disabled" type="button"></button>
+                                    <button class="cancelBtn" type="button"></button>
+                                </div>
+                            </div>
+                            </div>
+                            <!--calendar end-->
 
-<!-- Required Fremwork -->
-<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+                        </div>
+                    </div>
+            
 
-<!-- waves effects.js -->
-<script src="assets/plugins/Waves/waves.min.js"></script>
+                  <!-- Textual inputs starts -->
+                  <div class="col-lg-6">
+                     <!-- Basic Table starts -->
+		                  <div class="card">
+		                     <div class="card-header">
+		                        <h6 class="card-header-text">교육이수조회 페이지</h6>
+		                        <!--  <p>Basic example <code>without any additional modification</code> classes</p> -->
+		                     </div>
+		                     
+		                      <table class="table">
+                              
+                                 <thead>                                 	 
+                                    <tr>
+                                       <th></th>
+                                       <th>커리큘럼 이름</th>
+                                       <th>내용</th>
+                                       <th>강사명</th>
+                                       <th>시작일</th>
+                                       <th>종료일</th>
+                                       <th>이수율</th>
+                                       <th>Action</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr th:each="educatedlist:${educatedlist}">
+                                       <td>1</td>
+                                       <td>[[${educatedlist.currname}]]</td> 
+                                       <td>[[${educatedlist.content}]]</td> 
+                                       <td>[[${educatedlist.instructor}]]</td> 
+                                       <td>[[${educatedlist.startdate}]]</td>
+                                       <td>[[${educatedlist.enddate}]]</td>  
+                                       <td>[[${educatedlist.edustate}]]</td> 
+     								   <td></td>       								                                         
+                                    </tr>
+                                    <tr >
+                                    	                            	
+                                    </tr>
+                                                                   
+                                 </tbody>                                    
+                              </table>
+                      	
+                                 </div>
+                                 <aiid ends -->
+      </div>
+   </div>
 
-<!-- Scrollbar JS-->
-<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
-<script src="assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
 
-<!--classic JS-->
-<script src="assets/plugins/classie/classie.js"></script>
+   <!-- Required Jqurey -->
+   <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
+   <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+   <script src="/assets/plugins/tether/dist/js/tether.min.js"></script>
 
-<!-- notification -->
-<script src="assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+   <!-- Required Fremwork -->
+   <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-<!-- Date picker.js -->
-<script src="assets/plugins/datepicker/js/moment-with-locales.min.js"></script>
-<script src="assets/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+   <!-- waves effects.js -->
+   <script src="/assets/plugins/Waves/waves.min.js"></script>
 
-<!-- Select 2 js -->
-<script src="assets/plugins/select2/dist/js/select2.full.min.js"></script>
+   <!-- Scrollbar JS-->
+   <script src="/assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+   <script src="/assets/plugins/jquery.nicescroll/jquery.nicescroll.min.js"></script>
 
-<!-- Max-Length js -->
-<script src="assets/plugins/bootstrap-maxlength/src/bootstrap-maxlength.js"></script>
+   <!--classic JS-->
+   <script src="/assets/plugins/classie/classie.js"></script>
 
-<!-- Multi Select js -->
-<script src="assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.js"></script>
-<script src="assets/plugins/multiselect/js/jquery.multi-select.js"></script>
-<script type="text/javascript" src="assets/plugins/multi-select/js/jquery.quicksearch.js"></script>
+   <!-- notification -->
+   <script src="/assets/plugins/notification/js/bootstrap-growl.min.js"></script>
 
-<!-- Tags js -->
-<script src="assets/plugins/bootstrap-tagsinput/dist/bootstrap-tagsinput.js"></script>
+   <!-- Highliter js -->
+   <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
+   <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
+   <script type="text/javascript" src="/assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
+   <script type="text/javascript">
+      SyntaxHighlighter.all();
+   </script>
 
-<!-- Bootstrap Datepicker js -->
-<script type="text/javascript" src="assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker.min.js"></script>
-
-<!-- bootstrap range picker -->
-<script type="text/javascript" src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-<!-- color picker -->
-<script type="text/javascript" src="assets/plugins/spectrum/spectrum.js"></script>
-<script type="text/javascript" src="assets/plugins/jscolor/jscolor.js"></script>
-
-<!-- highlite js -->
-<script type="text/javascript" src="assets/plugins/syntaxhighlighter/scripts/shCore.js"></script>
-<script type="text/javascript" src="assets/plugins/syntaxhighlighter/scripts/shBrushJScript.js"></script>
-<script type="text/javascript" src="assets/plugins/syntaxhighlighter/scripts/shBrushXml.js"></script>
-<script type="text/javascript">SyntaxHighlighter.all();</script>
-
-<!-- custom js -->
-<script type="text/javascript" src="assets/js/main.min.js"></script>
-<script type="text/javascript" src="assets/pages/advance-form.js"></script>
-<script src="assets/js/menu.min.js"></script>
-<script type="text/javascript">
-    SyntaxHighlighter.all();
-</script>
-<script>
-	var $window = $(window);
-	var nav = $('.fixed-button');
-	$window.scroll(function(){
-	    if ($window.scrollTop() >= 200) {
-	       nav.addClass('active');
-	    }
-	    else {
-	       nav.removeClass('active');
-	    }
-	});
-</script>
-
-<script type="text/javascript">
+   <!-- custom js -->
+   <script type="text/javascript" src="/assets/js/main.min.js"></script>
+   <script type="text/javascript" src="/assets/pages/elements.js"></script>
+   <script src="/assets/js/menu.min.js"></script>
+   
+   <script type="text/javascript">
 	function updateEmployee(empno) {
 	      
 	    	 $.ajax({
@@ -722,12 +684,10 @@
 	 	    		location.href="/employeeupdate?empno="+empno;	    		
 	 	    	}
 	 	    	
-	 	    })
-	 	  
-	    
-	  
+	 	    })	 	  	    	  
 	}
 </script>
+   
 
 </body>
 

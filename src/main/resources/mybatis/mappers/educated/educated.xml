@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.metanet.jo2jo.repository.Educated.EducatedRepository">
+
+	<!-- 교육이수 조회 -->
+	<select id="selectEducated" parameterType="EmployeeDetailDto" resultType="EducatedSelectDto">
+		 <![CDATA[
+			SELECT EMPNAME AS empname,
+				   CURRNAME AS currname,
+				   CONTENT AS content,
+				   INSTRUCTOR AS instructor,
+				   STARTDATE  AS startdate,
+				   ENDDATE AS enddate,
+				   EDUSTATE AS edustate
+			FROM EMPLOYEE e ,CURRICULUM c , EDUCATED e2
+			WHERE e.EMPNO = e2.EMPNO 
+			AND c.CURRNO = e2.CURRNO 
+			AND e.EMPNO = #{empno}
+	    ]]>
+	</select>
+	
+</mapper>
