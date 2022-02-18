@@ -22,5 +22,5 @@ public interface EmployeeRepository {
     List<EmployeeDetailDto> selectEmployeeDetail(EmployeeSelectDto params);
     Integer selectEmployeeTotalCount(EmployeeSelectDto params);
     int idCheck(String id);
-
+    List<EmployeeDto> findByEmployeesRelevantDepartment(Long deptNo);
 }

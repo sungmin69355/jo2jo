@@ -9,10 +9,9 @@
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="codedthemes">
-    <meta name="keywords"
-          content=", Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="keywords" content=", Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="codedthemes">
 
     <!-- Favicon icon -->
@@ -35,13 +34,14 @@
     <link rel="stylesheet" type="text/css" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
 
     <!-- bash syntaxhighlighter css -->
-    <link type="text/css" rel="stylesheet" href="/assets/plugins/syntaxhighlighter/styles/shCoreDjango.css"/>
+    <link type="text/css" rel="stylesheet" href="/assets/plugins/syntaxhighlighter/styles/shCoreDjango.css" />
 
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
 
     <!-- Responsive.css-->
     <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
+
 
 
 </head>
@@ -66,46 +66,43 @@
             <div class="col-sm-12 p-0">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-header-text">부서상세</h5>
+                        <h5 class="card-header-text">부서업데이트 페이지</h5>
                         <div class="f-right">
                             <!-- <a href="" data-toggle="modal" data-target="#textual-input-Modal"><i class="icofont icofont-code-alt"></i></a> -->
 
                         </div>
-                        <div class="card-block" th:if="${not #lists.isEmpty( departmentDetailDto )}"
-                             th:each="departmentDetailDto:${departmentDetailDto}">
-                            <div class="form-group row">
-                                <label for="deptname" class="col-xs-2 col-form-label form-control-label">부서명</label>
-                                <div class="col-sm-10">
-                                    <p class="form-control" id="deptname">[[${departmentDetailDto.deptname}]]</p>
-                                </div>
-                            </div>
-                            <div th:if="${departmentDetailDto.getManager()}">
+                        <div class="card-block">
+                            <form action="/department/" th:attrappend="action=${deptNo}+'/update'" th:object="${departmentForm}" method="post" >
                                 <div class="form-group row">
-                                    <label for="deptname" class="col-xs-2 col-form-label form-control-label">부서장</label>
+                                    <input type="hidden" th:field="*{deptno}" th:value="${deptNo}"/>
+                                    <label for="deptname" class="col-xs-2 col-form-label form-control-label">부서명</label>
                                     <div class="col-sm-10">
-                                        <p class="form-control" id="manager">[[${departmentDetailDto.manager}]]</p>
+                                        <input class="form-control" type="text" th:field="*{deptname}" id="deptname">
+                                        <div th:each="msg : ${#fields.errors('deptname')}">
+                                            <p th:text="${msg}" style="color:red;"></p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div th:if="${departmentDetailDto.getDeptpidname()}">
+                                <div class="form-group row">
+                                    <label class="col-xs-2 col-form-label form-control-label">부서장</label>
+                                    <div class="col-xs-2 col-form-label form-group">
+                                        <select class="col-xs-2 col-form-label form-control" th:field="*{manager}">
+                                            <option th:value="${null}">없음</option>
+                                            <option th:each="findByEmployeesRelevantDepartment:${findByEmployeesRelevantDepartment}"th:value="${findByEmployeesRelevantDepartment.empno}">[[${findByEmployeesRelevantDepartment.empname}]]</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-xs-2 col-form-label form-control-label">상위부서</label>
                                     <div class="col-xs-2 col-form-label form-group">
-                                        <p class="form-control" id="deptpidname">
-                                            [[${departmentDetailDto.deptpidname}]]</p>
+                                        <select class="col-xs-2 col-form-label form-control" th:field="*{deptpid}">
+                                            <option th:value="${null}">없음</option>
+                                            <option th:each="findByAllDepartment:${findByAllDepartment}"th:value="${findByAllDepartment.deptno}">[[${findByAllDepartment.deptname}]]</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <a href="/departments">
-                                <button type="button" class="btn btn-success waves-effect waves-light">돌아가기</button>
-                            </a><br><br>
-                            <div th:if="${session.user}==admin">
-                                <a href="/department/"
-                                   th:attrappend="href=${departmentDetailDto.getDeptno()}+'/update'">
-                                    <button type="button" class="btn btn-success waves-effect waves-light">부서 업데이트
-                                    </button></a>
-                            </div>
+                                <button type="submit" class="btn btn-success waves-effect waves-light">업데이트</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -140,6 +137,7 @@
     <!-- Main content ends -->
 </div>
 <!-- Container-fluid ends -->
+
 
 
 <!-- Required Jqurey -->

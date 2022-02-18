@@ -18,5 +18,5 @@ public interface DepartmentRepository {
     DepartmentDetailDto findOneByDepartment(Long deptNo);
     Integer deleteDepartment(Long deptNo);
     List<DepartmentDto> selectDepartment();
-
+    Integer updateDepartment(DepartmentForm departmentForm);
 }
