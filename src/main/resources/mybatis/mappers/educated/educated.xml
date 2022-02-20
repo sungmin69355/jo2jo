@@ -22,5 +22,40 @@
 			AND e.EMPNO = #{empno}
 	    ]]>
 	</select>
-	
+
+	<!--수강 신청-->
+	<insert id="insertEducated" parameterType="EducatedDto">
+		INSERT
+		INTO EDUCATED (	EDUNO
+					  , EMPNO
+					  , CURRNO
+					  , EDUSTATE
+					  , ACHIEVEMENT
+					  )
+		VALUES  ( SEQ_EDUCATED_NO.NEXTVAL
+				, #{empno}
+				, #{currno}
+				, 0
+				, 0
+				)
+	</insert>
+
+	<!--수강 업데이트-->
+	<update id="updateEducated" parameterType="EducatedDto">
+		UPDATE EDUCATED
+		SET	  EDUSTATE		=  #{edustate}
+			, ACHIEVEMENT	=  100 * (SELECT 1/COSTOTALCNT
+									  FROM   CURRICULUM C
+									  WHERE  C.CURRNO = #{currno}
+									  )
+		WHERE CURRNO = #{currno}
+	</update>
+
+	<!--수강 삭제-->
+	<delete id="deleteEducated" parameterType="EducatedDto">
+		DELETE
+		FROM	EDUCATED
+		WHERE		CURRNO = #{currno}
+				OR	EMPNO = #{empno}
+	</delete>
 </mapper>

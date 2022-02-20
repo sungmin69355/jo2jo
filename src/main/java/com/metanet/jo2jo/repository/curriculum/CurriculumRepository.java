@@ -1,6 +1,7 @@
 package com.metanet.jo2jo.repository.curriculum;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
+import com.metanet.jo2jo.domain.educated.EducatedDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,4 +20,6 @@ public interface CurriculumRepository {
     List<CurriculumDto> selectCurriculum(CurriculumDto curriculumDto);  //메인페이지 조회
 
     Long updateCurriculum(CurriculumDto curriculumDto); //커리큘럼 업데이트
+
+    Long deleteCurriculum(Long currno); //삭제
 }
