@@ -57,11 +57,10 @@ public class CurriculumController {
 
     //커리큘럼 업데이트
     @GetMapping("/curriculum/{currno}/update")
-    public String curriculumUpdate(@PathVariable Long currno, HttpSession session, Model model) {
+    public String curriculumUpdate(@PathVariable Long currno, HttpSession session, Model model, @ModelAttribute("curriculumDto") CurriculumDto curriculumDto) {
         if(session.getAttribute("user").equals("admin")) {
-            CurriculumDto curriculumDto = new CurriculumDto();
             curriculumDto.setCurrno(currno);
-            model.addAttribute("curriculum",curriculumDetailService.findOneCurriculum(curriculumDto).get());
+            model.addAttribute("curriculumDto",curriculumDetailService.findOneCurriculum(curriculumDto).get());
             if(curriculumDto != null) {
                 return getModel(model, currno);
             }
@@ -70,80 +69,78 @@ public class CurriculumController {
     }
 
     @PostMapping("/curriculum/{currno}/update")
-    public String curriculumUpdateForm(@ModelAttribute CurriculumDto curriculum,
-                                       @RequestParam("daterange") String daterange,
-                                       HttpSession session, Model model, @PathVariable Long currno, @Valid CurriculumDto curriculumForm, BindingResult bindingResult){
+    public String curriculumUpdateForm(@RequestParam("daterange") String daterange,
+                                       HttpSession session, Model model, @PathVariable Long currno,
+                                       @ModelAttribute("curriculumDto") @Valid CurriculumDto curriculumDto, BindingResult bindingResult){
         if(session.getAttribute("user").equals("admin")) {
-            curriculumForm.setCurrno(currno);
-            CurriculumDto curriculumDto = curriculumUpdateService.findOneCurriculum(curriculumForm).get();
+            curriculumDto.setCurrno(currno);
             if(curriculumDto != null) {
                 //Valid 검증
                 if (bindingResult.hasErrors()) {
+                    Map map = bindingResult.getModel(); //테스트용
+                    Set keys = map.keySet();
+                    Iterator it = keys.iterator();
+                    while(it.hasNext()) {
+                        Object key = it.next();
+                        Object val = map.get(key);
+                        System.out.println("에러내용 :: "+val);
+                    }
                     return getModel(model, currno);
                 }
                 //daterange -> startdate, enddate
                 String[] dateArr = daterange.split(" - ");
 
                 //currcost 전처리
-                Long newCurrcost = curriculum.getCurrcost() * 10000L;
+                Long newCurrcost = curriculumDto.getCurrcost() * 10000L;
 
                 //deptrange 전처리
-                String newDeptrange = curriculum.getDeptrange().replace(',' ,' ');  //','을 ' '으로 치환
+                String newDeptrange = curriculumDto.getDeptrange().replace(',' ,' ');  //','을 ' '으로 치환
 
                 //educos 전처리
                 List<String> educosList = new ArrayList<>(){{
-                    add(curriculum.getEducos1());
-                    add(curriculum.getEducos2());
-                    add(curriculum.getEducos3());
-                    add(curriculum.getEducos4());
-                    add(curriculum.getEducos5());
+                    add(curriculumDto.getEducos1());
+                    add(curriculumDto.getEducos2());
+                    add(curriculumDto.getEducos3());
+                    add(curriculumDto.getEducos4());
+                    add(curriculumDto.getEducos5());
                 }} ;
-                educosList.removeAll(Arrays.asList("",null));
+                educosList.removeAll(Arrays.asList("",null));   //1번부터 빈칸 없이 채우기
                 int temp = 5-educosList.size();
-                for(int i=0; i<temp; i++){
+                for(int i=0; i<temp; i++){                      //나머지 5코스까지는 빈칸으로 채우기
                     educosList.add("");
                 }
 
-                curriculum.setStartdate(dateArr[0]);
-                curriculum.setEnddate(dateArr[1]);
-                curriculum.setCurrcost(newCurrcost);
-                curriculum.setEducos1(educosList.get(0));
-                curriculum.setEducos2(educosList.get(1));
-                curriculum.setEducos3(educosList.get(2));
-                curriculum.setEducos4(educosList.get(3));
-                curriculum.setEducos5(educosList.get(4));
+                curriculumDto.setStartdate(dateArr[0]);
+                curriculumDto.setEnddate(dateArr[1]);
+                curriculumDto.setCurrcost(newCurrcost);
+                curriculumDto.setEducos1(educosList.get(0));
+                curriculumDto.setEducos2(educosList.get(1));
+                curriculumDto.setEducos3(educosList.get(2));
+                curriculumDto.setEducos4(educosList.get(3));
+                curriculumDto.setEducos5(educosList.get(4));
 
-                curriculumUpdateService.updateCurriculum(curriculum);
-                Long newCostotalcnt = curriculumUpdateService.updateCurriculumCostotalcnt(curriculum);
-                return "curriculums";
+                Long updateCurriculum = curriculumUpdateService.updateCurriculum(curriculumDto);
+                Long newCostotalcnt = curriculumRegisterService.registerCurriculumCostotalcnt(curriculumDto);
+                return "redirect:/curriculums";
             }
         }
-
         return "redirect:/curriculums";
     }
 
     private String getModel(Model model, @PathVariable Long currno) {
-        CurriculumDto curriculum = new CurriculumDto();
-        curriculum.setCurrno(currno);
-        curriculum = curriculumUpdateService.findOneCurriculum(curriculum).get();
         List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
 
         model.addAttribute("deptList", deptList);
-        model.addAttribute("curriculumForm", new CurriculumDto());
-        model.addAttribute("curriculum", curriculum);
         return "/curriculum/curriculum-update";
     }
 
     //커리큘럼 등록
     @GetMapping("/curriculum/new")
-    String curriculumRegisterForm(HttpSession session, Model model){
+    String curriculumRegisterForm(HttpSession session, Model model, @ModelAttribute("curriculumDto") CurriculumDto curriculumDto){
         if (session.getAttribute("user").equals("admin")) {
             //최하위 부서 리스트
             List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
-
             model.addAttribute("deptList", deptList);
-            model.addAttribute("curriculumDto", new CurriculumDto());
-
             return "curriculum/curriculum-register";
         } else{
             return "redirect:/";
@@ -152,18 +149,24 @@ public class CurriculumController {
 
 
     @PostMapping("/curriculum/new")
-    String curriculumRegister(@ModelAttribute CurriculumDto curriculum,
-                              @RequestParam("daterange") String daterange,
+    String curriculumRegister(@RequestParam("daterange") String daterange,
                               HttpSession session, Model model, @ModelAttribute("curriculumDto") @Valid CurriculumDto curriculumDto,
                               BindingResult bindingResult)  throws IOException {
         if (session.getAttribute("user").equals("admin")) {
             //Valid 검증
             if (bindingResult.hasErrors()) {
+                Map map = bindingResult.getModel(); //테스트용
+                Set keys = map.keySet();
+                Iterator it = keys.iterator();
+                while(it.hasNext()) {
+                    Object key = it.next();
+                    Object val = map.get(key);
+                    System.out.println("에러내용 :: "+val);
+                }
+
                 //최하위 부서 리스트
                 List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
-
                 model.addAttribute("deptList", deptList);
-                model.addAttribute("curriculumDto", new CurriculumDto());
 
                 return "curriculum/curriculum-register";
             }
@@ -172,37 +175,37 @@ public class CurriculumController {
             String[] dateArr = daterange.split(" - ");
 
             //currcost 전처리
-            Long newCurrcost = curriculum.getCurrcost() * 10000L;
+            Long newCurrcost = curriculumDto.getCurrcost() * 10000L;
 
             //deptrange 전처리
-            String newDeptrange = curriculum.getDeptrange().replace(',' ,' ');  //','을 ' '으로 치환
+            String newDeptrange = curriculumDto.getDeptrange().replace(',' ,' ');  //','을 ' '으로 치환
 
             //educos 전처리
             List<String> educosList = new ArrayList<>(){{
-                add(curriculum.getEducos1());
-                add(curriculum.getEducos2());
-                add(curriculum.getEducos3());
-                add(curriculum.getEducos4());
-                add(curriculum.getEducos5());
+                add(curriculumDto.getEducos1());
+                add(curriculumDto.getEducos2());
+                add(curriculumDto.getEducos3());
+                add(curriculumDto.getEducos4());
+                add(curriculumDto.getEducos5());
             }} ;
-            educosList.removeAll(Arrays.asList("",null));
+            educosList.removeAll(Arrays.asList("",null));   //1번부터 빈칸 없이 채우기
             int temp = 5-educosList.size();
-            for(int i=0; i<temp; i++){
+            for(int i=0; i<temp; i++){                      //나머지 5코스까지는 빈칸으로 채우기
                 educosList.add("");
             }
 
-            curriculum.setStartdate(dateArr[0]);
-            curriculum.setEnddate(dateArr[1]);
-            curriculum.setCurrcost(newCurrcost);
-            curriculum.setEducos1(educosList.get(0));
-            curriculum.setEducos2(educosList.get(1));
-            curriculum.setEducos3(educosList.get(2));
-            curriculum.setEducos4(educosList.get(3));
-            curriculum.setEducos5(educosList.get(4));
+            curriculumDto.setStartdate(dateArr[0]);
+            curriculumDto.setEnddate(dateArr[1]);
+            curriculumDto.setCurrcost(newCurrcost);
+            curriculumDto.setEducos1(educosList.get(0));
+            curriculumDto.setEducos2(educosList.get(1));
+            curriculumDto.setEducos3(educosList.get(2));
+            curriculumDto.setEducos4(educosList.get(3));
+            curriculumDto.setEducos5(educosList.get(4));
 
-            CurriculumDto newCurriculum = curriculumRegisterService.saveCurriculum(curriculum);
+            CurriculumDto newCurriculum = curriculumRegisterService.saveCurriculum(curriculumDto);
             Long newCostotalcnt = curriculumRegisterService.registerCurriculumCostotalcnt(newCurriculum);
-            return "curriculums";
+            return "redirect:/curriculums";
         }
 
         return "redirect:/";

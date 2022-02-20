@@ -118,16 +118,16 @@
         UPDATE 	CURRICULUM
         SET 	CURRNAME    = #{currname}
               , CURRCOST    = #{currcost}
-              , STARTDATE   = #{startdate}
-              , ENDDATE     = #{enddate}
-              , DEPTRANGE   = #{deptrange}
               , CONTENT     = #{content}
-              , INSTRUCTOR  = #{instructor}
               , EDUCOS1     = #{educos1}
               , EDUCOS2     = #{educos2}
               , EDUCOS3     = #{educos3}
               , EDUCOS4     = #{educos4}
-                EDUCOS5     = #{educos5}
+              , EDUCOS5     = #{educos5}
+              , STARTDATE   = TO_DATE(#{startdate},'MM/DD/YYYY')
+              , ENDDATE     = TO_DATE(#{enddate},'MM/DD/YYYY')
+              , INSTRUCTOR  = #{instructor}
+              , DEPTRANGE   = #{deptrange}
         WHERE 	CURRNO = #{currno}
 	    ]]>
     </update>
