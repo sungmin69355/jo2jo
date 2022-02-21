@@ -26,7 +26,7 @@ public class EducatedController {
     private final CurriculumUpdateService curriculumUpdateService;
     private final EmployeeSelectService employeeSelectService;
 
-    @GetMapping("educated")
+    @GetMapping("/educated")
     String updateEdustateProgress(HttpSession session,
                                   @RequestParam("edustate") Long edustate,
                                   @RequestParam("currno") Long currno,
@@ -50,7 +50,7 @@ public class EducatedController {
                 model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
                 return "employee/employee-detail";
             }
-            return "redirect:/curriculums";
+            return "redirect:curriculums";
         }
         return "redirect:/";
     }

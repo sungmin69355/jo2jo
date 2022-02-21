@@ -377,7 +377,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3" >
-                                        <input th:if="${session.user}==employee and ${educatedState!=0}" name="edustate" id="checkbox" type="checkbox" onclick="getCheckedCnt()">
+                                        <input th:if="${session.user}==employee and ${educatedState!=0}" name="edustateCheck" id="checkbox" type="checkbox" onclick="getCheckedCnt()">
                                         <i class="icofont icofont-label"></i><span>코스 [[${num.count}]]</span>
                                     </div>
                                     <div class="col-xs-9">
@@ -468,9 +468,9 @@
                 </div>
                 <div th:if="${educatedState!=0}" class="btnArea box on" style="float: left; width: 50%;"><!--수강중인 사원-->
                     <!-- th:if="${#lists.isEmpty(educatedState)}" -->
-                    <form action="/educated" method="GET">
+                    <form action="/educated" name="emp_form" method="GET">
 <!--                        <label id='result'></label>-->
-                        <input type="hidden" th:name="edustate" th:value="${selectedElementsCnt}">
+                        <input type="hidden" th:name="edustate" value="">
                         <button type="submit" th:name="currno" th:value="${curriculum.getCurrno()}" disabled="disabled" class="order2_chks btn btn-primary waves-effect waves-light text-uppercase">수강기록</button>
                     </form>
                 </div>
@@ -609,19 +609,19 @@
 </script>
 
 <script type="text/javascript">
-	function updateCurriculum(currno) {
-	      
-	    	 $.ajax({
-	    		url:"/curriculum/curriculum-detail",
-	 	    	type:"Post",
-	 	    	contType : "html",
-	 	    	cache : false,
-	 	    	complete:function() {
-	 	    		location.href="/curriculum/update/"+currno;
-	 	    	}
-	 	    	
-	 	    })
-	}
+function updateCurriculum(currno) {
+
+         $.ajax({
+            url:"/curriculum/curriculum-detail",
+            type:"Post",
+            contType : "html",
+            cache : false,
+            complete:function() {
+                location.href="/curriculum/update/"+currno;
+            }
+
+        })
+}
 
 //체크박스 클릭시 버튼 활성화
 $(".box button").attr("disabled", true);
@@ -639,21 +639,19 @@ $(".box button").attr("disabled", true);
 //체크박스에 체크된 항목 개수 구하기
 function getCheckedCnt()  {
   // 선택된 목록 가져오기
-  const query = 'input[name="edustate"]:checked';
+  const query = 'input[name="edustateCheck"]:checked';
   const selectedElements =
       document.querySelectorAll(query);
 
   // 선택된 목록의 갯수 세기
   const selectedElementsCnt =
         selectedElements.length;
+  document.emp_form.edustate.value = selectedElementsCnt;
 
   // 출력
-  console.log(selectedElements);
-  document.getElementById('result').innerText
-    = selectedElementsCnt;
-  var test = document.getElementById('checkbox');
-
-  test.value = selectedElementsCnt;
+//  console.log(selectedElements);
+//  document.getElementById('result').innerText
+//    = selectedElementsCnt;
 }
 
 </script>
