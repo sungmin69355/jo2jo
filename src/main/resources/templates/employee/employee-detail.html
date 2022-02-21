@@ -387,7 +387,7 @@
 	                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
 	                                    수정하기
 	                                </button>
-	                                 <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
+	                                 <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:deleteEmployee('${employeedetaillist.empno}')|">
 	                                    삭제하기
 	                                </button>
 			                              
@@ -410,7 +410,7 @@
 	                 
 	                  <!--calendar end-->
 	                  <div class="row"> 
-                       <div class="card" style="width:580px; float: right;">
+                       <div class="card" style="width:700px; float: left;">
                         <div class="calendar">
                          <h6 class="card-header-text" style="text-align: center;">캘린더</h6>
 						    <div class="header">
@@ -636,7 +636,7 @@
 	   </th:block>                 
    
    
-   <script type="text/javascript">
+<script type="text/javascript">
 	function updateEmployee(empno) {
 	      
 	    	 $.ajax({
@@ -649,6 +649,22 @@
 	 	    	}
 	 	    	
 	 	    })	 	  	    	  
+	}
+</script>
+
+<script type="text/javascript">
+	function deleteEmployee(empno) {
+	      
+		 $.ajax({
+	    		url:"/employee/employee-detail",
+	 	    	type:"Post",
+	 	    	contType : "html",
+	 	    	cache : false,
+	 	    	complete:function() {
+	 	    		location.href="/employee/"+empno+"/delete"	    		
+	 	    	}
+	 	    	
+	 	    })	 	  	     	  
 	}
 </script>
    

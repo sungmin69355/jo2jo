@@ -101,4 +101,13 @@
 	    ]]>
 	    <include refid="search"></include>	
 	</select>
+
+
+	<delete id="deleteEmployeeEducated" parameterType="Long">
+		<![CDATA[
+			delete from EDUCATED where EMPNO = #{empno}
+		]]>
+	</delete>
+	
+
 </mapper>

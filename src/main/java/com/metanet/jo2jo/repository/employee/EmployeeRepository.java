@@ -23,4 +23,6 @@ public interface EmployeeRepository {
     Integer selectEmployeeTotalCount(EmployeeSelectDto params);
     int idCheck(String id);
     List<EmployeeDto> findByEmployeesRelevantDepartment(Long deptNo);
+    Integer deleteEmployee(Long enpno);
+
 }
