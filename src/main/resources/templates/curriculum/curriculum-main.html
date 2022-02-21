@@ -138,8 +138,7 @@
                                        <td>[[${index.startdate}]]</td>
                                        <td>[[${index.enddate}]]</td>
      								   <td>
-     								   <a href="/curriculum?currno="
-     								   	 	th:attrappend="href=${index.currno}">
+     								   <a th:href="@{/curriculum/{currno}(currno=${index.currno})}" th:attrappend="href=${index.currno}">
      								   	<i class="icofont icofont-ui-text-chat"></i>
      								   </a>
      								   </td>                                        

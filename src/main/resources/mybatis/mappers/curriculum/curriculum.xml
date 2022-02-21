@@ -115,10 +115,23 @@
     <!-- 커리큘럼 하나 select -->
     <select id="findOneCurriculum" parameterType="CurriculumDto" resultType="CurriculumDto">
         <![CDATA[
-        SELECT 	*
+        SELECT	  CURRNO                            CURRNO
+                , CURRNAME 							CURRNAME
+                , CURRCOST 							CURRCOST
+                , CONTENT 							CONTENT
+                , EDUCOS1							EDUCOS1
+                , EDUCOS2							EDUCOS2
+                , EDUCOS3 							EDUCOS3
+                , EDUCOS4 							EDUCOS4
+                , EDUCOS5							EDUCOS5
+                , TO_CHAR(STARTDATE, 'YYYY-MM-DD')	STARTDATE
+                , TO_CHAR(ENDDATE, 'YYYY-MM-DD') 	ENDDATE
+                , INSTRUCTOR 						INSTRUCTOR
+                , DEPTRANGE 						DEPTRANGE
+                , COSTOTALCNT                       COSTOTALCNT
         FROM 	CURRICULUM
-        WHERE   CURRNO = #{currno}
-	    ]]>
+        WHERE 	CURRNO = #{currno}
+        ]]>
     </select>
 
     <!-- 커리큘럼 등록(코스총개수) -->

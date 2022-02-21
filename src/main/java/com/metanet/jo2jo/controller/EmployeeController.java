@@ -129,6 +129,7 @@ public class EmployeeController {
     	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
     	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
         return "employee/employee-detail";
+
        
     }
     
