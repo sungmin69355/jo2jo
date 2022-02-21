@@ -1,5 +1,7 @@
 package com.metanet.jo2jo.domain.employee;
 
+import com.metanet.jo2jo.domain.commons.CommonDto;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -7,7 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class EmployeeDetailDto {
+public class EmployeeDetailDto extends CommonDto {
 	private String empname;
 	private String deptname;
 	private String posname;

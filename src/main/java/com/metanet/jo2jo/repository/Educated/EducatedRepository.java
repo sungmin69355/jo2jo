@@ -12,4 +12,5 @@ import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 @Mapper
 public interface EducatedRepository {
 	 List<EducatedSelectDto> selectEducated(EmployeeDetailDto employeeDetailDto);
+	 Integer selectEducatedTotalCount(EmployeeDetailDto employeeDetailDto);
 }

@@ -7,8 +7,8 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class EducatedSelectDto {
-	private Long empno;
+public class EducatedSelectDto  {
+	private Long rn;	
 	private Long currno;
 	private String currname;
 	private String content;
@@ -16,19 +16,21 @@ public class EducatedSelectDto {
 	private String startdate;
 	private String enddate;
 	private String edustate;
+	private Long empno;
 	
 	public EducatedSelectDto() {
 		
 	}
 
-	public EducatedSelectDto(Long empno, Long currno, String currname, String content, String instructor,
-			String startdate, String enddate) {
-		this.empno = empno;
+	public EducatedSelectDto(Long rn,Long currno, String currname, String content, String instructor,
+			String startdate, String enddate,Long empno) {
+		this.rn = rn;		
 		this.currno = currno;
 		this.currname = currname;
 		this.content = content;
 		this.instructor = instructor;
 		this.startdate = startdate;
 		this.enddate = enddate;
+		this.empno = empno;
 	}
 }

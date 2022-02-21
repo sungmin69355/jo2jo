@@ -296,15 +296,16 @@
           
                <!-- Row Starts -->
                <!-- Row end -->
-
+               <div>
                <!-- Row start -->
                <!-- 1-3-block row start -->
                <!--  보기모드 -->
 	            <div class="row" >
 	                <div class="col-lg-4">
+	                
 	                    <div class="card" th:if ="${session.user}==admin" th:each="employeedetaillist:${employeedetaillist}">
 	                        <div class="user-block-2" >
-	                            <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
+	                            <img class="img-fluid" th:src="@{/assets/images/user/} + ${employeedetaillist.photoaddr}"  alt="user-header">
 	                            <h5></h5>
 	                            <h6></h6>
 	       
@@ -384,18 +385,70 @@
 	                                    수정하기
 	                                </button>
 			                              
-		                        </div>	              
+		                        </div>		                        	              
 							</div>
-						
-			          	</div>	     
-	                 </div>                             
+													   
+			          	</div>			      			          		     
+	                 </div>
+	                  <div class="row">   
+                       <div class="card" style="width:580px; float: right;">
+
+                        <div class="card-header">
+                            <h5 class="card-header-text">Calendar</h5>
+                        </div>
+                        <div class="card-block-col-lg-4" style="float: left;">
+                            <!-- <h6 class="sub-title">Date Range Picker</h6> -->
+                            <input type="text" name="daterange" class="form-control" value="01/01/2015 - 01/31/2015" />
+
+                            <!--calendar start-->
+                            <div class="daterangepicker dropdown-menu">
+                            <div class="calendar left">
+                                <div class="daterangepicker_input">
+                                <input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />
+                                <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+                                   <div class="calendar-time">
+                                        <div></div>
+                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
+                                    </div>
+                                </div>
+                            <div class="calendar-table"></div>
+                            </div>
+                            <div class="calendar right">
+                                <div class="daterangepicker_input">
+                                    <input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />
+                                    <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
+                                    <div class="calendar-time">
+                                        <div></div>
+                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
+                                    </div>
+                                </div>
+                            <div class="calendar-table"></div>
+                            </div>
+                            <div class="ranges">
+                                <div class="range_inputs">
+                                    <button class="applyBtn" disabled="disabled" type="button"></button>
+                                    <button class="cancelBtn" type="button"></button>
+                                </div>
+                            </div>
+                            </div>
+                            <!--calendar end-->
+
+                        </div>
+                    </div>
+                 </div>
+
+                  <!-- Textual inputs starts -->
+                  <div class="col-lg-6">
+                  </div>
+				  </div>                             
                   <!-- Form Control ends -->
-                  
-                  
-                  <!-- Row start -->
+	                </div>
+	              </div>
+	             	                                                    
+               <!-- Row start -->
                <!-- 1-3-block row start -->
                <!--  보기모드 -->
-	            <div class="row" >
+	            <div class="row">
 	                <div class="col-lg-4">
 	                    <div class="card" th:if ="${session.user}==employee and ${session.info.id}==${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
 	                        <div class="user-block-2" >
@@ -490,8 +543,8 @@
                     <!-- Row start -->
                <!-- 1-3-block row start -->
                <!--  보기모드 -->
-	            <div class="row" >
-	                <div class="col-lg-4">	                    
+	            <div class="row">
+	                <div class="col-lg-4" >	                    
 	                  <div class="card" th:if ="${session.user}==employee and ${session.info.id}!=${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
                         <div class="user-block-2">
                             <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"  alt="user-header">
@@ -525,80 +578,51 @@
                                 <div class="user-block-2-active">
                                     <i class="icofont icofont-id-card"></i><span>ID: [[${employeedetaillist.id}]]</span>
                                     <label class="badge badge-lg badge-inverse-default"></label>
-                                </div>
-                         
-                            
-                            </div>
-                            <!-- <div class="text-center">
-                                <input type="hidden" name = "empno" value ="${employeedetaillist.empno}">
-                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
-                                    수정하기
-                                </button>
-	                              
-	                        </div> -->
-	                      </div>	                     
-                
-							</div>
+                                </div>                                                   
+                            </div>                           
+	                      </div>	                                     
+					   </div>
+					   
 						
-			          	</div>	     
-	                 </div>                             
+			       </div>	     
+	             </div>                             
                   <!-- Form Control ends -->
                   
-                      
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h5 class="card-header-text">Calendar</h5>
-                        </div>
-                        <div class="card-block">
-                            <!-- <h6 class="sub-title">Date Range Picker</h6> -->
-                            <input type="text" name="daterange" class="form-control" value="01/01/2015 - 01/31/2015" />
-
-                            <!--calendar start-->
-                            <div class="daterangepicker dropdown-menu">
-                            <div class="calendar left">
-                                <div class="daterangepicker_input">
-                                <input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />
-                                <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
-                                   <div class="calendar-time">
-                                        <div></div>
-                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
-                                    </div>
-                                </div>
-                            <div class="calendar-table"></div>
-                            </div>
-                            <div class="calendar right">
-                                <div class="daterangepicker_input">
-                                    <input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />
-                                    <i class="fa fa-calendar glyphicon glyphicon-calendar"></i>
-                                    <div class="calendar-time">
-                                        <div></div>
-                                        <i class="fa fa-clock-o glyphicon glyphicon-time"></i>
-                                    </div>
-                                </div>
-                            <div class="calendar-table"></div>
-                            </div>
-                            <div class="ranges">
-                                <div class="range_inputs">
-                                    <button class="applyBtn" disabled="disabled" type="button"></button>
-                                    <button class="cancelBtn" type="button"></button>
-                                </div>
-                            </div>
-                            </div>
-                            <!--calendar end-->
-
-                        </div>
-                    </div>
-            
-
-                  <!-- Textual inputs starts -->
-                  <div class="col-lg-6">
+                   
                      <!-- Basic Table starts -->
 		                  <div class="card">
 		                     <div class="card-header">
 		                        <h6 class="card-header-text">교육이수조회 페이지</h6>
 		                        <!--  <p>Basic example <code>without any additional modification</code> classes</p> -->
 		                     </div>
+		                     <div class="card-block">
+                        		<div class="row">
+                            		<div class="col-sm-12 table-responsive">
+                            			<div id="adv-search"  class="input-group">                            		
+				                     		<form id="searchForm" th:action="@{/employeedetail}" method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+														<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
+														<input type="hidden" name="currentPageNo" value="1" />
+														<input type="hidden" name="recordsPerPage" th:value="${employeeDetailDto.recordsPerPage}" />
+														<input type="hidden" name="pageSize" th:value="${employeeDetailDto.pageSize}" />
+														<div class="form-group">
+															<label for="filter">검색 유형</label>
+															<select name="searchType" class="form-control">
+																<option value="" th:selected="${#strings.isEmpty(employeeDetailDto.searchType)}">선택안함</option>
+																<option value="currname" th:selected="${#strings.equals(employeeDetailDto.searchType, 'currname')}">커리큘럼 이름</option>
+																<option value="content" th:selected="${#strings.equals(employeeDetailDto.searchType, 'content')}">내용</option>
+																<option value="instructor" th:selected="${#strings.equals(employeeDetailDto.searchType, 'instructor')}">강사명</option>
+																<option value="startdate" th:selected="${#strings.equals(employeeDetailDto.searchType, 'startdate')}">시작일</option>
+																<option value="enddate" th:selected="${#strings.equals(employeeDetailDto.searchType, 'enddate')}">종료일</option>
+																<option value="edustate" th:selected="${#strings.equals(employeeDetailDto.searchType, 'edustate')}">이수율</option>
+															</select>
+														</div>
+														<div class="form-group">
+															<label for="contain">키워드</label>
+															<input type="text" name="searchKeyword" class="form-control" th:value="${employeeDetailDto.searchKeyword}"/> 																																																							 												      		
+													  </div>
+													  <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
+											</form>													  			
+								  		</div>
 		                     
 		                      <table class="table">
                               
@@ -615,8 +639,8 @@
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    <tr th:each="educatedlist:${educatedlist}">
-                                       <td>1</td>
+                                    <tr th:if="${not #lists.isEmpty(educatedlist)}" th:each="educatedlist:${educatedlist}">
+                                       <td>[[${educatedlist.rn}]]</td>
                                        <td>[[${educatedlist.currname}]]</td> 
                                        <td>[[${educatedlist.content}]]</td> 
                                        <td>[[${educatedlist.instructor}]]</td> 
@@ -625,19 +649,51 @@
                                        <td>[[${educatedlist.edustate}]]</td> 
      								   <td></td>       								                                         
                                     </tr>
-                                    <tr >
+                                    <tr th:unless="${not #lists.isEmpty(educatedlist)}"  >
+                                    	<td colspan="5">조회된 결과가 없습니다.</td>                               	
+                                    </tr>
                                     	                            	
                                     </tr>
                                                                    
                                  </tbody>                                    
                               </table>
+                              
+                               <div class ="paging">                          
+		                           <nav aria-label="Page navigation example" th:if="${employeeDetailDto != null and employeeDetailDto.paginationInfo.totalRecordCount > 0}" th:object="${employeeDetailDto.paginationInfo}" th:with="info=${employeeDetailDto.paginationInfo}">
+									  <ul class="pagination">
+									    <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${employeeDetailDto.makeQueryString(1)} ]])">									    
+									    	<a class="page-link" href="javascript:void(0)" aria-label="Previous" aria-hidden="true">
+									    	 <<
+									    	</a>
+									    </li>
+									    <li class="page-item" th:if="*{hasPreviousPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${employeeDetailDto.makeQueryString(info.firstPage - 1)} ]])">									    
+									    	<a class="page-link" href="javascript:void(0)" aria-label="Previous" aria-hidden="true">
+									    	 Previous
+									    	</a>
+									    </li>
+									    <li class="page-item"  th:each="pageNo : *{#numbers.sequence( firstPage, lastPage )}" th:id="${pageNo == employeeDetailDto.currentPageNo} ? 'active'">
+									    	<a class="page-link" href="javascript:void(0)" th:text="${pageNo}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${employeeDetailDto.makeQueryString(pageNo)} ]])"></a>
+									    </li>
+									     <li class="page-item"  th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${employeeDetailDto.makeQueryString(info.lastPage + 1)} ]])">
+									     	<a class="page-link" href="javascript:void(0)" aria-label="NEXT" aria-hidden="true">
+									    	 NEXT
+									    	</a>
+									     </li>
+									     <li class="page-item" th:if="*{hasNextPage == true}" th:onclick="movePage([[ ${#request.requestURI} ]], [[ ${employeeDetailDto.makeQueryString(info.totalPageCount)} ]])">
+									     	<a class="page-link" href="javascript:void(0)" aria-label="NEXT" aria-hidden="true">
+									    	 >>
+									    	</a>
+									     </li>
+									  </ul>								  
+									</nav>  
+							</div>						
                       	
                                  </div>
                                  <aiid ends -->
-      </div>
-   </div>
-
-
+					      </div>
+					   </div>
+					  </div>
+	
    <!-- Required Jqurey -->
    <script src="/assets/plugins/jquery/dist/jquery.min.js"></script>
    <script src="/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
@@ -671,6 +727,43 @@
    <script type="text/javascript" src="/assets/js/main.min.js"></script>
    <script type="text/javascript" src="/assets/pages/elements.js"></script>
    <script src="/assets/js/menu.min.js"></script>
+   
+   <th:block layout:fragment="script"> 
+			<script th:inline="javascript">						
+				function movePage(uri, queryString)  {
+					location.href = uri + queryString;
+				}
+				
+				function searchBoard(form) {
+					/*[- 드롭다운이 아닌 메인 검색 키워드로 검색했을 때 -]*/
+						if (isEmpty(form) == true) {
+						var searchKeyword = document.getElementById("mainSearchKeyword");
+						if (isEmpty(searchKeyword.value) == true) {
+							alert("키워드를 입력해 주세요.");
+							searchKeyword.focus();
+							return false;
+						}
+						
+						
+
+						form = document.getElementById("searchForm");
+						form.searchKeyword.value = searchKeyword.value;
+						form.submit();
+					}
+
+					if (isEmpty(form.searchKeyword.value) == true) {
+						alert("키워드를 입력해 주세요.");
+						form.searchKeyword.focus();
+						return false;
+					}
+				}
+				/*[- end of function -]*/
+	
+
+
+			</script>
+	   </th:block>                 
+   
    
    <script type="text/javascript">
 	function updateEmployee(empno) {

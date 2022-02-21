@@ -407,7 +407,7 @@
                     <div class="card">                       
                         <form action="/employeeupdate" th:object="${employeeUpdateForm}" method="post" enctype="multipart/form-data">
 				                  <div class="user-block-2" th:each="employeedetaillist:${employeedetaillist}">
-				                        <img class="img-fluid" th:src="@{/assets/images/} + ${employeedetaillist.photoaddr}"alt="user-header">
+				                        <img class="img-fluid"  th:src="@{/assets/images/user/} + ${employeedetaillist.photoaddr}" alt="user-header">
 										<input type="file" class="form-control form-control-sm" name="file" id="file"><br>
 				                        <input type ="hidden" name="empno" th:value=${employeedetaillist.empno}>
 				                        <span>[[${employeedetaillist.empname}]]</span><br>  
