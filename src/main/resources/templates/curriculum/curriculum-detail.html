@@ -349,7 +349,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>비용</span>
+                                        <i class="icofont icofont-money"></i><span>비용</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.currcost}]]</span>
@@ -361,7 +361,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>내용</span>
+                                        <i class="icofont icofont-ui-note"></i><span>내용</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.content}]]</span>
@@ -374,7 +374,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>코스1</span>
+                                        <i class="icofont icofont-label"></i><span>코스1</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.educos1}]]</span>
@@ -386,7 +386,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>코스2</span>
+                                        <i class="icofont icofont-label"></i><span>코스2</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.educos2}]]</span>
@@ -398,7 +398,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>코스3</span>
+                                        <i class="icofont icofont-label"></i><span>코스3</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.educos3}]]</span>
@@ -410,7 +410,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>코스4</span>
+                                        <i class="icofont icofont-label"></i><span>코스4</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.educos4}]]</span>
@@ -422,7 +422,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>코스5</span>
+                                        <i class="icofont icofont-label"></i><span>코스5</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.educos5}]]</span>
@@ -434,7 +434,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>시작일</span>
+                                        <i class="icofont icofont-ui-calendar"></i><span>시작일</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.startdate}]]</span>
@@ -446,7 +446,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>종료일</span>
+                                        <i class="icofont icofont-ui-calendar"></i><span>종료일</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.enddate}]]</span>
@@ -458,7 +458,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>강사명</span>
+                                        <i class="icofont icofont-user"></i><span>강사명</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.instructor}]]</span>
@@ -470,7 +470,7 @@
                                 <div class="user-block-2-active">
                                     <div class="container">
                                     <div class="col-xs-3">
-                                        <i class="icofont icofont-phone"></i><span>부서범위</span>
+                                        <i class="icofont icofont-box"></i><span>부서범위</span>
                                     </div>
                                     <div class="col-xs-9">
                                         <span> [[${curriculum.deptrange}]]</span>
@@ -495,18 +495,24 @@
             <div class="text-center" th:if="${session.user}==admin" style="margin:0 0 15px 0;">
                 <a href="/curriculum/" th:attrappend="href=${curriculum.getCurrno()}+'/update'">
                 <button type="submit" class="btn btn-primary waves-effect waves-light text-uppercase">업데이트</button>
-                </a>
+                </a>타임리프 빈 객체
                 <a href="/curriculums" >
                     <button type="submit" class="btn btn-success waves-effect waves-light text-uppercase">돌아가기</button>
                 </a>
             </div>
             <div class="text-center" th:if="${session.user}==employee" style="margin:0 0 15px 0;">
-                <a href="/curriculums" >
-                    <button type="submit" class="btn btn-primary waves-effect waves-light text-uppercase">수강신청</button>
-                </a>
-                <a href="/curriculums" >
+                <div th:if="${educatedState==0}" style="float: left; width: 50%;">
+                <!-- th:if="${#lists.isEmpty(educatedState)}" -->
+                    <form action="/curriculum/register" method="POST">
+                        <button type="submit" th:name="currno" th:value="${curriculum.getCurrno()}" class="btn btn-primary waves-effect waves-light text-uppercase">수강신청</button>
+                    </form>
+                </div>
+                <div style="float: center;">
+                <a href="/curriculums">
                     <button type="submit" class="btn btn-success waves-effect waves-light text-uppercase">돌아가기</button>
                 </a>
+                </div>
+
             </div>
         </div>
         </div>

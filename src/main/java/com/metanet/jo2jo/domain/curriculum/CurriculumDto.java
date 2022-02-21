@@ -15,13 +15,11 @@ import javax.validation.constraints.NotNull;
 public class CurriculumDto extends CommonDto {
     private Long r; //paging을 위한 rownum
     private Long currno;
-    @NotBlank(message = "이름을 입력해주세요")
+    @NotBlank(message = "커리큘럼 이름을 입력해주세요")
     private String currname;
     @NotNull(message = "비용을 입력해주세요")
     private Long currcost;
-//    @NotNull(message = "시작일을 입력해주세요")
     private String startdate;
-//    @NotNull(message = "종료일을 입력해주세요")
     private String enddate;
     @NotEmpty(message = "부서 범위를 선택해주세요")
     private String deptrange;
@@ -29,7 +27,7 @@ public class CurriculumDto extends CommonDto {
     private String content;
     @NotBlank(message = "강사명을 입력해주세요")
     private String instructor;
-    @NotBlank(message = "코스를 한개 이상 입력해주세요")
+    @NotBlank(message = "코스1을 입력해주세요")
     private String educos1;
     private String educos2;
     private String educos3;

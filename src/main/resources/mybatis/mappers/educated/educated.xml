@@ -23,10 +23,62 @@
 	    ]]>
 	</select>
 
+	<!--수강 신청 현황 조회-->
+	<select id="selectEducatedState" parameterType="EducatedDto" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+		FROM   EDUCATED
+		WHERE      EMPNO  = #{empno}
+		       AND CURRNO = #{currno}
+		]]>
+	</select>
+
+	<!--수강 신청-->
+	<insert id="insertEducated" parameterType="EducatedDto">
+		<![CDATA[
+		INSERT
+		INTO EDUCATED (	EDUNO
+					  , EMPNO
+					  , CURRNO
+					  , EDUSTATE
+					  , ACHIEVEMENT
+					  )
+		VALUES  ( SEQ_EDUCATED_NO.NEXTVAL
+				, #{empno}
+				, #{currno}
+				, 0
+				, 0
+				)
+		]]>
+	</insert>
+
+	<!--수강 업데이트-->
+	<update id="updateEducated" parameterType="EducatedDto">
+		<![CDATA[
+		UPDATE EDUCATED
+		SET	  EDUSTATE		=  #{edustate}
+			, ACHIEVEMENT	=  100 * (SELECT 1/COSTOTALCNT
+									  FROM   CURRICULUM C
+									  WHERE  C.CURRNO = #{currno}
+									  )
+		WHERE CURRNO = #{currno}
+		]]>
+	</update>
+
+	<!--수강 삭제-->
+	<delete id="deleteEducated" parameterType="EducatedDto">
+		<![CDATA[
+		DELETE
+		FROM	EDUCATED
+		WHERE		CURRNO = #{currno}
+				OR	EMPNO  = #{empno}
+		]]>
+	</delete>
+
 	<delete id="deleteEmployeeEducated" parameterType="Long">
 		<![CDATA[
 			delete from EDUCATED where EMPNO = #{empno}
 		]]>
 	</delete>
-	
+
 </mapper>
