@@ -119,4 +119,7 @@
         UPDATE  DEPARTMENT set DEPTNAME = #{deptname}, MANAGER = #{manager, jdbcType=VARCHAR},DEPTPID = #{deptpid, jdbcType=INTEGER} where DEPTNO = #{deptno}
     </update>
 
+	<update id="deleteManagerDepartment" parameterType="Long">
+		UPDATE  DEPARTMENT set MANAGER = null where MANAGER = #{empno, jdbcType=VARCHAR}
+	</update>
 </mapper>

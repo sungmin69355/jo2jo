@@ -1,4 +1,4 @@
-package com.metanet.jo2jo.curriculumDetail;
+package com.metanet.jo2jo.curriculum.curriculumDetail;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.service.curriculum.CurriculumDetailService;

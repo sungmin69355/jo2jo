@@ -6,6 +6,7 @@ import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.repository.Educated.EducatedRepository;
 import com.metanet.jo2jo.service.educated.EducatedSelectService;
+import com.metanet.jo2jo.service.employee.EmployeeDeleteService;
 import com.metanet.jo2jo.service.employee.EmployeeRegisterService;
 import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -13,16 +14,13 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
 import com.metanet.jo2jo.service.employee.EmployeeSelectService;
 import com.metanet.jo2jo.service.employee.EmployeeUpdateService;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -45,6 +43,7 @@ public class EmployeeController {
     private final EmployeeRegisterService employeeRegisterService;
     private final EmployeeUpdateService employeeUpdateService;
     private final EducatedSelectService educatedSelectService;
+    private final EmployeeDeleteService employeeDeleteService;
 
     //사원조회 부서추가
     @GetMapping("/employees")
@@ -126,9 +125,12 @@ public class EmployeeController {
   //사원조회 상세페이지
     @GetMapping("/employeedetail")
      String employeeDetail(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("params2")EmployeeDetailDto employeeDetailDto, Model model) {    	
-    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
-    	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
-        return "employee/employee-detail";
+    	if(session.getAttribute("user") != null) {
+            model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
+            model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
+            return "employee/employee-detail";
+        }
+        return "redirect:index";
        
     }
     
@@ -194,6 +196,20 @@ public class EmployeeController {
             return "redirect:employees";
         }
         return "redirect:index";
+    }
+
+    @GetMapping("/employee/{empno}/delete")
+    String employeeDelete(HttpSession session, Model model, @PathVariable Long empno){
+        if (session.getAttribute("user").equals("admin")) {
+            //커리큘럼삭제
+            Integer deleteEmployeeEducated = employeeDeleteService.deleteEmployeeEducated(empno);
+            //사원삭제
+            Integer deleteEmployee = employeeDeleteService.deleteEmployee(empno);
+            //부서 매니저정보 있으면 삭제
+            Integer deleteManagerDepartment = employeeDeleteService.deleteManagerDepartment(empno);
+            return "redirect:/employees";
+        }
+        return "redirect:/employees";
     }
     
       

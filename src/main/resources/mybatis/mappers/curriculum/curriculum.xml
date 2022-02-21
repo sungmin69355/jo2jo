@@ -143,6 +143,26 @@
 	    ]]>
     </update>
 
+    <!-- 커리큘럼 수정 -->
+    <update id="updateCurriculum" parameterType="CurriculumDto">
+        <![CDATA[
+        UPDATE 	CURRICULUM
+        SET 	CURRNAME    = #{currname}
+              , CURRCOST    = #{currcost}
+              , CONTENT     = #{content}
+              , EDUCOS1     = #{educos1}
+              , EDUCOS2     = #{educos2}
+              , EDUCOS3     = #{educos3}
+              , EDUCOS4     = #{educos4}
+              , EDUCOS5     = #{educos5}
+              , STARTDATE   = TO_DATE(#{startdate},'MM/DD/YYYY')
+              , ENDDATE     = TO_DATE(#{enddate},'MM/DD/YYYY')
+              , INSTRUCTOR  = #{instructor}
+              , DEPTRANGE   = #{deptrange}
+        WHERE 	CURRNO = #{currno}
+	    ]]>
+    </update>
+
     <!--현재 시퀀스 번호 조회 -->
     <select id="findCurrSequenceNo" resultType="Long">
         SELECT  LAST_NUMBER
@@ -150,4 +170,15 @@
         WHERE   SEQUENCE_NAME = 'SEQ_CURRICULUM_NO'
     </select>
 
+    <!--커리큘럼 삭제-->
+    <delete id="deleteCurriculum" parameterType="Long">
+        DELETE
+        FROM	CURRICULUM C
+        WHERE	CURRNO = #{currno}
+        AND		NOT EXISTS  (
+                            SELECT *
+                            FROM	EDUCATED E
+                            WHERE	E.CURRNO = #{currno}
+                            )
+    </delete>
 </mapper>
