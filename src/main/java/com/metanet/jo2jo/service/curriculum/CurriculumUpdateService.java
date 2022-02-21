@@ -1,33 +1,27 @@
 package com.metanet.jo2jo.service.curriculum;
 
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
-import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.repository.curriculum.CurriculumRepository;
-import com.metanet.jo2jo.repository.department.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CurriculumRegisterService {
+public class CurriculumUpdateService {
     private final CurriculumRepository curriculumRepository;
-    private final DepartmentRepository departmentRepository;
-
-    public CurriculumDto saveCurriculum(CurriculumDto curriculumDto){
-        curriculumRepository.registerCurriculum(curriculumDto);
-        curriculumDto.setCurrno(curriculumRepository.findCurrSequenceNo()-1L);
-        return curriculumDto;
-    }
 
     public Optional<CurriculumDto> findOneCurriculum(CurriculumDto curriculumDto){
         return curriculumRepository.findOneCurriculum(curriculumDto);
     }
 
-    public Long registerCurriculumCostotalcnt(CurriculumDto curriculumDto){
+    public Long updateCurriculum(CurriculumDto curriculumDto){
+        return curriculumRepository.updateCurriculum(curriculumDto);
+    }
+
+    public Long updateCurriculumCostotalcnt(CurriculumDto curriculumDto){
         Long count = 0L;
         if(!StringUtils.isEmpty(curriculumRepository.findOneCurriculum(curriculumDto).get().getEducos1())){
             count++;
@@ -49,11 +43,14 @@ public class CurriculumRegisterService {
         return count;
     }
 
-    public List<DepartmentDto> findLowestDepartment(){
-        return departmentRepository.findLowestDepartment();
-    }
-
     public Long findCurrSequenceNo(){
         return curriculumRepository.findCurrSequenceNo();
     }
+
+    public CurriculumDto saveCurriculum(CurriculumDto curriculumDto){
+        curriculumRepository.registerCurriculum(curriculumDto);
+        curriculumDto.setCurrno(curriculumRepository.findCurrSequenceNo()-1L);
+        return curriculumDto;
+    }
+
 }
