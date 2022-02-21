@@ -61,8 +61,8 @@
 				   STARTDATE AS startdate,
 				   ENDDATE AS enddate,
 				   EDUSTATE AS edustate,
-				   empno			  
-				    
+				   empno,
+				   currno			  				    
 			 FROM
 			 	(
 					SELECT ROWNUM R,					 	   
@@ -72,7 +72,8 @@
 					       STARTDATE,
 					       ENDDATE,
 					       EDUSTATE,
-					       e.EMPNO AS empno		      
+					       e.EMPNO AS empno,
+					       c.CURRNO AS currno		      
 					FROM EMPLOYEE e ,CURRICULUM c , EDUCATED e2
 					WHERE e.EMPNO = e2.EMPNO 
 					AND c.CURRNO = e2.CURRNO 

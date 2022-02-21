@@ -1,5 +1,6 @@
 package com.metanet.jo2jo.controller;
 
+import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
@@ -125,7 +126,7 @@ public class EmployeeController {
    
   //사원조회 상세페이지
     @GetMapping("/employeedetail")
-     String employeeDetail(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("employeeDetailDto")EmployeeDetailDto employeeDetailDto, Model model) {    	
+     String employeeDetail(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("employeeDetailDto")EmployeeDetailDto employeeDetailDto,Model model) {    	
     	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
     	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
         return "employee/employee-detail";
