@@ -20,8 +20,8 @@ public class EducatedInsertServiceTest {
     public void insertEducatedTest(){
         //given
         EducatedDto educatedDto = new EducatedDto();
-        educatedDto.setEmpno(2004L);
-        educatedDto.setCurrno(2058L);
+        educatedDto.setEmpno(501L);
+        educatedDto.setCurrno(1001L);
 
         //when
         educatedInsertService.signUpForClass(educatedDto);
