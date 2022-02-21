@@ -21,4 +21,8 @@ public class EducatedDto {
         this.edustate = edustate;
         this.achievement = achievement;
     }
+
+    public EducatedDto() {
+
+    }
 }

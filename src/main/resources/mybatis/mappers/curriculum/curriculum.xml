@@ -143,7 +143,7 @@
 	    ]]>
     </update>
 
-    <!-- 커리큘럼 등록(코스총개수) -->
+    <!-- 커리큘럼 수정 -->
     <update id="updateCurriculum" parameterType="CurriculumDto">
         <![CDATA[
         UPDATE 	CURRICULUM

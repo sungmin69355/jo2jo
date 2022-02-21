@@ -42,4 +42,15 @@ public class CurriculumUpdateService {
         curriculumRepository.registerCurriculumCostotalcnt(curriculumDto);
         return count;
     }
+
+    public Long findCurrSequenceNo(){
+        return curriculumRepository.findCurrSequenceNo();
+    }
+
+    public CurriculumDto saveCurriculum(CurriculumDto curriculumDto){
+        curriculumRepository.registerCurriculum(curriculumDto);
+        curriculumDto.setCurrno(curriculumRepository.findCurrSequenceNo()-1L);
+        return curriculumDto;
+    }
+
 }

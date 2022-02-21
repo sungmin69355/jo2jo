@@ -1,6 +1,7 @@
 package com.metanet.jo2jo.repository.Educated;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.metanet.jo2jo.domain.educated.EducatedDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +15,7 @@ import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 public interface EducatedRepository {
 	List<EducatedSelectDto> selectEducated(EmployeeDetailDto employeeDetailDto);
 
+	int selectEducatedState(EducatedDto educatedDto);
 	Long insertEducated(EducatedDto educatedDto); //수강신청
 	Long updateEducated(EducatedDto educatedDto); //수강업데이트
 

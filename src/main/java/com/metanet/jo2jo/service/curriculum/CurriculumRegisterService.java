@@ -20,7 +20,7 @@ public class CurriculumRegisterService {
     public CurriculumDto saveCurriculum(CurriculumDto curriculumDto){
         curriculumRepository.registerCurriculum(curriculumDto);
         curriculumDto.setCurrno(curriculumRepository.findCurrSequenceNo()-1L);
-        return curriculumDto;   //커리큘럼 이름 필요
+        return curriculumDto;
     }
 
     public Optional<CurriculumDto> findOneCurriculum(CurriculumDto curriculumDto){

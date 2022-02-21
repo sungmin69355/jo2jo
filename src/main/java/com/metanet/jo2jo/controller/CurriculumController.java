@@ -3,6 +3,8 @@ package com.metanet.jo2jo.controller;
 import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 
+import com.metanet.jo2jo.domain.educated.EducatedDto;
+import com.metanet.jo2jo.domain.employee.EmployeeDto;
 import com.metanet.jo2jo.service.curriculum.CurriculumDetailService;
 
 import com.metanet.jo2jo.service.curriculum.CurriculumRegisterService;
@@ -10,6 +12,7 @@ import com.metanet.jo2jo.service.curriculum.CurriculumSelectService;
 
 
 import com.metanet.jo2jo.service.curriculum.CurriculumUpdateService;
+import com.metanet.jo2jo.service.educated.EducatedInsertService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,7 @@ public class CurriculumController {
     private final CurriculumSelectService curriculumSelectService;
     private final CurriculumDetailService curriculumDetailService;
     private final CurriculumUpdateService curriculumUpdateService;
+    private final EducatedInsertService educatedInsertService;
 
     //커리큘럼 메인
     @GetMapping("/curriculums")
@@ -47,9 +51,15 @@ public class CurriculumController {
     public String curriculumDetail(@PathVariable Long currno, @ModelAttribute CurriculumDto curriculum, HttpSession session, Model model) {
         if(session.getAttribute("user") != null){
             curriculum.setCurrno(currno);
-            System.out.println(curriculumDetailService.findOneCurriculum(curriculum).toString());
-            model.addAttribute("curriculum",curriculumDetailService.findOneCurriculum(curriculum).get());
 
+            EducatedDto educatedDto = new EducatedDto();
+            educatedDto.setCurrno(currno);
+            educatedDto.setEmpno(((EmployeeDto)(session.getAttribute("info"))).getEmpno());
+
+            System.out.println(curriculumDetailService.findOneCurriculum(curriculum).toString());
+
+            model.addAttribute("curriculum",curriculumDetailService.findOneCurriculum(curriculum).get());
+            model.addAttribute("educatedState", educatedInsertService.findCurriculumState(educatedDto));
             return "curriculum/curriculum-detail";
         }
         return "redirect:/";
@@ -211,5 +221,22 @@ public class CurriculumController {
         return "redirect:/";
     }
 
+    //사원 커리큘럼 신청
+    @PostMapping("/curriculum/register")
+    String curriculumSignUp(HttpSession session,
+                            @RequestParam("currno") Long currno,
+                            Model model){
+        if (session.getAttribute("user").equals("employee")) {
+            EducatedDto educatedDto = new EducatedDto();
+            educatedDto.setCurrno(currno);
+            Long empno = ((EmployeeDto)(session.getAttribute("info"))).getEmpno();
+            educatedDto.setEmpno(empno);
+
+            educatedInsertService.signUpForClass(educatedDto);
+            model.addAttribute("currno");
+            return "redirect:/curriculum/{currno}";
+        }
+        return "redirect:/";
+    }
 
 }
