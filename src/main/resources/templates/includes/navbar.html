@@ -46,9 +46,9 @@
 </head>
 <body>
 <aside class="main-sidebar hidden-print " th:fragment="navbar">
-    <section class="sidebar" id="sidebar-scroll">
-         <!-- Sidebar Menu-->
-        <ul class="sidebar-menu" th:if=${session.user}==admin>
+    <section class="sidebar" id="sidebar-scroll" >
+        <!-- Sidebar Menu-->
+        <ul class="sidebar-menu" th:if="${session.user}==admin">
             <li class="nav-level"><a class="waves-effect waves-dark" href="/organizaition"><i class="icofont icofont-company"></i>조직도<i class="icon-arrow-down"></i></a>
             
             	<ul class="treeview-menu">
@@ -85,8 +85,9 @@
                
 		                <li class="treeview"><a class="waves-effect waves-dark" href="/curriculums"><i class="icon-chart"></i><span> 커리큘럼조회</span></a>
 		            	</li>            
-			            <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-chart"></i><span> 커리큘럼 이수기록</span></a>
-			            </li>
+			            <li class="treeview">
+			            
+			            
 		        	</ul>                     
 		     	 </li>
 	         </ul>
@@ -130,14 +131,16 @@
                
 		                <li class="treeview"><a class="waves-effect waves-dark" href="/curriculums"><i class="icon-chart"></i><span> 커리큘럼 조회</span></a>
 		            	</li>            
-			            <li class="treeview"><a class="waves-effect waves-dark" href="#!"><i class="icon-chart"></i><span> 커리큘럼 이수 기록</span></a>			               
+			            <th:block th:if="${session.info.empno } != null"><li class="treeview"><a class="waves-effect waves-dark" href="/employeedetail?empno=" th:attrappend="href=${session.info.empno}"><i class="icon-chart"></i><span> 커리큘럼 이수 기록</span></a>			               
 			            </li>
+			            </th:block>
 		        	</ul>                     
 		     	 </li>
-	         </ul>                              
+	         </ul>                             
     </section>
+   
 </aside>
-
+ </div> 
 </body>
 </html>
 </html>

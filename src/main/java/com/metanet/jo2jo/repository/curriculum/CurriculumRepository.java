@@ -11,13 +11,13 @@ import java.util.Optional;
 @Repository
 @Mapper
 public interface CurriculumRepository {
-    Long registerCurriculum(CurriculumDto curriculumDto);
-    Optional<CurriculumDto> findOneCurriculum(CurriculumDto curriculumDto);
-    int registerCurriculumCostotalcnt(CurriculumDto curriculumDto); //코스 총 개수 costotalcnt 등록
-    Long findCurrSequenceNo();
+	 	Long registerCurriculum(CurriculumDto curriculumDto);
+	    Optional<CurriculumDto> findOneCurriculum(CurriculumDto curriculumDto);
+	    int registerCurriculumCostotalcnt(CurriculumDto curriculumDto); //코스 총 개수 costotalcnt 등록
+	    Long findCurrSequenceNo();
 
-    Integer selectCurriculumTotalCount(CurriculumDto curriculumDto);    //커리큘럼 토탈카운트
-    List<CurriculumDto> selectCurriculum(CurriculumDto curriculumDto);  //메인페이지 조회
-    Long updateCurriculum(CurriculumDto curriculumDto); //커리큘럼 업데이트
-    Long deleteCurriculum(Long currno); //삭제
+	    Integer selectCurriculumTotalCount(CurriculumDto curriculumDto);    //커리큘럼 토탈카운트
+	    List<CurriculumDto> selectCurriculum(CurriculumDto curriculumDto);  //메인페이지 조회
+	    Long updateCurriculum(CurriculumDto curriculumDto); //커리큘럼 업데이트
+	    Long deleteCurriculum(Long currno); //삭제
 }

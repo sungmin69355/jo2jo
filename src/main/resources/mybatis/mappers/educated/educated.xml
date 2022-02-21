@@ -6,21 +6,100 @@
 
 <mapper namespace="com.metanet.jo2jo.repository.Educated.EducatedRepository">
 
+	<!-- Oracle 검색 -->
+	<sql id="search">
+		<!-- 검색 키워드가 있을 때 -->
+		<if test="searchKeyword != null and searchType != ''">
+			<choose>
+				<!-- 검색 유형이 있을 때 -->
+				<when test="searchType != null and searchType != ''">
+					<choose>
+						<when test="'currname'.equals(searchType)">						
+							AND CURRNAME LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'content'.equals(searchType)">
+							AND CONTENT LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'instructor'.equals(searchType)">
+							AND INSTRUCTOR LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'startdate'.equals(searchType)">
+							AND STARTDATE LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						<when test="'enddate'.equals(searchType)">
+							AND ENDDATE LIKE('%' || #{searchKeyword} || '%')
+						</when>
+						
+						<when test="'edustate'.equals(searchType)">
+							AND EDUSTATE LIKE('%' || #{searchKeyword} || '%')
+						</when>
+					</choose>
+				</when>
+				<!-- 검색 유형이 없을 때 -->
+				<otherwise>
+					AND
+						(
+						  CURRNAME LIKE('%' || #{searchKeyword} || '%')
+						  OR CONTENT LIKE('%' || #{searchKeyword} || '%')
+						  OR INSTRUCTOR LIKE('%' || #{searchKeyword} || '%')
+						  OR STARTDATE = LIKE('%' || #{searchKeyword} || '%')
+						  OR ENDDATE  LIKE('%' || #{searchKeyword} || '%')
+						  OR EDUSTATE  LIKE('%' || #{searchKeyword} || '%')
+						)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+
 	<!-- 교육이수 조회 -->
 	<select id="selectEducated" parameterType="EmployeeDetailDto" resultType="EducatedSelectDto">
 		 <![CDATA[
-			SELECT EMPNAME AS empname,
+			SELECT R AS rn,
 				   CURRNAME AS currname,
-				   CONTENT AS content,
+				   CONTENT  AS content,
 				   INSTRUCTOR AS instructor,
-				   STARTDATE  AS startdate,
+				   STARTDATE AS startdate,
 				   ENDDATE AS enddate,
-				   EDUSTATE AS edustate
+				   EDUSTATE AS edustate,
+				   empno,
+				   currno			  				    
+			 FROM
+			 	(
+					SELECT ROWNUM R,					 	   
+					       CURRNAME,
+					       CONTENT, 
+					       INSTRUCTOR,
+					       STARTDATE,
+					       ENDDATE,
+					       EDUSTATE,
+					       e.EMPNO AS empno,
+					       c.CURRNO AS currno		      
+					FROM EMPLOYEE e ,CURRICULUM c , EDUCATED e2
+					WHERE e.EMPNO = e2.EMPNO 
+					AND c.CURRNO = e2.CURRNO 
+					AND e.EMPNO = #{empno}
+					AND ROWNUM <= #{endPage}
+		]]>
+					<if test="searchKeyword != null">
+					  <include refid="search"></include>
+					</if>
+				<![CDATA[
+				
+				)
+				WHERE R >= #{startPage}
+	    		]]>
+	</select>
+	
+	<!-- 교육이수 조회 총개수 -->
+	<select id = "selectEducatedTotalCount" parameterType="EmployeeDetailDto" resultType="Integer">
+		 <![CDATA[
+			SELECT count(*)
 			FROM EMPLOYEE e ,CURRICULUM c , EDUCATED e2
 			WHERE e.EMPNO = e2.EMPNO 
 			AND c.CURRNO = e2.CURRNO 
 			AND e.EMPNO = #{empno}
 	    ]]>
+	    <include refid="search"></include>	
 	</select>
 
 	<!--수강 신청 현황 조회-->
@@ -75,10 +154,13 @@
 		]]>
 	</delete>
 
+
 	<delete id="deleteEmployeeEducated" parameterType="Long">
 		<![CDATA[
 			delete from EDUCATED where EMPNO = #{empno}
 		]]>
 	</delete>
+
+	
 
 </mapper>
