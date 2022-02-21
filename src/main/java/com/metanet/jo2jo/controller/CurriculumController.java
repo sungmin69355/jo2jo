@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -225,7 +226,8 @@ public class CurriculumController {
     @PostMapping("/curriculum/register")
     String curriculumSignUp(HttpSession session,
                             @RequestParam("currno") Long currno,
-                            Model model){
+                            Model model,
+                            RedirectAttributes redirectAttributes){
         if (session.getAttribute("user").equals("employee")) {
             EducatedDto educatedDto = new EducatedDto();
             educatedDto.setCurrno(currno);
@@ -233,8 +235,14 @@ public class CurriculumController {
             educatedDto.setEmpno(empno);
 
             educatedInsertService.signUpForClass(educatedDto);
-            model.addAttribute("currno");
+            redirectAttributes.addAttribute("currno", currno);
             return "redirect:/curriculum/{currno}";
+
+//            model.addAttribute("currno", currno); //redirect 안쓰고 하는 원래 방법
+//            CurriculumDto curriculum = new CurriculumDto();
+//            curriculum.setCurrno(currno);
+//            model.addAttribute("curriculum",curriculumDetailService.findOneCurriculum(curriculum).get());
+//            return "curriculum/curriculum-detail";
         }
         return "redirect:/";
     }
