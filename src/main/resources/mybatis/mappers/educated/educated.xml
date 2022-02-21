@@ -102,8 +102,6 @@
 	    <include refid="search"></include>	
 	</select>
 
-<<<<<<< HEAD
-=======
 	<!--수강 신청 현황 조회-->
 	<select id="selectEducatedState" parameterType="EducatedDto" resultType="int">
 		<![CDATA[
@@ -155,16 +153,14 @@
 				OR	EMPNO  = #{empno}
 		]]>
 	</delete>
->>>>>>> upstream/develop
+
 
 	<delete id="deleteEmployeeEducated" parameterType="Long">
 		<![CDATA[
 			delete from EDUCATED where EMPNO = #{empno}
 		]]>
 	</delete>
-<<<<<<< HEAD
+
 	
-=======
->>>>>>> upstream/develop
 
 </mapper>
