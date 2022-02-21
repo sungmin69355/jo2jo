@@ -13,6 +13,7 @@ import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 @Repository
 @Mapper
 public interface EducatedRepository {
+
 	List<EducatedSelectDto> selectEducated(EmployeeDetailDto employeeDetailDto);
 
 	int selectEducatedState(EducatedDto educatedDto);
@@ -20,4 +21,8 @@ public interface EducatedRepository {
 	Long updateEducated(EducatedDto educatedDto); //수강업데이트
 
 	Long deleteEducated(EducatedDto educatedDto); //수강 삭제(사원 삭제, 커리큘럼 삭제 하기 전)
+
+  List<EducatedSelectDto> selectEducated(EmployeeDetailDto employeeDetailDto);
+  Integer deleteEmployeeEducated(Long enpno);
+
 }

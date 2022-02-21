@@ -23,5 +23,6 @@ public interface DepartmentRepository {
     Integer deleteDepartment(Long deptNo);
     List<DepartmentDto> selectDepartment();
     Integer updateDepartment(DepartmentForm departmentForm);
+    Integer deleteManagerDepartment(Long empno);
 
 }

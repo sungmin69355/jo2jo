@@ -181,4 +181,8 @@
 		SELECT COUNT(ID) FROM EMPLOYEE where ID = #{id}
 	</select>
 
+	<delete id="deleteEmployee" parameterType="Long">
+		delete from EMPLOYEE where EMPNO = #{empno}
+	</delete>
+
 </mapper>
