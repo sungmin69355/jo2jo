@@ -11,5 +11,7 @@ import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 @Repository
 @Mapper
 public interface EducatedRepository {
-	 List<EducatedSelectDto> selectEducated(EmployeeDetailDto employeeDetailDto);
+    List<EducatedSelectDto> selectEducated(EmployeeDetailDto employeeDetailDto);
+    Integer deleteEmployeeEducated(Long enpno);
+
 }

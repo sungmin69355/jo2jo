@@ -22,5 +22,11 @@
 			AND e.EMPNO = #{empno}
 	    ]]>
 	</select>
+
+	<delete id="deleteEmployeeEducated" parameterType="Long">
+		<![CDATA[
+			delete from EDUCATED where EMPNO = #{empno}
+		]]>
+	</delete>
 	
 </mapper>
