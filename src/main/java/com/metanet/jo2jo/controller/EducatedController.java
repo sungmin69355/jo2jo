@@ -31,8 +31,11 @@ public class EducatedController {
                                   @RequestParam("edustate") Long edustate,
                                   @RequestParam("currno") Long currno,
                                   Model model){
+        System.out.println("들어오긴 들어왔니?????1\n");
         if(session.getAttribute("user")!=null){
-            if(session.getAttribute("employee").equals("employee")) {
+            System.out.println("들어오긴 들어왔니?????2\n");
+            if(session.getAttribute("user").equals("employee")) {
+                System.out.println("들어오긴 들어왔니?????3\n");
                 EducatedDto educatedDto = new EducatedDto();
                 educatedDto.setEdustate(edustate);
                 educatedDto.setCurrno(currno);

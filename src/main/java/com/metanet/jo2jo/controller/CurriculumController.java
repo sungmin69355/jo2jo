@@ -6,13 +6,10 @@ import com.metanet.jo2jo.domain.department.DepartmentDto;
 
 import com.metanet.jo2jo.domain.educated.EducatedDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDto;
-import com.metanet.jo2jo.service.curriculum.CurriculumDetailService;
-
-import com.metanet.jo2jo.service.curriculum.CurriculumRegisterService;
-import com.metanet.jo2jo.service.curriculum.CurriculumSelectService;
+import com.metanet.jo2jo.service.curriculum.*;
 
 
-import com.metanet.jo2jo.service.curriculum.CurriculumUpdateService;
+import com.metanet.jo2jo.service.educated.EducatedDeleteService;
 import com.metanet.jo2jo.service.educated.EducatedInsertService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +32,9 @@ public class CurriculumController {
     private final CurriculumSelectService curriculumSelectService;
     private final CurriculumDetailService curriculumDetailService;
     private final CurriculumUpdateService curriculumUpdateService;
+    private final CurriculumDeleteService curriculumDeleteService;
     private final EducatedInsertService educatedInsertService;
+    private final EducatedDeleteService educatedDeleteService;
 
     //커리큘럼 메인
     @GetMapping("/curriculums")
@@ -59,7 +58,7 @@ public class CurriculumController {
 
             CurriculumDto curriculumOne = curriculumDetailService.findOneCurriculum(curriculum).get();
             List<String> cosList = cosList(curriculumOne);
-            System.out.println(cosList.toString());
+            System.out.println("수강 코스 리스트:"+cosList.toString());
 
             if(session.getAttribute("user").equals("employee")){
                 educatedDto.setEmpno(((EmployeeDto)(session.getAttribute("info"))).getEmpno());
@@ -256,4 +255,20 @@ public class CurriculumController {
         return "redirect:/";
     }
 
+    //커리큘럼 삭제
+    @GetMapping("/curriculum/{currno}/delete")
+    public String curriculumDelete(@PathVariable Long currno, HttpSession session) {
+        if(session.getAttribute("user").equals("admin")) {
+            EducatedDto educatedDto = new EducatedDto();
+            educatedDto.setCurrno(currno);
+            educatedDto.setEmpno(-1L);
+
+            //이수 내역 삭제
+            educatedDeleteService.deleteEducated(educatedDto);
+            //커리큘럼 삭제
+            curriculumDeleteService.deleteCurriculum(currno);
+            return "redirect:/curriculums";
+        }
+        return "redirect:/";
+    }
 }

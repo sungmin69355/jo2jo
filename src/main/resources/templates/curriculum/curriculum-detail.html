@@ -455,6 +455,20 @@
                 <a href="/curriculum/" th:attrappend="href=${curriculum.getCurrno()}+'/update'">
                     <button type="submit" class="btn btn-primary waves-effect waves-light text-uppercase">업데이트</button>
                 </a>
+                <button type="submit" value="confirm" onclick="func_confirm()" return false; class="btn btn-danger waves-effect waves-light text-uppercase">삭제</button>
+                    <script type="text/javascript" th:inline="javascript">
+                      function func_confirm() {
+                          if(confirm('커리큘럼을 삭제하면 관련 이수 내역도 모두 삭제됩니다.')) {
+                              location.href="/curriculum/[[ ${curriculum.getCurrno()} ]]/delete"
+                          }else{
+                              return false;
+                          }
+                      }
+                      $( "a" ).click(function( event ) {
+                          event.preventDefault();
+
+                      });
+                    </script>
                 <a href="/curriculums" >
                     <button type="submit" class="btn btn-success waves-effect waves-light text-uppercase">돌아가기</button>
                 </a>
@@ -481,6 +495,7 @@
                 </div>
 
             </div>
+
         </div>
         </div>
     </div>
@@ -607,7 +622,6 @@
 	    }
 	});
 </script>
-
 <script type="text/javascript">
 function updateCurriculum(currno) {
 
@@ -646,7 +660,8 @@ function getCheckedCnt()  {
   // 선택된 목록의 갯수 세기
   const selectedElementsCnt =
         selectedElements.length;
-  document.emp_form.edustate.value = selectedElementsCnt;
+  document.emp_form.edustate.value = selectedElementsCnt;   //emp_form에 값 전달
+  console.log('selectCnt',selectedElementsCnt);
 
   // 출력
 //  console.log(selectedElements);
@@ -655,7 +670,6 @@ function getCheckedCnt()  {
 }
 
 </script>
-
 </body>
 
 </html>
