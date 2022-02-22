@@ -131,7 +131,7 @@
                
 		                <li class="treeview"><a class="waves-effect waves-dark" href="/curriculums"><i class="icon-chart"></i><span> 커리큘럼 조회</span></a>
 		            	</li>            
-			            <th:block th:if="${session.info.empno } != null"><li class="treeview"><a class="waves-effect waves-dark" href="/employeedetail?empno=" th:attrappend="href=${session.info.empno}"><i class="icon-chart"></i><span> 커리큘럼 이수 기록</span></a>			               
+			            <th:block th:if="${session.info.empno } != null"><li class="treeview"><a class="waves-effect waves-dark" href="/employee/" th:attrappend="href=${session.info.empno}"><i class="icon-chart"></i><span> 커리큘럼 이수 기록</span></a>			               
 			            </li>
 			            </th:block>
 		        	</ul>                     
