@@ -49,12 +49,13 @@ public class EmployeeController {
     //사원조회 부서추가
     @GetMapping("/employees")
     String employeeMain(HttpSession session, @ModelAttribute("params")  EmployeeSelectDto params, Model model) {
+        System.out.println(session.getAttribute("user"));
     	if(session.getAttribute("user").equals("admin") || session.getAttribute("user").equals("employee")) {
     		 model.addAttribute("employeelist", employeeService.employeeList(params));
     	        return "employee/employee-main";
     	} else {
     		  session.invalidate();
-    		  return "redirect:index";
+    		  return "redirect:/";
     	}
        
 
