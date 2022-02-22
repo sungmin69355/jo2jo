@@ -107,6 +107,15 @@
                 }
             });
         };
+        function setThumbnail(event) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                document.querySelector("div#image_container").appendChild(img);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
     </script>
 </head>
 
@@ -397,8 +406,8 @@
                 <div class="card">
                     <form action="/employee" th:object="${employeeRegisterForm}" method="post" enctype="multipart/form-data">
                     <div class="user-block-2">
-                        <img class="img-fluid" src="/assets/images/widget/user-1.png" alt="user-header">
-                        <input type="file" class="form-control form-control-sm" style="margin:0 auto; width: 20%" name="file" id="file"><br>
+                        <div class="img-fluid" alt="user-header" id="image_container"></div>
+                        <input type="file" class="form-control form-control-sm" style="margin:0 auto; width: 20%" name="file" id="file" onchange="setThumbnail(event);"><br>
                         <h5>부서 : <select class="form-select form-select-lg mb-3" th:field="*{deptno}">
                             <option th:each="findByAllDepartment:${findByAllDepartment}"th:value="${findByAllDepartment.deptno}">[[${findByAllDepartment.deptname}]]</option>
                         </select>
