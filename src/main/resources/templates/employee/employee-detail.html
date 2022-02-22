@@ -470,9 +470,9 @@
                         		<div class="row">
                             		<div class="col-sm-12 table-responsive">
                             			<div id="adv-search"  class="input-group">                            		
-				                     		<form id="searchForm" th:action="@{/employee/${employeeDetailDto.empno}}"  method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+				                     		<form id="searchForm" th:action="@{/employee/} + ${employeeDetailDto.empno}"   method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
 														<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
-														<input type="hidden" name="empno" th:value="${employeeDetailDto.empno}" />
+														
 														<input type="hidden" name="currentPageNo" value="1" />
 														<input type="hidden" name="recordsPerPage" th:value="${employeeDetailDto.recordsPerPage}" />
 														<input type="hidden" name="pageSize" th:value="${employeeDetailDto.pageSize}" />
