@@ -72,7 +72,7 @@
             ]]>
     </select>
      <!-- 부서조회 총개수 -->
-     <select id="selectDepartmentTotalCount" resultType ="Integer">
+     <select id="selectDepartmentTotalCount" parameterType="DepartmentSelectDto" resultType ="Integer">
 		  <![CDATA[	
 			 SELECT count(*) 
 			 FROM DEPARTMENT d LEFT OUTER JOIN  EMPLOYEE e

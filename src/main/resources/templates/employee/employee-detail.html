@@ -46,7 +46,15 @@
 
    <!-- Responsive.css-->
    <link rel="stylesheet" type="text/css" href="/assets/css/responsive.css">
-
+	<style>
+	#bioverflow{
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 35em;
+		height: 30px;
+	}
+	</style>
 
 
 </head>
@@ -383,7 +391,7 @@
 	                                </div>
 	                            </div>
 	                            <div class="text-center" th:if="${session.user}==admin">
-	                                <!-- <input type="hidden" name = "empno" value ="${employeedetaillist.empno}"> -->
+	                                <!-- <input type="hidden" name ="empno" value ="${employeedetaillist.empno}"> -->
 	                                <button type="button" class="btn btn-primary waves-effect waves-light text-uppercase" th:onclick="|javascript:updateEmployee('${employeedetaillist.empno}')|">
 	                                    수정하기
 	                                </button>
@@ -453,7 +461,7 @@
                   
                    
                      <!-- Basic Table starts -->
-		                  <div class="card">
+		                  <div class="card" style="width:1350px; float: left;">
 		                     <div class="card-header">
 		                        <h6 class="card-header-text">교육이수조회 페이지</h6>
 		                        <!--  <p>Basic example <code>without any additional modification</code> classes</p> -->
@@ -462,30 +470,34 @@
                         		<div class="row">
                             		<div class="col-sm-12 table-responsive">
                             			<div id="adv-search"  class="input-group">                            		
-				                     		<form id="searchForm" th:action="@{/employeedetail}" method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
+				                     		<form id="searchForm" th:action="@{/employee/} + ${employeeDetailDto.empno}"   method="get" th:onsubmit="return searchBoard(this)" class="form-horizontal" role="form">
 														<!-- /* 현재 페이지 번호, 페이지당 출력할 데이터 개수, 페이지 하단에 출력할 페이지 개수 Hidden 파라미터 */ -->
-														<input type="hidden" name="empno" th:value="${employeeDetailDto.empno}" />
+														
 														<input type="hidden" name="currentPageNo" value="1" />
 														<input type="hidden" name="recordsPerPage" th:value="${employeeDetailDto.recordsPerPage}" />
 														<input type="hidden" name="pageSize" th:value="${employeeDetailDto.pageSize}" />
 														
 														<div class="form-group">
-															<label for="filter">검색 유형</label>
-															<select name="searchType" class="form-control">
+															<label for="filter" style="float: left;">검색 유형&nbsp;&nbsp;</label>
+															<select name="searchType" class="form-control" style="width:100px;">
 																<option value="" th:selected="${#strings.isEmpty(employeeDetailDto.searchType)}">선택안함</option>
 																<option value="currname" th:selected="${#strings.equals(employeeDetailDto.searchType, 'currname')}">커리큘럼 이름</option>
 																<option value="content" th:selected="${#strings.equals(employeeDetailDto.searchType, 'content')}">내용</option>
 																<option value="instructor" th:selected="${#strings.equals(employeeDetailDto.searchType, 'instructor')}">강사명</option>
 																<option value="startdate" th:selected="${#strings.equals(employeeDetailDto.searchType, 'startdate')}">시작일</option>
 																<option value="enddate" th:selected="${#strings.equals(employeeDetailDto.searchType, 'enddate')}">종료일</option>
-																<option value="edustate" th:selected="${#strings.equals(employeeDetailDto.searchType, 'edustate')}">이수율</option>
+																<option value="achievement" th:selected="${#strings.equals(employeeDetailDto.searchType, 'achievement')}">이수율</option>
 															</select>
+															
 														</div>
 														<div class="form-group">
-															<label for="contain">키워드</label>
-															<input type="text" name="searchKeyword" class="form-control" th:value="${employeeDetailDto.searchKeyword}"/> 																																																							 												      		
-													  </div>
-													  <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
+															<label for="contain" style="float: left;">키워드&nbsp;&nbsp;</label>
+															<input type="text" name="searchKeyword" class="form-control" th:value="${employeeDetailDto.searchKeyword}" style="width:100px;"/>
+															
+																																																																					 												      		
+													   </div>
+													   <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
+													 
 											</form>													  			
 								  		</div>
 		                     
@@ -507,11 +519,11 @@
                                     <tr th:if="${not #lists.isEmpty(educatedlist)}" th:each="educatedlist:${educatedlist}">
                                        <td>[[${educatedlist.rn}]]</td>
                                        <td>[[${educatedlist.currname}]]</td> 
-                                       <td>[[${educatedlist.content}]]</td> 
+                                       <td width="40%"><div id="bioverflow">[[${educatedlist.content}]]</div></td> 
                                        <td>[[${educatedlist.instructor}]]</td> 
                                        <td>[[${educatedlist.startdate}]]</td>
                                        <td>[[${educatedlist.enddate}]]</td>  
-                                       <td>[[${educatedlist.edustate}]]</td> 
+                                       <td>[[${educatedlist.achievement}]]</td> 
      								   <td>
                                        	   <input type="hidden" name="currno" value="${educatedlist.currno}">
 	                                       <a href="/curriculum/"
@@ -640,12 +652,11 @@
 	function updateEmployee(empno) {
 	      
 	    	 $.ajax({
-	    		url:"/employee/employee-detail",
-	 	    	type:"Post",
-	 	    	contType : "html",
+	    		url:"/employee/"+empno,
+	 	    	type:"GET",
 	 	    	cache : false,
 	 	    	complete:function() {
-	 	    		location.href="/employeeupdate?empno="+empno;	    		
+	 	    		location.href="/employeeupdate?empno="+empno;		
 	 	    	}
 	 	    	
 	 	    })	 	  	    	  
@@ -656,9 +667,8 @@
 	function deleteEmployee(empno) {
 	      
 		 $.ajax({
-	    		url:"/employee/employee-detail",
+	    		url:"/employee/"+empno,
 	 	    	type:"Post",
-	 	    	contType : "html",
 	 	    	cache : false,
 	 	    	complete:function() {
 	 	    		location.href="/employee/"+empno+"/delete"	    		

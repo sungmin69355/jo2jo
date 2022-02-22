@@ -86,16 +86,16 @@
 														<input type="hidden" name="recordsPerPage" th:value="${params.recordsPerPage}" />
 														<input type="hidden" name="pageSize" th:value="${params.pageSize}" />
 														<div class="form-group">
-															<label for="filter">검색 유형</label>
-															<select name="searchType" class="form-control">
+															<label for="filter" style="float: left;">검색 유형</label>
+															<select name="searchType" class="form-control" style="width:100px;">
 																<option value="" th:selected="${#strings.isEmpty(params.searchType)}">선택안함</option>
 																<option value="deptname" th:selected="${#strings.equals(params.searchType, 'deptname')}">부서명</option>
 																<option value="manager" th:selected="${#strings.equals(params.searchType, 'manager')}">부서장</option>						
 															</select>
 														</div>
 														<div class="form-group">
-															<label for="contain">키워드</label>
-															<input type="text" name="searchKeyword" class="form-control" th:value="${params.searchKeyword}"/> 																																																							 												      		
+															<label for="contain" style="float: left;">키워드&nbsp;&nbsp;</label>
+															<input type="text" name="searchKeyword" class="form-control" th:value="${params.searchKeyword}" style="width:100px;"/> 																																																							 												      		
 													  </div>
 													  <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
 											</form>													  			
@@ -119,13 +119,12 @@
                                        <td>
                                         <input type="hidden" name="deptno" value="${departmentlist.deptno}">
 	                                       <a href="/department/"
-	                                       		th:attrappend="href=${departmentlist.deptno}"
-	                                       	>   								   	 	
+	                                       		th:attrappend="href=${departmentlist.deptno}">   								   	 	
 	     								   	<i class="icofont icofont-ui-text-chat"></i>
 	     								   </a>
 	     								<td>                                      								                                      
                                     </tr>
-                                    <tr th:unless="${not #lists.isEmpty(departmentlist)}"  >
+                                    <tr th:unless="${not #lists.isEmpty(departmentlist)}">
                                     	<td colspan="5">조회된 결과가 없습니다.</td>                               	
                                     </tr>                                                                  
                                  </tbody>                                    

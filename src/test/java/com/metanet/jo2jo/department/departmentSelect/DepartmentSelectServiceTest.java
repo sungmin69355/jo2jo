@@ -1,4 +1,4 @@
-package com.metanet.jo2jo.departmentSelect;
+package com.metanet.jo2jo.department.departmentSelect;
 
 import java.util.Collections;
 import java.util.List;
