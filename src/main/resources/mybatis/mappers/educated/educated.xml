@@ -79,7 +79,7 @@
 					AND c.CURRNO = e2.CURRNO 
 					AND e.EMPNO = #{empno}
 					AND ROWNUM <= #{endPage}
-					AND ENDDATE > SYSDATE 
+					
 				]]>
 					<if test="searchKeyword != null">
 					  <include refid="search"></include>
