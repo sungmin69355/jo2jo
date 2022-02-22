@@ -107,6 +107,16 @@
                 }
             });
         };
+        
+        function setThumbnail(event) {
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                document.querySelector("div#image_container").appendChild(img);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
     </script>
 </head>
 
@@ -407,8 +417,9 @@
                     <div class="card">                       
                         <form action="/employeeupdate" th:object="${employeeUpdateForm}" method="post" enctype="multipart/form-data">
 				                  <div class="user-block-2" th:each="employeedetaillist:${employeedetaillist}">
-				                        <img class="img-fluid"  th:src="@{/assets/images/user/} + ${employeedetaillist.photoaddr}" alt="user-header">
-										<input type="file" class="form-control form-control-sm" name="file" id="file"><br>
+				                        
+				                        <div class="img-fluid" th:src="@{/assets/images/user/} + ${employeedetaillist.photoaddr}" alt="user-header" id="image_container"></div>
+										<input type="file" class="form-control form-control-sm"  name="file" id="file" onchange="setThumbnail(event);"><br>
 				                        <input type ="hidden" name="empno" th:value=${employeedetaillist.empno}>
 				                        <span>[[${employeedetaillist.empname}]]</span><br>  
 				                        <h5>부서 : <select class="form-select form-select-lg mb-3" th:field="*{deptno}" >
