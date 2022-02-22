@@ -125,18 +125,19 @@ public class EmployeeController {
 
    
   //사원조회 상세페이지
-    @GetMapping("/employeedetail")
-     String employeeDetail(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("employeeDetailDto")EmployeeDetailDto employeeDetailDto,Model model) {    	
-    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
-    	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
-        return "employee/employee-detail";
-
-       
+    @GetMapping("/employee/{empno}")
+     String employeeDetail(HttpSession session,@PathVariable Long empno, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("employeeDetailDto")EmployeeDetailDto employeeDetailDto,Model model) {    	
+    	if(session.getAttribute("user") != null){
+	    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
+	    	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
+	        return "employee/employee-detail";
+    	}
+    	return "redirect:/";
     }
     
   //사원수정(수정페이지)
     @GetMapping("/employeeupdate")
-     String employeeUpdateForm(HttpSession session, @ModelAttribute("params") EmployeeSelectDto params, Model model) {
+     String employeeUpdateForm(HttpSession session,@ModelAttribute("params") EmployeeSelectDto params, Model model, BindingResult bindingResult) {
     	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
     	
     	if (session.getAttribute("user").equals("admin")) {
@@ -156,7 +157,7 @@ public class EmployeeController {
     }
     //사원 수정
     @PostMapping("/employeeupdate")
-    String employeeUpdate(HttpSession session, Model model, @RequestParam(name="file", required = false) MultipartFile file, @Valid EmployeeUpdateForm  employeeUpdateForm, BindingResult bindingResult) throws IOException {
+    String employeeUpdate(HttpSession session,Model model, @RequestParam(name="file", required = false) MultipartFile file, @Valid EmployeeUpdateForm  employeeUpdateForm, BindingResult bindingResult) throws IOException {
 
         if (session.getAttribute("user").equals("admin")) {
             System.out.println(employeeUpdateForm.toString());

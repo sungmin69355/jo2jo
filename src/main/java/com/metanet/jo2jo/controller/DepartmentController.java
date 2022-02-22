@@ -125,7 +125,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/department/{deptNo}/update")
-    String departmentUpdateForm(HttpSession session,Model model, @PathVariable Long deptNo){
+    String departmentUpdateForm(HttpSession session, Model model, @PathVariable Long deptNo){
         if(session.getAttribute("user").equals("admin")) {
             DepartmentDetailDto departmentDetailDto = departmentUpdateService.selectDepartment(deptNo);
             if(departmentDetailDto != null) {

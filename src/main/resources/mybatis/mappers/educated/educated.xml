@@ -30,8 +30,8 @@
 							AND ENDDATE LIKE('%' || #{searchKeyword} || '%')
 						</when>
 						
-						<when test="'edustate'.equals(searchType)">
-							AND EDUSTATE LIKE('%' || #{searchKeyword} || '%')
+						<when test="'achievement'.equals(searchType)">
+							AND ACHIEVEMENT LIKE('%' || #{searchKeyword} || '%')
 						</when>
 					</choose>
 				</when>
@@ -42,9 +42,9 @@
 						  CURRNAME LIKE('%' || #{searchKeyword} || '%')
 						  OR CONTENT LIKE('%' || #{searchKeyword} || '%')
 						  OR INSTRUCTOR LIKE('%' || #{searchKeyword} || '%')
-						  OR STARTDATE = LIKE('%' || #{searchKeyword} || '%')
-						  OR ENDDATE  LIKE('%' || #{searchKeyword} || '%')
-						  OR EDUSTATE  LIKE('%' || #{searchKeyword} || '%')
+						  OR STARTDATE LIKE('%' || #{searchKeyword} || '%')
+						  OR ENDDATE LIKE('%' || #{searchKeyword} || '%')
+						  OR ACHIEVEMENT LIKE('%' || #{searchKeyword} || '%')
 						)
 				</otherwise>
 			</choose>
@@ -60,7 +60,7 @@
 				   INSTRUCTOR AS instructor,
 				   STARTDATE AS startdate,
 				   ENDDATE AS enddate,
-				   EDUSTATE AS edustate,
+				   ACHIEVEMENT AS achievement,
 				   empno,
 				   currno			  				    
 			 FROM
@@ -71,7 +71,7 @@
 					       INSTRUCTOR,
 					       STARTDATE,
 					       ENDDATE,
-					       EDUSTATE,
+					       ACHIEVEMENT,
 					       e.EMPNO AS empno,
 					       c.CURRNO AS currno		      
 					FROM EMPLOYEE e ,CURRICULUM c , EDUCATED e2
@@ -79,7 +79,8 @@
 					AND c.CURRNO = e2.CURRNO 
 					AND e.EMPNO = #{empno}
 					AND ROWNUM <= #{endPage}
-		]]>
+					AND ENDDATE > SYSDATE 
+				]]>
 					<if test="searchKeyword != null">
 					  <include refid="search"></include>
 					</if>

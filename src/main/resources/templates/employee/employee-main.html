@@ -87,8 +87,8 @@
 														<input type="hidden" name="recordsPerPage" th:value="${params.recordsPerPage}" />
 														<input type="hidden" name="pageSize" th:value="${params.pageSize}" />
 														<div class="form-group">
-															<label for="filter">검색 유형</label>
-															<select name="searchType" class="form-control">
+															<label for="filter" style="float: left;">검색 유형&nbsp;&nbsp;</label>
+															<select name="searchType" class="form-control" style="width:100px;">
 																<option value="" th:selected="${#strings.isEmpty(params.searchType)}">선택안함</option>
 																<option value="empname" th:selected="${#strings.equals(params.searchType, 'empname')}">사원이름</option>
 																<option value="deptname" th:selected="${#strings.equals(params.searchType, 'deptname')}">부서</option>
@@ -98,8 +98,8 @@
 															</select>
 														</div>
 														<div class="form-group">
-															<label for="contain">키워드</label>
-															<input type="text" name="searchKeyword" class="form-control" th:value="${params.searchKeyword}"/> 																																																							 												      		
+															<label for="contain" style="float: left;">키워드&nbsp;&nbsp;</label>
+															<input type="text" name="searchKeyword" class="form-control" th:value="${params.searchKeyword}" style="width:100px;"/> 																																																							 												      		
 													  </div>
 													  <span class="glyphicon glyphicon-search" aria-hidden="true"><input type="submit" name="submit" value="검색" aria-hidden="true"></span> 
 											</form>													  			
@@ -129,7 +129,7 @@
                                        <td>[[${employeelist.annual}]]</td>
                                        <td>[[${employeelist.email}]]</td>
      								   <td>
-     								   <a href="/employeedetail?empno="
+     								   <a href="/employee/"
      								   	 	th:attrappend="href=${employeelist.empno}">
      								   	<i class="icofont icofont-ui-text-chat"></i>
      								   </a>

@@ -15,7 +15,7 @@ public class EducatedSelectDto  {
 	private String instructor;
 	private String startdate;
 	private String enddate;
-	private String edustate;
+	private Long achievement;
 	private Long empno;
 	
 	public EducatedSelectDto() {
@@ -23,14 +23,14 @@ public class EducatedSelectDto  {
 	}
 
 	public EducatedSelectDto(Long rn,Long currno, String currname, String content, String instructor,
-			String startdate, String enddate,Long empno) {
+			 String enddate,Long achievement,Long empno) {
 		this.rn = rn;		
 		this.currno = currno;
 		this.currname = currname;
 		this.content = content;
-		this.instructor = instructor;
-		this.startdate = startdate;
+		this.instructor = instructor;		
 		this.enddate = enddate;
+		this.achievement = achievement;
 		this.empno = empno;
 	}
 }
