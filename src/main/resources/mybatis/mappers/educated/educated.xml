@@ -132,12 +132,22 @@
 		]]>
 	</insert>
 
+	<!-- 교육 이수 하나 조회 -->
+	<select id="findOneEducated" parameterType="EducatedDto" resultType="EducatedDto">
+		<![CDATA[
+		SELECT *
+		FROM EDUCATED
+		WHERE   EMPNO  = #{empno}
+			AND CURRNO = #{currno}
+		]]>
+	</select>
+
 	<!--수강 업데이트-->
 	<update id="updateEducated" parameterType="EducatedDto">
 		<![CDATA[
 		UPDATE EDUCATED
 		SET	  EDUSTATE		=  #{edustate}
-			, ACHIEVEMENT	=  100 * (SELECT 1/COSTOTALCNT
+			, ACHIEVEMENT	=  100 * (SELECT #{edustate}/COSTOTALCNT
 									  FROM   CURRICULUM C
 									  WHERE  C.CURRNO = #{currno}
 									  )

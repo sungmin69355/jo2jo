@@ -22,6 +22,6 @@ public interface EducatedRepository {
 	Long insertEducated(EducatedDto educatedDto); //수강신청
 	Long updateEducated(EducatedDto educatedDto); //수강업데이트
 	Long deleteEducated(EducatedDto educatedDto); //수강 삭제(사원 삭제, 커리큘럼 삭제 하기 전)
-
+	Optional<EducatedDto> findOneEducated(EducatedDto educatedDto);
 
 }

@@ -40,8 +40,15 @@ public class CurriculumController {
     @GetMapping("/curriculums")
     String curriculumMain(@ModelAttribute("params") CurriculumDto params, HttpSession session, Model model){
         if(session.getAttribute("user") != null) {
-            List<CurriculumDto> curriculumList = curriculumSelectService.curriculumList(params);
-            model.addAttribute("curriculumList", curriculumList);
+            if(session.getAttribute("user").equals("admin")){
+                List<CurriculumDto> curriculumList = curriculumSelectService.curriculumList(params);
+                model.addAttribute("curriculumList", curriculumList);
+            }
+            if(session.getAttribute("user").equals("employee")){
+                List<CurriculumDto> curriculumList = curriculumSelectService.curriculumListFromEmp(params);
+                model.addAttribute("curriculumList", curriculumList);
+            }
+
             return "curriculum/curriculum-main";
         }
         return "redirect:/";
@@ -58,10 +65,10 @@ public class CurriculumController {
 
             CurriculumDto curriculumOne = curriculumDetailService.findOneCurriculum(curriculum).get();
             List<String> cosList = cosList(curriculumOne);
-            System.out.println("수강 코스 리스트:"+cosList.toString());
 
             if(session.getAttribute("user").equals("employee")){
                 educatedDto.setEmpno(((EmployeeDto)(session.getAttribute("info"))).getEmpno());
+                model.addAttribute("empno", ((EmployeeDto)(session.getAttribute("info"))).getEmpno());
                 model.addAttribute("educatedState", educatedInsertService.findCurriculumState(educatedDto));
             }
             if(session.getAttribute("user").equals("admin")){
@@ -234,7 +241,6 @@ public class CurriculumController {
     @PostMapping("/curriculum/register")
     String curriculumSignUp(HttpSession session,
                             @RequestParam("currno") Long currno,
-//                            Model model,
                             RedirectAttributes redirectAttributes){
         if (session.getAttribute("user").equals("employee")) {
             EducatedDto educatedDto = new EducatedDto();
