@@ -474,25 +474,50 @@
                 </a>
             </div>
             <div class="text-center" th:if="${session.user}==employee" style="margin:0 0 15px 0;">
-                <div th:if="${educatedState==0}" style="float: left; width: 50%;"><!--수강한적 없는 사원-->
+                <div th:if="${educatedState==0}"><!--수강한적 없는 사원-->
                 <!-- th:if="${#lists.isEmpty(educatedState)}" -->
-                    <form action="/curriculum/register" method="POST">
-                        <button type="submit" th:name="currno" th:value="${curriculum.getCurrno()}" class="btn btn-primary waves-effect waves-light text-uppercase">수강신청</button>
+                    <div align="right">
+                    <form action="/curriculum/register" method="POST" style="width:75%;" >
+                        <button type="submit" th:name="currno" th:value="${curriculum.getCurrno()}" style="float:left;" class="btn btn-primary waves-effect waves-light text-uppercase">수강신청</button>
                     </form>
+                    </div>
+                    <div style="float: center;">
+                        <a href="/curriculums">
+                            <button type="submit" class="btn btn-success waves-effect waves-light text-uppercase">돌아가기</button>
+                        </a>
+                    </div>
                 </div>
-                <div th:if="${educatedState!=0}" class="btnArea box on" style="float: left; width: 50%;"><!--수강중인 사원-->
+                <div th:if="${educatedState!=0}" align="center"><!--수강중인 사원-->
                     <!-- th:if="${#lists.isEmpty(educatedState)}" -->
-                    <form action="/educated" name="emp_form" method="GET">
-<!--                        <label id='result'></label>-->
-                        <input type="hidden" th:name="edustate" value="">
-                        <button type="submit" th:name="currno" th:value="${curriculum.getCurrno()}" disabled="disabled" class="order2_chks btn btn-primary waves-effect waves-light text-uppercase">수강기록</button>
-                    </form>
+                    <div class="btnArea box on" style="text-align:center;">
+                        <form action="/educated" class="btnArea box on" name="emp_form" method="GET" style="float: left; width: 50%;"  >
+                            <!--                        <label id='result'></label>-->
+                            <input type="hidden" th:name="edustate" value="">
+                            <button type="submit" th:name="currno" th:value="${curriculum.getCurrno()}" disabled="disabled" class="order2_chks btn btn-primary waves-effect waves-light text-uppercase">수강기록</button>
+                        </form>
+                    </div>
+                    <div align="left">
+                        <button type="submit" value="confirm" onclick="func_confirm()" return false; class="btn btn-danger waves-effect waves-light text-uppercase">수강취소</button>
+                        <script type="text/javascript" th:inline="javascript">
+                          function func_confirm() {
+                              if(confirm('수강 취소하시겠습니까?')) {
+                                  location.href="/educated/[[ ${empno} ]]/[[ ${curriculum.getCurrno()} ]]/delete"
+                              }else{
+                                  return false;
+                              }
+                          }
+                          $( "a" ).click(function( event ) {
+                              event.preventDefault();
+
+                          });
+                        </script>
+                        <a href="/curriculums">
+                            <button type="submit" class="btn btn-success waves-effect waves-light text-uppercase">돌아가기</button>
+                        </a>
+                    </div>
                 </div>
-                <div style="float: center;">
-                <a href="/curriculums">
-                    <button type="submit" class="btn btn-success waves-effect waves-light text-uppercase">돌아가기</button>
-                </a>
-                </div>
+
+
 
             </div>
 

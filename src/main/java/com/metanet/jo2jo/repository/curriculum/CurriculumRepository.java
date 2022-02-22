@@ -16,8 +16,10 @@ public interface CurriculumRepository {
 	    int registerCurriculumCostotalcnt(CurriculumDto curriculumDto); //코스 총 개수 costotalcnt 등록
 	    Long findCurrSequenceNo();
 
-	    Integer selectCurriculumTotalCount(CurriculumDto curriculumDto);    //커리큘럼 토탈카운트
-	    List<CurriculumDto> selectCurriculum(CurriculumDto curriculumDto);  //메인페이지 조회
+	    Integer selectCurriculumTotalCount(CurriculumDto curriculumDto);    //커리큘럼 토탈카운트(관리자)
+	    List<CurriculumDto> selectCurriculum(CurriculumDto curriculumDto);  //메인페이지 조회(관리자)
+		List<CurriculumDto> selectCurriculumFromEmp(CurriculumDto curriculumDto);//메인페이지 조회(관리자)
+		Integer selectCurriculumTotalCountFromEmp(CurriculumDto curriculumDto);	//커리큘럼 토탈카운트(사원)
 	    Long updateCurriculum(CurriculumDto curriculumDto); //커리큘럼 업데이트
 	    Long deleteCurriculum(Long currno); //삭제
 }

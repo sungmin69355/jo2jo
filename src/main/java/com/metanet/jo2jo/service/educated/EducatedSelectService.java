@@ -2,7 +2,9 @@ package com.metanet.jo2jo.service.educated;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+import com.metanet.jo2jo.domain.educated.EducatedDto;
 import org.springframework.stereotype.Service;
 
 import com.metanet.jo2jo.domain.commons.PaginationInfo;
@@ -12,6 +14,8 @@ import com.metanet.jo2jo.repository.Educated.EducatedRepository;
 
 
 import lombok.RequiredArgsConstructor;
+
+import javax.swing.text.html.Option;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +43,11 @@ public class EducatedSelectService {
 	 public Integer selectEducatedTotalCount(EmployeeDetailDto employeeDetailDto) {
 		 
 		 return educatedRepository.selectEducatedTotalCount(employeeDetailDto);
+	 }
+
+
+	 public Optional<EducatedDto> getOneEducated(EducatedDto educatedDto){
+		return educatedRepository.findOneEducated(educatedDto);
 	 }
 
 }
