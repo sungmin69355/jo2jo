@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.metanet.jo2jo.domain.department.DepartmentDto;
-import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
+import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.service.employee.EmployeeUpdateService;
 
@@ -49,17 +49,28 @@ public class EmployeeUpdateServiceTest {
 	 @DisplayName("사원 수정이 가능해야한다.")
 	 public void updateEmployeeTest() {
 		 
-//		 EmployeeDetailDto employeeDetailDto = new EmployeeDetailDto();
-//		 employeeDetailDto.setEmpno(654L);
-		 EmployeeUpdateForm employeeUpdateForm = new EmployeeUpdateForm(
-				 654L,10004L, 1001L,"jo@example.com", "010-3333-7777", "고양", 
-				 "c83ffe1b-63b3-4bda-b8d3-e5c84a4eed44.jpg", "930104-1011111", Long.valueOf(1), 
-				"test6000", "1234", 8000L, "2022-02-03", "2" ,Long.valueOf(1),Long.valueOf(1)
-		 );
-		
-		 
+
+		 EmployeeDetailDto employeeDetailDto  = new EmployeeDetailDto();	 
+		 employeeDetailDto.setDeptno(1009L);
+		 employeeDetailDto.setPosno(10002L);		
+		 employeeDetailDto.setEmpname("조민국");
+		 employeeDetailDto.setEmail("test@example.com");		 
+		 employeeDetailDto.setPhone("010-2222-8888");
+		 employeeDetailDto.setAddress("마포구");
+		 employeeDetailDto.setPhotoaddr("/images/user/aaa.jpg");
+		 employeeDetailDto.setRegno("000000-1000000");
+		 employeeDetailDto.setAnnual(Long.valueOf(1));
+		 employeeDetailDto.setId("employeeTestId");
+		 employeeDetailDto.setPassword("1234");
+		 employeeDetailDto.setSalary(Long.valueOf(100000000));
+		 employeeDetailDto.setHiredate("2022-02-03");
+		 employeeDetailDto.setAcademic("1");
+		 employeeDetailDto.setMilitary(Long.valueOf(0));
+		 employeeDetailDto.setGender(Long.valueOf(2));
+		 employeeDetailDto.setEmpno(561L);
+				 
 		 //when
-	     Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
+	     Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeDetailDto);
 	     System.out.println(updateEmployeeResult);
 
 	     //then
