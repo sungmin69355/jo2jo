@@ -17,19 +17,9 @@ public class HomeController {
     String home(Model model, HttpSession session){
         model.addAttribute("loginDto", new LoginDto());
         System.out.println(session);
-        if (session != null) {
-            return "login/main";
+        if (session.getAttribute("user") != null) {
+            return "redirect:/employees";
         }
-        return "redirect:/employees";
-    }
-
-    @GetMapping("/index")
-    String index(Model model, HttpSession session){
-        model.addAttribute("loginDto", new LoginDto());
-        System.out.println(session.getAttribute("info"));
-        if (session != null) {
-            return "login/main";
-        }
-        return "index";
+        return "/login/main";
     }
 }

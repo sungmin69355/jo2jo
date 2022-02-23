@@ -78,6 +78,40 @@
         ]]>
     </select>
 
+    <!--사원이 볼 때 start-->
+    <select id="selectCurriculumFromEmp" parameterType="CurriculumDto" resultType="CurriculumDto">
+        <![CDATA[
+        SELECT *
+        FROM 	(
+                SELECT *
+                FROM	(
+                        SELECT	ROWNUM							    AS R
+                              , C.CURRNO                            AS CURRNO
+                              , C.CURRNAME  						AS CURRNAME
+                              , C.CONTENT 						    AS CONTENT
+                              , C.INSTRUCTOR 						AS INSTRUCTOR
+                              , TO_CHAR(C.STARTDATE, 'YYYY-MM-DD')  AS STARTDATE
+                              , TO_CHAR(C.ENDDATE, 'YYYY-MM-DD')	AS ENDDATE
+                        FROM	CURRICULUM C
+                        WHERE   ENDDATE > SYSDATE
+                        )
+                WHERE R >= #{startPage}
+        ]]>
+        <if test="searchKeyword != null">
+            <include refid="search"></include>
+        </if>
+        <![CDATA[
+                )
+        WHERE R <= #{endPage}
+        ]]>
+    </select>
+    <select id="selectCurriculumTotalCountFromEmp" parameterType="CurriculumDto" resultType="Integer">
+        SELECT	COUNT(*)
+        FROM	CURRICULUM
+        WHERE   ENDDATE > SYSDATE
+    </select>
+    <!--사원이 볼 때 end-->
+
     <!-- 커리큘럼 등록 -->
     <insert id="registerCurriculum" parameterType="CurriculumDto">
         <![CDATA[

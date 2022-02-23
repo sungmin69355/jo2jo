@@ -46,12 +46,13 @@ public class EmployeeController {
     //사원조회 부서추가
     @GetMapping("/employees")
     String employeeMain(HttpSession session, @ModelAttribute("params")  EmployeeSelectDto params, Model model) {
+        System.out.println(session.getAttribute("user"));
     	if(session.getAttribute("user").equals("admin") || session.getAttribute("user").equals("employee")) {
     		 model.addAttribute("employeelist", employeeService.employeeList(params));
     	        return "employee/employee-main";
     	} else {
     		  session.invalidate();
-    		  return "redirect:index";
+    		  return "redirect:/";
     	}
        
 
@@ -107,7 +108,7 @@ public class EmployeeController {
                 System.out.println(insertEmployeeResult);
             }else{
                 //공동이미지 삽입
-                employeeRegisterForm.setPhotoaddr("/images/user/aaa.jpg");
+                employeeRegisterForm.setPhotoaddr("default_user_img.jpg");
                 Integer insertEmployeeResult = employeeRegisterService.insertEmployee(employeeRegisterForm);
                 System.out.println(insertEmployeeResult);
             }
@@ -125,7 +126,13 @@ public class EmployeeController {
     @GetMapping("/employee/{empno}")
      String employeeDetail(HttpSession session,@PathVariable Long empno, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("employeeDetailDto")EmployeeDetailDto employeeDetailDto,Model model) {    	
     	if(session.getAttribute("user") != null){
-	    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
+            List<EmployeeDetailDto> employeeDetailDtoList = employeeService.employeeDetailList(params);
+            for(EmployeeDetailDto e : employeeDetailDtoList){
+                String url = "/resources/user/" + e.getPhotoaddr();
+                System.out.println(url);
+                e.setPhotoaddr(url);
+            }
+	    	model.addAttribute("employeedetaillist", employeeDetailDtoList);
 	    	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
 	        return "employee/employee-detail";
     	}
@@ -191,8 +198,10 @@ public class EmployeeController {
                 System.out.println(updateEmployeeResult);
             }else{
                 //공동이미지 삽입
+
             	employeeDetailDto.setPhotoaddr("/images/user/aaa.jpg");
                 Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeDetailDto);
+
                 System.out.println(updateEmployeeResult);
             }
             //결과
