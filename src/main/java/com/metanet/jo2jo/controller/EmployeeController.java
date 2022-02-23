@@ -74,7 +74,7 @@ public class EmployeeController {
         } else {
         	
         	session.invalidate();
-            return "redirect:index";
+            return "redirect:/";
         }
     }
 
@@ -115,7 +115,7 @@ public class EmployeeController {
             //결과
             return "redirect:employees";
         }
-        return "redirect:index";
+        return "redirect:/";
     }
 
 
@@ -207,7 +207,7 @@ public class EmployeeController {
             //결과
             return "redirect:employees";
         }
-        return "redirect:index";
+        return "redirect:/";
     }
 
     @GetMapping("/employee/{empno}/delete")

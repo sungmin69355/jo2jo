@@ -50,7 +50,7 @@ public class DepartmentController {
 	    	return "department/department-main";
     	} else {
     		session.invalidate();
-  		    return "redirect:index";
+  		    return "redirect:/";
     	}
     }
   
