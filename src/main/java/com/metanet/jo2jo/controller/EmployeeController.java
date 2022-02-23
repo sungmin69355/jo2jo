@@ -109,7 +109,7 @@ public class EmployeeController {
                 System.out.println(insertEmployeeResult);
             }else{
                 //공동이미지 삽입
-                employeeRegisterForm.setPhotoaddr("/images/user/aaa.jpg");
+                employeeRegisterForm.setPhotoaddr("default_user_img.jpg");
                 Integer insertEmployeeResult = employeeRegisterService.insertEmployee(employeeRegisterForm);
                 System.out.println(insertEmployeeResult);
             }
@@ -194,7 +194,7 @@ public class EmployeeController {
                 System.out.println(updateEmployeeResult);
             }else{
                 //공동이미지 삽입
-            	employeeUpdateForm.setPhotoaddr("/images/user/aaa.jpg");
+            	employeeUpdateForm.setPhotoaddr("default_user_img.jpg");
                 Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
                 System.out.println(updateEmployeeResult);
             }
