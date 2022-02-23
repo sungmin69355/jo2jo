@@ -129,6 +129,7 @@ public class DepartmentController {
         if(session.getAttribute("user").equals("admin")) {
             DepartmentDetailDto departmentDetailDto = departmentUpdateService.selectDepartment(deptNo);
             if(departmentDetailDto != null) {
+
                 return getModel(model, deptNo);
             }
         }
@@ -161,7 +162,7 @@ public class DepartmentController {
         model.addAttribute("departmentForm", new DepartmentForm());
         model.addAttribute("findByAllDepartment", findByAllDepartment);
         model.addAttribute("findByEmployeesRelevantDepartment", findByEmployeesRelevantDepartment);
-        return "/department/department-update";
+        return "department/department-update";
     }
 
 

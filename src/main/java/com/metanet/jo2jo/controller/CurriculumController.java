@@ -152,7 +152,7 @@ public class CurriculumController {
         List<DepartmentDto> deptList = curriculumRegisterService.findLowestDepartment();
 
         model.addAttribute("deptList", deptList);
-        return "/curriculum/curriculum-update";
+        return "curriculum/curriculum-update";
     }
 
     private List<String> cosList(CurriculumDto curriculumDto){
