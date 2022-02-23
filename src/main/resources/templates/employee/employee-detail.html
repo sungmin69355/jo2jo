@@ -314,7 +314,7 @@
 	                    <!--  -->
 	                    <div class="card" th:if ="${session.user}==admin or ${session.user}==employee and ${session.info.id}==${employeedetaillist.id} or ${session.user}==employee and ${session.info.id}!=${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
 	                        <div class="user-block-2" >
-	                            <img class="img-fluid" th:src="@{/assets/images/user/} + ${employeedetaillist.photoaddr}"  alt="user-header">
+	                            <img class="img-fluid" th:src="@{${employeedetaillist.photoaddr}} "  alt="user-header">
 	                            <h5></h5>
 	                            <h6></h6>
 	       

@@ -1,11 +1,9 @@
 package com.metanet.jo2jo.controller;
 
-import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
-import com.metanet.jo2jo.repository.Educated.EducatedRepository;
 import com.metanet.jo2jo.service.educated.EducatedSelectService;
 import com.metanet.jo2jo.service.employee.EmployeeDeleteService;
 import com.metanet.jo2jo.service.employee.EmployeeRegisterService;
@@ -129,7 +127,13 @@ public class EmployeeController {
     @GetMapping("/employee/{empno}")
      String employeeDetail(HttpSession session,@PathVariable Long empno, @ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("employeeDetailDto")EmployeeDetailDto employeeDetailDto,Model model) {    	
     	if(session.getAttribute("user") != null){
-	    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
+            List<EmployeeDetailDto> employeeDetailDtoList = employeeService.employeeDetailList(params);
+            for(EmployeeDetailDto e : employeeDetailDtoList){
+                String url = "/resources/user/" + e.getPhotoaddr();
+                System.out.println(url);
+                e.setPhotoaddr(url);
+            }
+	    	model.addAttribute("employeedetaillist", employeeDetailDtoList);
 	    	model.addAttribute("educatedlist",educatedSelectService.selectEducated(employeeDetailDto));
 	        return "employee/employee-detail";
     	}
