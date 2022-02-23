@@ -313,7 +313,7 @@
 	                <div class="col-lg-4">
 	                    <!--  -->
 	                    <div class="card" th:if ="${session.user}==admin or ${session.user}==employee and ${session.info.id}==${employeedetaillist.id} or ${session.user}==employee and ${session.info.id}!=${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
-	                        <div class="user-block-2" >
+	                        <div class="user-block-2">
 	                            <img class="img-fluid" th:src="@{/assets/images/user/} + ${employeedetaillist.photoaddr}"  alt="user-header">
 	                            <h5></h5>
 	                            <h6></h6>
@@ -352,6 +352,12 @@
 	                            <div class="user-block-2-activities" th:if ="${session.user}==admin or ${session.user}==employee and ${session.info.id}==${employeedetaillist.id}">
 	                                <div class="user-block-2-active">
 	                                    <i class="icofont icofont-birthday-cake"></i><span>생년월일: [[${employeedetaillist.regno}]]</span>
+	                                    <label class="badge badge-lg badge-inverse-default"></label>
+	                                </div>
+	                            </div>
+	                             <div class="user-block-2-activities" th:if ="${session.user}==admin or ${session.user}==employee and ${session.info.id}==${employeedetaillist.id}">
+	                                <div class="user-block-2-active">
+	                                    <i class="icofont icofont-birthday-cake"></i><span>연봉: [[${employeedetaillist.salary}]]</span>
 	                                    <label class="badge badge-lg badge-inverse-default"></label>
 	                                </div>
 	                            </div>

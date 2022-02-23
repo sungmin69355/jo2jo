@@ -1,11 +1,9 @@
 package com.metanet.jo2jo.controller;
 
-import com.metanet.jo2jo.domain.curriculum.CurriculumDto;
 import com.metanet.jo2jo.domain.department.DepartmentDto;
 import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
 import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
 import com.metanet.jo2jo.domain.position.PositionDto;
-import com.metanet.jo2jo.repository.Educated.EducatedRepository;
 import com.metanet.jo2jo.service.educated.EducatedSelectService;
 import com.metanet.jo2jo.service.employee.EmployeeDeleteService;
 import com.metanet.jo2jo.service.employee.EmployeeRegisterService;
@@ -17,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
-import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
 import com.metanet.jo2jo.service.employee.EmployeeSelectService;
 import com.metanet.jo2jo.service.employee.EmployeeUpdateService;
 
@@ -137,18 +134,22 @@ public class EmployeeController {
     
   //사원수정(수정페이지)
     @GetMapping("/employeeupdate")
-     String employeeUpdateForm(HttpSession session,@ModelAttribute("params") EmployeeSelectDto params, Model model, BindingResult bindingResult) {
-    	model.addAttribute("employeedetaillist", employeeService.employeeDetailList(params));
-    	
+     String employeeUpdateForm(HttpSession session,@ModelAttribute("params") EmployeeSelectDto params, @ModelAttribute("employeeDetailDto") EmployeeDetailDto employeeDetailDto, Model model, BindingResult bindingResult) {
+   	  	
     	if (session.getAttribute("user").equals("admin")) {
     		
     		//부서 정보
             List<DepartmentDto> findByAllDepartment = employeeUpdateService.findAllByDepartment();
             //직급 정보
             List<PositionDto> findAllByPosition = employeeUpdateService.findAllByPosition();
+           
             model.addAttribute("findByAllDepartment", findByAllDepartment);
             model.addAttribute("findAllByPosition", findAllByPosition);
-            model.addAttribute("employeeUpdateForm", new EmployeeUpdateForm());
+            model.addAttribute("employeeDetailDto", employeeService.employeeDetailList(params).get(0));
+                                 
+            System.out.println(employeeService.employeeDetailList(params).get(0).toString());
+        	System.out.println(params.getEmpno());
+        	
             return "employee/employee-update";
         } else {
             return "redirect:/employeeupdate";
@@ -157,10 +158,10 @@ public class EmployeeController {
     }
     //사원 수정
     @PostMapping("/employeeupdate")
-    String employeeUpdate(HttpSession session,Model model, @RequestParam(name="file", required = false) MultipartFile file, @Valid EmployeeUpdateForm  employeeUpdateForm, BindingResult bindingResult) throws IOException {
+    String employeeUpdate(HttpSession session,Model model,@RequestParam(name="file", required = false) MultipartFile file, @Valid EmployeeDetailDto employeeDetailDto, BindingResult bindingResult) throws IOException {
 
         if (session.getAttribute("user").equals("admin")) {
-            System.out.println(employeeUpdateForm.toString());
+            System.out.println(employeeDetailDto.toString());
             //Valid 검증
             if (bindingResult.hasErrors()) {
             	Map map = bindingResult.getModel(); //테스트용
@@ -175,6 +176,7 @@ public class EmployeeController {
                 List<DepartmentDto> findByAllDepartment = employeeUpdateService.findAllByDepartment();
                 //직급 정보
                 List<PositionDto> findAllByPosition = employeeUpdateService.findAllByPosition();
+                
                 model.addAttribute("findByAllDepartment", findByAllDepartment);
                 model.addAttribute("findAllByPosition", findAllByPosition);
                 return "employee/employee-update";
@@ -184,13 +186,13 @@ public class EmployeeController {
                 String uuid = UUID.randomUUID().toString()+".jpg";
                 File converFile = new File(savePath, uuid);
                 file.transferTo(converFile);  //--- 저장할 경로를 설정 해당 경로는 각자 원하는 위치로 설정하면 됩니다. 다만, 해당 경로에 접근할 수 있는 권한이 없으면 에러 발생
-                employeeUpdateForm.setPhotoaddr(uuid);
-                Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
+                employeeDetailDto.setPhotoaddr(uuid);
+                Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeDetailDto);
                 System.out.println(updateEmployeeResult);
             }else{
                 //공동이미지 삽입
-            	employeeUpdateForm.setPhotoaddr("/images/user/aaa.jpg");
-                Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeUpdateForm);
+            	employeeDetailDto.setPhotoaddr("/images/user/aaa.jpg");
+                Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeDetailDto);
                 System.out.println(updateEmployeeResult);
             }
             //결과

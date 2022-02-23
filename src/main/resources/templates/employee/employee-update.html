@@ -415,16 +415,18 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">                       
-                        <form action="/employeeupdate" th:object="${employeeUpdateForm}" method="post" enctype="multipart/form-data">
-				                  <div class="user-block-2" th:each="employeedetaillist:${employeedetaillist}">
-				                        
-				                        <div class="img-fluid" th:src="@{/assets/images/user/} + ${employeedetaillist.photoaddr}" alt="user-header" id="image_container"></div>
-										<input type="file" class="form-control form-control-sm"  name="file" id="file" onchange="setThumbnail(event);"><br>
-				                        <input type ="hidden" name="empno" th:value=${employeedetaillist.empno}>
-				                        <span>[[${employeedetaillist.empname}]]</span><br>  
+                        <form action="/employeeupdate" th:object="${employeeDetailDto}" method="post" enctype="multipart/form-data">
+				                  <div class="user-block-2" >
+				                  		<div class="img-fluid" alt="user-header" id="image_container"></div>
+                        				<input type="file" class="form-control form-control-sm" style="margin:0 auto; width: 20%" name="file" id="file" onchange="setThumbnail(event);"><br>
+                        				
+                        				
+                        			    <input type="hidden" name="empno" th:value="${employeeDetailDto.empno}">
+                        																                          				                      
 				                        <h5>부서 : <select class="form-select form-select-lg mb-3" th:field="*{deptno}" >
-				                            <option th:each="findByAllDepartment:${findByAllDepartment}"th:value="${findByAllDepartment.deptno}">[[${findByAllDepartment.deptname}]]</option>
+				                            <option th:each="findByAllDepartment:${findByAllDepartment}" th:value="${findByAllDepartment.deptno}">[[${findByAllDepartment.deptname}]]</option>
 				                        </select>
+				                        
 				
 				                        </h5>
 				                        <h5>직급 : <select class="form-select form-select-lg mb-3" th:field="*{posno}">
@@ -442,20 +444,20 @@
 				                            </select>
 				                        </h5>
 				                    </div>
-				                    <div class="card-block">
+				                   <div class="card-block">
 				                        <div class="user-block-2-activities">
-				                            <!-- <div class="user-block-2-active">
-				                                <i class="icofont icofont-user-suited"></i> 이름
-				                                <input type="text" th:field="*{empname}" id="empname" class="form-control" placeholder="name">
+				                            <div class="user-block-2-active">
+				                                <i class="icofont icofont-user-suited" ></i> 이름
+				                                <input type="text" th:field="*{empname}" id="empname" class="form-control" placeholder="name" >
 				                                <div th:each="msg : ${#fields.errors('empname')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
-				                            </div> -->
+				                            </div>
 				                        </div>
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active1">
 				                                <i class="icofont icofont-phone"></i> 전화 번호
-				                                <input type="text"  th:field="*{phone}" id="phone" class="form-control" placeholder="phoneNumber">
+				                                <input type="text" th:field="*{phone}"  id="phone" class="form-control" placeholder="phoneNumber" >
 				                                <div th:each="msg : ${#fields.errors('phone')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
@@ -464,7 +466,7 @@
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active2">
 				                                <i class="icofont icofont-home"></i> 주소
-				                                <input type="text" th:field="*{address}" id="address" class="form-control" placeholder="address">
+				                                <input type="text" th:field="*{address}" id="address" class="form-control" placeholder="address" >
 				                                <div th:each="msg : ${#fields.errors('address')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
@@ -474,7 +476,7 @@
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active3">
 				                                <i class="icofont icofont-email"></i> email
-				                                <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="Email">
+				                                <input type="email" th:field="*{email}" id="email" class="form-control" placeholder="Email" >
 				                                <div th:each="msg : ${#fields.errors('email')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
@@ -483,11 +485,11 @@
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active4">
 				                                <i class="icofont icofont-user-suited"></i> 입사일
-				                                <div th:each="msg : ${#fields.errors('hiredate')}">
+				                                <div th:each="msg : ${#fields.errors('hiredate')}" >
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
 				                                <div class="input-group date input-group-date-custom">
-				                                    <input type="text" th:field="*{hiredate}" class="form-control" placeholder="ex) 01/01/2022">
+				                                    <input type="text" th:field="*{hiredate}" class="form-control" placeholder="ex) 01/01/2022" >
 				                                    <span class="input-group-addon bg-primary">
 				                                        <i class="icofont icofont-clock-time"></i>
 				                                    </span>
@@ -497,7 +499,7 @@
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active5">
 				                                <i class="icofont icofont-id-card"></i> ID
-				                                <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="ID" oninput="checkId()">
+				                                <input type="text" th:field="*{id}" id="id" class="form-control" placeholder="ID" oninput="checkId()" >
 				                                <div th:each="msg : ${#fields.errors('id')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
@@ -508,7 +510,7 @@
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active6">
 				                                <i class="icofont icofont-id-card"></i> 비밀번호
-				                                <input type="password" th:field="*{password}" id="password" class="form-control" placeholder="password">
+				                                <input type="password" th:field="*{password}" id="password" class="form-control" placeholder="password" >
 				                                <div th:each="msg : ${#fields.errors('password')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
@@ -517,7 +519,7 @@
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active7">
 				                                <i class="icofont icofont-id-card"></i> 주민등록번호
-				                                <input type="text" th:field="*{regno}" id="regno" class="form-control" placeholder="register">
+				                                <input type="text" th:field="*{regno}" id="regno" class="form-control" placeholder="register" >
 				                                <div th:each="msg : ${#fields.errors('regno')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
@@ -526,7 +528,7 @@
 				                        <div class="user-block-2-activities">
 				                            <div class="user-block-2-active8">
 				                                <i class="icofont icofont-letter"></i> 연봉
-				                                <input type="text" th:field="*{salary}" id="salary" class="form-control" placeholder="salary">
+				                                <input type="text" th:field="*{salary}" id="salary" class="form-control" placeholder="salary" >
 				                                <div th:each="msg : ${#fields.errors('salary')}">
 				                                    <p th:text="${msg}" style="color:red;"></p>
 				                                </div>
@@ -538,7 +540,7 @@
 				                                <div class="form-radio" >
 				                                    <div class="radio radio-inline">
 				                                        <label>
-				                                            <input type="radio" name="radio" checked="checked"  th:field="*{gender}" value=1>
+				                                            <input type="radio" name="radio" checked="checked"  th:field="*{gender}" value=1 > 
 				                                            <i class="helper"></i>남자
 				                                        </label>
 				                                    </div>
@@ -665,7 +667,6 @@
     </div>
     <p>Sorry for the inconvenience!</p>
 </div>
-
 <!-- Warning Section Starts -->
 <!-- Older IE warning message -->
 <!--[if lt IE 9]>
@@ -777,3 +778,4 @@
 </body>
 
 </html>
+

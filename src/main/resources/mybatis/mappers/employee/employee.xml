@@ -124,18 +124,19 @@
 	</insert>
 	
 	<!-- 사원 수정-->
-	<update id="updateEmployee"  parameterType="EmployeeUpdateForm">
+	<update id="updateEmployee" parameterType="EmployeeDetailDto">
 		<![CDATA[
 		UPDATE EMPLOYEE 
 			SET 
 			       deptno = #{deptno},
 				   posno = #{posno},
-				   email = #{ email},
-				   phone = #{ phone},
-				   address = #{ address},
+				   empname = #{empname},
+				   email = #{email},
+				   phone = #{phone},
+				   address = #{address},
 				   photoaddr = #{photoaddr},
 				   regno = #{regno},
-				   annual = #{ annual},
+				   annual = #{annual},
 				   id = #{id },
 				   password = #{password},
 				   salary = #{salary},

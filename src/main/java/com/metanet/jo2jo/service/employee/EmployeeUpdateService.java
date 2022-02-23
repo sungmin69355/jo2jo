@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.metanet.jo2jo.domain.department.DepartmentDto;
-import com.metanet.jo2jo.domain.employee.EmployeeRegisterForm;
-import com.metanet.jo2jo.domain.employee.EmployeeUpdateForm;
+import com.metanet.jo2jo.domain.employee.EmployeeDetailDto;
+import com.metanet.jo2jo.domain.employee.EmployeeSelectDto;
 import com.metanet.jo2jo.domain.position.PositionDto;
 import com.metanet.jo2jo.repository.department.DepartmentRepository;
 import com.metanet.jo2jo.repository.employee.EmployeeRepository;
@@ -28,9 +28,13 @@ public class EmployeeUpdateService {
 	 public List<PositionDto> findAllByPosition(){
 	      return positionRepository.findAllByPosition();
 	 }
+	 
+	 public List<EmployeeDetailDto> employeeDetailList(EmployeeSelectDto params) {
+		 return employeeRepository.selectEmployeeDetail(params);
+	 }
 
-	 public Integer updateEmployee(EmployeeUpdateForm employeeUpdateForm) {
-	      return employeeRepository.updateEmployee(employeeUpdateForm);
+	 public Integer updateEmployee(EmployeeDetailDto employeeDetailDto) {
+	      return employeeRepository.updateEmployee(employeeDetailDto);
 	 }
 
 }
