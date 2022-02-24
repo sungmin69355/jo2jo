@@ -199,7 +199,7 @@ public class EmployeeController {
             }else{
                 //공동이미지 삽입
 
-            	employeeDetailDto.setPhotoaddr("/images/user/aaa.jpg");
+            	employeeDetailDto.setPhotoaddr("default_user_img.jpg");
                 Integer updateEmployeeResult = employeeUpdateService.updateEmployee(employeeDetailDto);
 
                 System.out.println(updateEmployeeResult);
