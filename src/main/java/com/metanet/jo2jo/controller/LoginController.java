@@ -28,7 +28,7 @@ public class LoginController {
         if (session.getAttribute("user") == null) {
             return "login/main";
         }
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("/login")

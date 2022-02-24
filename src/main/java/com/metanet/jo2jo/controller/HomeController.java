@@ -16,12 +16,11 @@ public class HomeController {
     @GetMapping("/")
     String home(Model model, HttpSession session){
         model.addAttribute("loginDto", new LoginDto());
-        System.out.println(session);
         if(session.getAttribute("user") != null){
             if (session.getAttribute("user").equals("admin") || session.getAttribute("user").equals("employee") ) {
                 return "redirect:/employees";
             }
         }
-        return "/login/main";
+        return "login/main";
     }
 }
