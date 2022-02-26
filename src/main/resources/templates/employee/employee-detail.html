@@ -310,7 +310,7 @@
                <!-- 1-3-block row start -->
                
 	            <div class="row" >
-	                <div class="col-lg-4">
+	                <div class="col-lg-4" style="width:400px; float: left;">
 	                    <!--  -->
 	                    <div class="card" th:if ="${session.user}==admin or ${session.user}==employee and ${session.info.id}==${employeedetaillist.id} or ${session.user}==employee and ${session.info.id}!=${employeedetaillist.id}" th:each="employeedetaillist:${employeedetaillist}">
 	                        <div class="user-block-2" >
@@ -418,12 +418,12 @@
 	                 
 	                  <!--calendar end-->
 	                  <div class="row"> 
-                       <div class="card" style="width:850px; float: left;">
+                       <div class="card" style="width:900px; float: left;">
                         <div class="calendar">
                          <h6 class="card-header-text" style="text-align: center;">캘린더</h6>
 						    <div class="header">
 						     
-						      <div class="year-month"></div>
+						      <div class="year-month" style="text-align: center;"></div>
 						      <div class="nav">
 						        <button class="nav-btn go-prev" onclick="prevMonth()">&lt;</button>
 						        <button class="nav-btn go-today" onclick="goToday()">Today</button>
@@ -463,7 +463,7 @@
                      <!-- Basic Table starts -->
 		                  <div class="card" style="width:1350px; float: left;">
 		                     <div class="card-header">
-		                        <h6 class="card-header-text">교육이수조회 페이지</h6>
+		                        <h6 class="card-header-text">커리큘럼 이수기록</h6>
 		                        <!--  <p>Basic example <code>without any additional modification</code> classes</p> -->
 		                     </div>
 		                     <div class="card-block">
