@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 @ToString
 public class CurriculumDto extends CommonDto {
-    private Long r; //paging을 위한 rownum
+    private Long rn; //paging을 위한 rownum
     private Long currno;
     @NotBlank(message = "커리큘럼 이름을 입력해주세요")
     private String currname;
@@ -35,8 +35,8 @@ public class CurriculumDto extends CommonDto {
     private String educos5;
     private Long costotalcnt;
 
-    public CurriculumDto(Long r, Long currno, String currname, Long currcost, String startdate, String enddate, String deptrange, String content, String instructor, String educos1, String educos2, String educos3, String educos4, String educos5, Long costotalcnt) {
-        this.r = r;
+    public CurriculumDto(Long rn, Long currno, String currname, Long currcost, String startdate, String enddate, String deptrange, String content, String instructor, String educos1, String educos2, String educos3, String educos4, String educos5, Long costotalcnt) {
+        this.rn = rn;
         this.currno = currno;
         this.currname = currname;
         this.currcost = currcost;

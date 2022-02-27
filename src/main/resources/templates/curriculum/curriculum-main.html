@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-	<title>커리큘럼 메인</title>
+	<title>교육 메인</title>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
    
@@ -82,7 +82,7 @@
                   <!-- Basic Table starts -->
                   <div class="card">
                      <div class="card-header">
-                        <h6 class="card-header-text">커리큘럼 메인</h6>
+                        <h6 class="card-header-text">교육조회</h6>
                         <!--  <p>Basic example <code>without any additional modification</code> classes</p> -->
                      </div>
                    
@@ -99,7 +99,7 @@
 															<label for="filter" style="float: left;">검색 유형&nbsp;&nbsp;</label>
 															<select name="searchType" class="form-control" style="width:100px;">
 																<option value="" th:selected="${#strings.isEmpty(params.searchType)}">선택안함</option>
-																<option value="currname" th:selected="${#strings.equals(params.searchType, 'currname')}">커리큘럼이름</option>
+																<option value="currname" th:selected="${#strings.equals(params.searchType, 'currname')}">교육이름</option>
 																<option value="content" th:selected="${#strings.equals(params.searchType, 'content')}">내용</option>
 																<option value="instructor" th:selected="${#strings.equals(params.searchType, 'instructor')}">강사이름</option>
 																<option value="startdate" th:selected="${#strings.equals(params.searchType, 'startdate')}">시작일</option>
@@ -121,7 +121,7 @@
                                  <thead>                                 	 
                                     <tr>
                                        <th></th>
-                                       <th>커리큘럼이름</th>
+                                       <th>교육이름</th>
                                        <th>내용</th>
                                        <th>강사이름</th>
                                        <th>시작일</th>
@@ -131,7 +131,7 @@
                                  </thead>
                                  <tbody>
                                     <tr th:if="${not #lists.isEmpty( curriculumList )}" th:each="index:${curriculumList}">
-                                       <td>[[${index.r}]]</td>
+                                       <td>[[${index.rn}]]</td>
                                        <td>[[${index.currname}]]</td>
 										<td width="40%"><div id="bioverflow">[[${index.content}]]</div></td>
                                        <td>[[${index.instructor}]]</td>
