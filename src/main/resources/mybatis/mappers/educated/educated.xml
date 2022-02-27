@@ -161,7 +161,7 @@
 		DELETE
 		FROM	EDUCATED
 		WHERE		CURRNO = #{currno}
-				OR	EMPNO  = #{empno}
+				AND	EMPNO  = #{empno}
 		]]>
 	</delete>
 
